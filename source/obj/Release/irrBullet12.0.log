@@ -1,0 +1,65 @@
+﻿Build started 5/21/2014 8:24:46 PM.
+Project "E:\irrBullet\source\irrBullet12.0.vcxproj" on node 2 (Build target(s)).
+ClCompile:
+  F:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I..\include /I"E:\bullet-2.82-r2704\src" /IF:\Irrlicht\include /Zi /nologo /W3 /WX- /sdl- /O2 /Ob1 /Oy- /D _MBCS /GF /Gm- /EHsc /MD /GS /Gy /arch:SSE2 /fp:fast /Zc:wchar_t /Zc:forScope /Fo"obj\Release\\" /Fd"obj\Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt boxshape.cpp bulletworld.cpp bvhtrianglemeshshape.cpp collisioncallbackinformation.cpp collisionobject.cpp collisionobjectaffector.cpp collisionobjectaffectorattract.cpp collisionobjectaffectordelete.cpp collisionshape.cpp convexhullshape.cpp gimpactmeshshape.cpp irrbullet.cpp irrbulletcommon.cpp kinematiccharactercontroller.cpp liquidbody.cpp motionstate.cpp physicsdebug.cpp raycastvehicle.cpp rigidbody.cpp softbody.cpp sphereshape.cpp trianglemeshshape.cpp
+  boxshape.cpp
+  bulletworld.cpp
+bulletworld.cpp(160): warning C4316: 'IRigidBody' : object allocated on the heap may not be aligned 16
+bulletworld.cpp(172): warning C4316: 'IRigidBody' : object allocated on the heap may not be aligned 16
+bulletworld.cpp(184): warning C4316: 'ISoftBody' : object allocated on the heap may not be aligned 16
+bulletworld.cpp(560): warning C4316: 'ICollisionCallbackInformation' : object allocated on the heap may not be aligned 16
+  bvhtrianglemeshshape.cpp
+  collisioncallbackinformation.cpp
+  collisionobject.cpp
+  collisionobjectaffector.cpp
+  collisionobjectaffectorattract.cpp
+  collisionobjectaffectordelete.cpp
+  collisionshape.cpp
+  convexhullshape.cpp
+  gimpactmeshshape.cpp
+  irrbullet.cpp
+irrbullet.cpp(11): warning C4316: 'irrBulletWorld' : object allocated on the heap may not be aligned 16
+  irrbulletcommon.cpp
+  kinematiccharactercontroller.cpp
+  liquidbody.cpp
+liquidbody.cpp(42): warning C4244: '=' : conversion from 'irr::u32' to 'irr::f32', possible loss of data
+liquidbody.cpp(77): warning C4244: '=' : conversion from 'irr::u32' to 'irr::f32', possible loss of data
+  motionstate.cpp
+  physicsdebug.cpp
+  raycastvehicle.cpp
+  rigidbody.cpp
+  softbody.cpp
+  Generating Code...
+  Compiling...
+  sphereshape.cpp
+  trianglemeshshape.cpp
+  Generating Code...
+Lib:
+  F:\Program Files\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"..\lib\Win32-VisualStudio\irrBullet.lib" /NOLOGO /LTCG obj\Release\boxshape.obj
+  obj\Release\bulletworld.obj
+  obj\Release\bvhtrianglemeshshape.obj
+  obj\Release\collisioncallbackinformation.obj
+  obj\Release\collisionobject.obj
+  obj\Release\collisionobjectaffector.obj
+  obj\Release\collisionobjectaffectorattract.obj
+  obj\Release\collisionobjectaffectordelete.obj
+  obj\Release\collisionshape.obj
+  obj\Release\convexhullshape.obj
+  obj\Release\gimpactmeshshape.obj
+  obj\Release\irrbullet.obj
+  obj\Release\irrbulletcommon.obj
+  obj\Release\kinematiccharactercontroller.obj
+  obj\Release\liquidbody.obj
+  obj\Release\motionstate.obj
+  obj\Release\physicsdebug.obj
+  obj\Release\raycastvehicle.obj
+  obj\Release\rigidbody.obj
+  obj\Release\softbody.obj
+  obj\Release\sphereshape.obj
+  obj\Release\trianglemeshshape.obj
+  irrBullet12.0.vcxproj -> E:\irrBullet\source\..\lib\Win32-VisualStudio\irrBullet.lib
+Done Building Project "E:\irrBullet\source\irrBullet12.0.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:45.73

@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{65f7f51f-e88b-4996-80d3-0e520dd113da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="irrBullet">
+      <UniqueIdentifier>{067a2005-9059-483b-bbb6-e58df357225d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\boxshape.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bulletworld.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bvhtrianglemeshshape.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\collisioncallbackinformation.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\collisionobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\collisionobjectaffector.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\collisionobjectaffectorattract.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\collisionobjectaffectordelete.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\collisionshape.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\convexhullshape.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\gimpactmeshshape.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\irrbullet.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\irrbullet_compile_config.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\irrbulletcommon.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\kinematiccharactercontroller.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\liquidbody.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\motionstate.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\physicsdebug.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\raycastvehicle.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\rigidbody.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\softbody.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphereshape.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\trianglemeshshape.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="boxshape.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="bulletworld.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="bvhtrianglemeshshape.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="collisioncallbackinformation.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="collisionobject.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="collisionobjectaffector.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="collisionobjectaffectorattract.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="collisionobjectaffectordelete.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="collisionshape.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="convexhullshape.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="gimpactmeshshape.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="irrbullet.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="irrbulletcommon.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="kinematiccharactercontroller.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="liquidbody.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="motionstate.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="physicsdebug.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="raycastvehicle.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="rigidbody.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="softbody.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="sphereshape.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="trianglemeshshape.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

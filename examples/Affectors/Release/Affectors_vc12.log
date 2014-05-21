@@ -1,0 +1,14 @@
+﻿Build started 5/21/2014 9:07:38 PM.
+Project "E:\irrBullet\examples\Affectors\Affectors_vc12.vcxproj" on node 2 (Build target(s)).
+Link:
+  F:\Program Files\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"..\..\bin\Win32-VisualStudio\Affectors.exe" /NOLOGO /LIBPATH:"../../lib/Win32-visualstudio" /LIBPATH:"E:\bullet-2.82-r2704\lib" /LIBPATH:"F:\Irrlicht/lib/Win32-visualstudio/" irrBullet.lib BulletCollision.lib BulletDynamics.lib BulletSoftBody.lib ConvexDecomposition.lib LinearMath.lib Irrlicht.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"..\..\bin\Win32-VisualStudio\Affectors.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"..\..\bin\Win32-VisualStudio\Affectors.lib" /MACHINE:X86 /SAFESEH Release\exampleframework.obj
+  Release\affectorsexample.obj
+  Release\main.obj
+  Generating code
+  Finished generating code
+  Affectors_vc12.vcxproj -> E:\irrBullet\examples\Affectors\..\..\bin\Win32-VisualStudio\Affectors.exe
+Done Building Project "E:\irrBullet\examples\Affectors\Affectors_vc12.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:05.95
