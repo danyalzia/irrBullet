@@ -3,8 +3,7 @@
 // For conditions of distribution and use, see license in irrbullet.h
 // The above copyright notice and its accompanying information must remain here.
 
-#ifndef __TRIANGLE_MESH_SHAPE_H_INCLUDED__
-#define __TRIANGLE_MESH_SHAPE_H_INCLUDED__
+#pragma once
 
 #include "collisionshape.h"
 #include "BulletCollision/CollisionShapes/btTriangleMesh.h"
@@ -38,5 +37,3 @@ class ITriangleMeshShape : public ICollisionShape
 
         btTriangleMesh* CollisionMesh;
 };
-
-#endif // __TRIANGLE_MESH_SHAPE_H_INCLUDED__

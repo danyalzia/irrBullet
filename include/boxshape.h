@@ -3,23 +3,18 @@
 // For conditions of distribution and use, see license in irrbullet.h
 // The above copyright notice and its accompanying information must remain here.
 
-#ifndef __BOX_SHAPE_H_INCLUDED__
-#define __BOX_SHAPE_H_INCLUDED__
+#pragma once
 
 #include "collisionshape.h"
-
 
 class IBoxShape : public ICollisionShape
 {
 public:
-    IBoxShape(irr::scene::ISceneNode* const n, irr::f32 m, bool overrideMargin = false);
+	IBoxShape(irr::scene::ISceneNode* const n, irr::f32 m, bool overrideMargin = false);
 
-    virtual ~IBoxShape();
+	virtual ~IBoxShape();
 
 protected:
-    void createShape(bool overrideMargin);
+	void createShape(bool overrideMargin);
 };
-
-
-#endif // __BOX_SHAPE_H_INCLUDED__
 

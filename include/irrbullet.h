@@ -27,8 +27,7 @@ The above copyright notice and its accompanying information may not be removed.
 The same applies for all other copyright notices at the top of files included with this library.
 */
 
-#ifndef __IRR_BULLET_H_INCLUDED__
-#define __IRR_BULLET_H_INCLUDED__
+#pragma once
 
 #include "irrbullet_compile_config.h"
 #include <btBulletDynamicsCommon.h>
@@ -60,16 +59,14 @@ The same applies for all other copyright notices at the top of files included wi
 
     Welcome to the irrBullet API documenation.
 
-    If you have any questions or suggestions, please email them to me at fighterstw@hotmail.com.
-
 
     @section irrbulletexample irrBullet Example
 
     Using irrBullet with Irrlicht is very straight-forward and simple.
 
 
-    Example source code and projects can be found in (<irrBulletDir> / examples),
-    and compiled examples can be found in (<irrBulletDir> / bin / win32_gcc).
+    Example source code and projects can be found in (irrBullet / examples),
+    and compiled examples can be found in (irrBullet / bin / win32_gcc) or  (irrBulletDir / bin / win32_VisualStudio) depending on your IDE.
 
 
     @section linkerandsearchdirs Linker and Search Directories Settings
@@ -77,14 +74,15 @@ The same applies for all other copyright notices at the top of files included wi
     Before you can begin integrating irrBullet in your application, there are a few things
     to add to your project first.
 
-    Link against these static libraries (included in (<irrBulletDir> / lib), pre-compiled):
+    Link against these static libraries (irrBullet.a/.lib will be available in (irrBullet / lib) after compiling):
 
-        <b>libirrBullet.a/.lib
-        libbulletdynamics.a/.lib
-        libbulletsoftbody.a/.lib
-        libGIMPACTUtils.a/.lib
-        liblinearmath.a/.lib
-        libbulletcollision.a/.lib</b>
+        irrBullet.a/.lib
+		BulletCollision.a/.lib
+		BulletDynamics.a/.lib
+		BulletSoftBody.a/.lib
+		ConvexDecomposition.a/.lib
+		LinearMath.a/.lib
+		Irrlicht.a/.lib
 
     This is for most features and with GImpact included. Other libs must be linked against for some features,
     such as libconvexdecomposition.a for decomposing objects.
@@ -93,12 +91,8 @@ The same applies for all other copyright notices at the top of files included wi
 
 
     Next, add these directories to your Search Directories list:
-
-        <b>
-        <irrBulletDirectory> / source
-        <irrBulletDirectory> / source / bheaders
-        <irrBulletDirectory> / source / bheaders / bullet
-        </b>
+		
+        irrBullet / include
 
     Then just include irrBullet.h into the top of your files using irrBullet.
 
@@ -108,8 +102,5 @@ The same applies for all other copyright notices at the top of files included wi
 */
 
 irrBulletWorld *createIrrBulletWorld(irr::IrrlichtDevice* const device, bool useGImpact = false, bool useDebugDrawer = false);
-
-#endif // __I_BULLET_WORLD_H_INCLUDED__
-
 
 

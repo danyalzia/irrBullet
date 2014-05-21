@@ -3,8 +3,7 @@
 // For conditions of distribution and use, see license in irrbullet.h
 // The above copyright notice and its accompanying information must remain here.
 
-#ifndef __G_IMPACT_MESH_SHAPE_H_INCLUDED__
-#define __G_IMPACT_MESH_SHAPE_H_INCLUDED__
+#pragma once
 
 #include "irrbulletcommon.h"
 #include "BulletCollision/Gimpact/btGImpactShape.h"
@@ -28,5 +27,3 @@ class IGImpactMeshShape : public ITriangleMeshShape
     protected:
         void createShape(irr::scene::IMesh* const collMesh);
 };
-
-#endif // __G_IMPACT_MESH_SHAPE_H_INCLUDED__

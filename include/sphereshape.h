@@ -3,13 +3,10 @@
 // For conditions of distribution and use, see license in irrbullet.h
 // The above copyright notice and its accompanying information must remain here.
 
-#ifndef __SPHERE_SHAPE_H_INCLUDED__
-#define __SPHERE_SHAPE_H_INCLUDED__
-
+#pragma once
 
 #include "collisionshape.h"
 #include <BulletCollision/CollisionShapes/btSphereShape.h>
-
 
 class ISphereShape : public ICollisionShape
 {
@@ -25,8 +22,5 @@ public:
 protected:
     void createShape(bool overrideMargin);
 };
-
-
-#endif // __SPHERE_SHAPE_H_INCLUDED__
 
 

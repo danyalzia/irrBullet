@@ -3,8 +3,7 @@
 // For conditions of distribution and use, see license in irrbullet.h
 // The above copyright notice and its accompanying information must remain here.
 
-#ifndef __IRRBULLET_COMMON_H_INCLUDED__
-#define __IRRBULLET_COMMON_H_INCLUDED__
+#pragma once
 
 #define BIT(x) (1<<(x)) // For collision masking
 
@@ -54,8 +53,3 @@ enum irrPhysicsDebugMode
   EPDM_FastWireframe = (1<<13),
   EPDM_MAX_DEBUG_DRAW_MODE
 };
-
-
-
-
-#endif // __IRRBULLET_COMMON_H_INCLUDED__

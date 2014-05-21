@@ -3,8 +3,7 @@
 // For conditions of distribution and use, see license in irrbullet.h
 // The above copyright notice and its accompanying information must remain here.
 
-#ifndef __RIGID_BODY_H_INCLUDED__
-#define __RIGID_BODY_H_INCLUDED__
+#pragma once
 
 #include "irrbulletcommon.h"
 #include "collisionobject.h"
@@ -285,8 +284,3 @@ protected:
     irr::core::aabbox3d<irr::f32> LiquidBox;
     bool DebugLiquidBox;
 };
-
-
-
-
-#endif // __RIGID_BODY_H_INCLUDED__

@@ -1,5 +1,4 @@
-#ifndef __KINEMATIC_CHARACTER_CONTROLLER_H__
-#define __KINEMATIC_CHARACTER_CONTROLLER_H__
+#pragma once
 
 #include <irrTypes.h>
 #include <vector3d.h>
@@ -84,5 +83,3 @@ class IKinematicCharacterController
         btKinematicCharacterController* Character;
         irr::core::matrix4 WorldTransform;
 };
-
-#endif // __KINEMATIC_CHARACTER_CONTROLLER_H__

@@ -1,7 +1,6 @@
 // This code belongs to RandomMesh from the Irrlicht forum
 
-#ifndef __PHYSICS_DEBUG_H_INCLUDED__
-#define __PHYSICS_DEBUG_H_INCLUDED__
+#pragma once
 
 #include <LinearMath/btIDebugDraw.h>
 #include "irrbulletcommon.h"
@@ -52,5 +51,3 @@ private:
 
 	irr::ILogger* logger;
 };
-
-#endif // __PHYSICS_DEBUG_H_INCLUDED__

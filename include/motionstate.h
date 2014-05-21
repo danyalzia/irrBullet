@@ -3,8 +3,7 @@
 // For conditions of distribution and use, see license in irrbullet.h
 // The above copyright notice and its accompanying information must remain here.
 
-#ifndef __MOTION_STATE_H_INCLUDED__
-#define __MOTION_STATE_H_INCLUDED__
+#pragma once
 
 #include <iostream>
 #include "irrbulletcommon.h"
@@ -50,6 +49,3 @@ class IMotionState : public btDefaultMotionState
         btTransform worldTransform;
         irr::core::matrix4 TransformMatrix;
 };
-
-#endif // __MOTION_STATE_H_INCLUDED__
-

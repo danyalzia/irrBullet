@@ -3,8 +3,7 @@
 // For conditions of distribution and use, see license in irrbullet.h
 // The above copyright notice and its accompanying information must remain here.
 
-#ifndef __SOFTBODY_H_INCLUDED__
-#define __SOFTBODY_H_INCLUDED__
+#pragma once
 
 #include "collisionobject.h"
 #include "BulletSoftBody/btSoftBodyHelpers.h"
@@ -235,5 +234,3 @@ class ISoftBody : public ICollisionObject
         std::vector<int> m_indices;
         std::map<int, btSoftBody::Node*> m_vertices;
 };
-
-#endif // __SOFTBODY_H_INCLUDED__

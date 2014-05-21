@@ -3,14 +3,12 @@
 // For conditions of distribution and use, see license in irrbullet.h
 // The above copyright notice and its accompanying information must remain here.
 
-#ifndef __COLLISION_CALLBACK_INFORMATION_H__
-#define __COLLISION_CALLBACK_INFORMATION_H__
+#pragma once
 
 #include <irrTypes.h>
 #include <vector3d.h>
 #include "irrbulletcommon.h"
 #include <BulletCollision/NarrowPhaseCollision/btPersistentManifold.h>
-
 
 class ICollisionObject;
 class irrBulletWorld;
@@ -65,5 +63,3 @@ class ICollisionCallbackInformation
         SManifoldPoint manifoldPoint;
         irrBulletWorld *dynamicsWorld;
 };
-
-#endif // __COLLISION_CALLBACK_INFORMATION_H__

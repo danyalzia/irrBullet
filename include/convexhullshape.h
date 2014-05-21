@@ -3,8 +3,7 @@
 // For conditions of distribution and use, see license in irrbullet.h
 // The above copyright notice and its accompanying information must remain here.
 
-#ifndef __CONVEX_HULL_SHAPE_H_INLUDED__
-#define __CONVEX_HULL_SHAPE_H_INLUDED__
+#pragma once
 
 #include "irrbulletcommon.h"
 
@@ -35,5 +34,3 @@ class IConvexHullShape : public ICollisionShape
 
         void getConvexHull(irr::scene::IMesh *collMesh, btConvexHullShape *hullShape);
 };
-
-#endif // __CONVEX_HULL_SHAPE_H_INLUDED__

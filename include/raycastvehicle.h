@@ -3,8 +3,7 @@
 // For conditions of distribution and use, see license in irrbullet.h
 // The above copyright notice and its accompanying information must remain here.
 
-#ifndef __RAYCAST_VEHICLE_H_INCLUDED__
-#define __RAYCAST_VEHICLE_H_INCLUDED__
+#pragma once
 
 #include "irrbulletcommon.h"
 #include "BulletDynamics/Vehicle/btRaycastVehicle.h"
@@ -232,6 +231,3 @@ class IRaycastVehicle
 
         SWheelInfo wheelInfo;
 };
-
-
-#endif // __RAYCAST_VEHICLE_H_INCLUDED__

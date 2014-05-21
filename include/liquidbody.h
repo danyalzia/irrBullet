@@ -3,8 +3,7 @@
 // For conditions of distribution and use, see license in irrbullet.h
 // The above copyright notice and its accompanying information must remain here.
 
-#ifndef __LIQUID_BODY_H_INCLUDED__
-#define __LIQUID_BODY_H_INCLUDED__
+#pragma once
 
 #include <vector3d.h>
 #include <irrTypes.h>
@@ -205,5 +204,3 @@ class ILiquidBody
         ///! For internal use only
         void affectRigidBody(IRigidBody* const body);
 };
-
-#endif // __LIQUID_BODY_H_INCLUDED__

@@ -3,11 +3,9 @@
 // For conditions of distribution and use, see license in irrbullet.h
 // The above copyright notice and its accompanying information must remain here.
 
-#ifndef __BVH_TRIANGLE_MESH_SHAPE_H_INCLUDED__
-#define __BVH_TRIANGLE_MESH_SHAPE_H_INCLUDED__
+#pragma once
 
 #include "trianglemeshshape.h"
-
 
 /// The BVH triangle mesh shape is useful for static triangle mesh shapes, such as game levels.
 class IBvhTriangleMeshShape : public ITriangleMeshShape
@@ -21,5 +19,3 @@ class IBvhTriangleMeshShape : public ITriangleMeshShape
     protected:
         void createShape(irr::scene::IMesh* const mesh);
 };
-
-#endif // __BVH_TRIANGLE_MESH_SHAPE_H_INCLUDED__

@@ -3,8 +3,7 @@
 // For conditions of distribution and use, see license in irrbullet.h
 // The above copyright notice and its accompanying information must remain here.
 
-#ifndef __COLLISION_SHAPE_H_INCLUDED__
-#define __COLLISION_SHAPE_H_INCLUDED__
+#pragma once
 
 #include "BulletCollision/CollisionShapes/btCollisionShape.h"
 #include <vector3d.h>
@@ -107,6 +106,3 @@ protected:
     // Functions
     virtual void createShape();
 };
-
-
-#endif // __COLLISION_SHAPE_H_INCLUDED__

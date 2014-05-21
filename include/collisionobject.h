@@ -3,8 +3,7 @@
 // For conditions of distribution and use, see license in irrbullet.h
 // The above copyright notice and its accompanying information must remain here.
 
-#ifndef __COLLISION_OBJECT_H_INCLUDED__
-#define __COLLISION_OBJECT_H_INCLUDED__
+#pragma once
 
 #include "irrbulletcommon.h"
 #include "collisionshape.h"
@@ -248,5 +247,3 @@ class ICollisionObject
 
         SCollisionObjectIdentification *collID;
 };
-
-#endif // __COLLISION_OBJECT_H_INCLUDED__
