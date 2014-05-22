@@ -10,6 +10,55 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\irrBullet.h" />
+    <ClInclude Include="..\include\irrBulletBoxShape.h" />
+    <ClInclude Include="..\include\irrBulletBvhTriangleMeshShape.h" />
+    <ClInclude Include="..\include\irrBulletCollisionCallBackInformation.h" />
+    <ClInclude Include="..\include\irrBulletCollisionObject.h" />
+    <ClInclude Include="..\include\irrBulletCollisionObjectAffector.h" />
+    <ClInclude Include="..\include\irrBulletCollisionObjectAffectorAttract.h" />
+    <ClInclude Include="..\include\irrBulletCollisionObjectAffectorDelete.h" />
+    <ClInclude Include="..\include\irrBulletCollisionShape.h" />
+    <ClInclude Include="..\include\irrBulletCommon.h" />
+    <ClInclude Include="..\include\irrBulletCompileConfig.h" />
+    <ClInclude Include="..\include\irrBulletConvexHullShape.h" />
+    <ClInclude Include="..\include\irrBulletGImpactMeshShape.h" />
+    <ClInclude Include="..\include\irrBulletKinematicCharacterController.h" />
+    <ClInclude Include="..\include\irrBulletLiquidBody.h" />
+    <ClInclude Include="..\include\irrBulletMotionState.h" />
+    <ClInclude Include="..\include\irrBulletPhysicsDebug.h" />
+    <ClInclude Include="..\include\irrBulletRayCastVehicle.h" />
+    <ClInclude Include="..\include\irrBulletRigidBody.h" />
+    <ClInclude Include="..\include\irrBulletSoftBody.h" />
+    <ClInclude Include="..\include\irrBulletSphereShape.h" />
+    <ClInclude Include="..\include\irrBulletTriangleMeshShape.h" />
+    <ClInclude Include="..\include\irrBulletWorld.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="irrBullet.cpp" />
+    <ClCompile Include="irrBulletBoxShape.cpp" />
+    <ClCompile Include="irrBulletBvhTriangleMeshShape.cpp" />
+    <ClCompile Include="irrBulletCollisionCallBackInformation.cpp" />
+    <ClCompile Include="irrBulletCollisionObject.cpp" />
+    <ClCompile Include="irrBulletCollisionObjectAffector.cpp" />
+    <ClCompile Include="irrBulletCollisionObjectAffectorAttract.cpp" />
+    <ClCompile Include="irrBulletCollisionObjectAffectorDelete.cpp" />
+    <ClCompile Include="irrBulletCollisionShape.cpp" />
+    <ClCompile Include="irrBulletCommon.cpp" />
+    <ClCompile Include="irrBulletConvexHullShape.cpp" />
+    <ClCompile Include="irrBulletGImpactMeshShape.cpp" />
+    <ClCompile Include="irrBulletKinematicCharacterController.cpp" />
+    <ClCompile Include="irrBulletLiquidBody.cpp" />
+    <ClCompile Include="irrBulletMotionState.cpp" />
+    <ClCompile Include="irrBulletPhysicsDebug.cpp" />
+    <ClCompile Include="irrBulletRayCastVehicle.cpp" />
+    <ClCompile Include="irrBulletRigidBody.cpp" />
+    <ClCompile Include="irrBulletSoftBody.cpp" />
+    <ClCompile Include="irrBulletSphereShape.cpp" />
+    <ClCompile Include="irrBulletTriangleMeshShape.cpp" />
+    <ClCompile Include="irrBulletWorld.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{0EA72724-3E6D-4FD9-B440-327AC50A6C66}</ProjectGuid>
     <RootNamespace>irrBullet120</RootNamespace>
@@ -95,55 +144,6 @@
       <OutputFile>..\lib\Win32-VisualStudio\irrBullet.lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\include\boxshape.h" />
-    <ClInclude Include="..\include\bulletworld.h" />
-    <ClInclude Include="..\include\bvhtrianglemeshshape.h" />
-    <ClInclude Include="..\include\collisioncallbackinformation.h" />
-    <ClInclude Include="..\include\collisionobject.h" />
-    <ClInclude Include="..\include\collisionobjectaffector.h" />
-    <ClInclude Include="..\include\collisionobjectaffectorattract.h" />
-    <ClInclude Include="..\include\collisionobjectaffectordelete.h" />
-    <ClInclude Include="..\include\collisionshape.h" />
-    <ClInclude Include="..\include\convexhullshape.h" />
-    <ClInclude Include="..\include\gimpactmeshshape.h" />
-    <ClInclude Include="..\include\irrbullet.h" />
-    <ClInclude Include="..\include\irrbulletcommon.h" />
-    <ClInclude Include="..\include\irrbullet_compile_config.h" />
-    <ClInclude Include="..\include\kinematiccharactercontroller.h" />
-    <ClInclude Include="..\include\liquidbody.h" />
-    <ClInclude Include="..\include\motionstate.h" />
-    <ClInclude Include="..\include\physicsdebug.h" />
-    <ClInclude Include="..\include\raycastvehicle.h" />
-    <ClInclude Include="..\include\rigidbody.h" />
-    <ClInclude Include="..\include\softbody.h" />
-    <ClInclude Include="..\include\sphereshape.h" />
-    <ClInclude Include="..\include\trianglemeshshape.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="boxshape.cpp" />
-    <ClCompile Include="bulletworld.cpp" />
-    <ClCompile Include="bvhtrianglemeshshape.cpp" />
-    <ClCompile Include="collisioncallbackinformation.cpp" />
-    <ClCompile Include="collisionobject.cpp" />
-    <ClCompile Include="collisionobjectaffector.cpp" />
-    <ClCompile Include="collisionobjectaffectorattract.cpp" />
-    <ClCompile Include="collisionobjectaffectordelete.cpp" />
-    <ClCompile Include="collisionshape.cpp" />
-    <ClCompile Include="convexhullshape.cpp" />
-    <ClCompile Include="gimpactmeshshape.cpp" />
-    <ClCompile Include="irrbullet.cpp" />
-    <ClCompile Include="irrbulletcommon.cpp" />
-    <ClCompile Include="kinematiccharactercontroller.cpp" />
-    <ClCompile Include="liquidbody.cpp" />
-    <ClCompile Include="motionstate.cpp" />
-    <ClCompile Include="physicsdebug.cpp" />
-    <ClCompile Include="raycastvehicle.cpp" />
-    <ClCompile Include="rigidbody.cpp" />
-    <ClCompile Include="softbody.cpp" />
-    <ClCompile Include="sphereshape.cpp" />
-    <ClCompile Include="trianglemeshshape.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

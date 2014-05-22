@@ -11,11 +11,11 @@ including commercial applications, and to alter it and redistribute it
 freely, subject to the following restrictions:
 
 1. The origin of this software must not be misrepresented; you must not
-    claim that you wrote the original software. If you use this software
-    in a product, an acknowledgment in the product documentation would be
-    appreciated but is not required.
+claim that you wrote the original software. If you use this software
+in a product, an acknowledgment in the product documentation would be
+appreciated but is not required.
 2. Altered source versions must be plainly marked as such, and must not be
-    misrepresented as being the original software.
+misrepresented as being the original software.
 3. This notice may not be removed or altered from any source distribution.
 
 Josiah Hartzell fighterstw@hotmail.com or josiah.hartzell@gmail.com
@@ -29,78 +29,76 @@ The same applies for all other copyright notices at the top of files included wi
 
 #pragma once
 
-#include "irrbullet_compile_config.h"
+#include "irrBulletCompileConfig.h"
 #include <btBulletDynamicsCommon.h>
 #include <btBulletCollisionCommon.h>
 #include <BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h>
-#include "irrbulletcommon.h"
-#include "bulletworld.h"
-#include "boxshape.h"
-#include "sphereshape.h"
-#include "gimpactmeshshape.h"
-#include "bvhtrianglemeshshape.h"
-#include "convexhullshape.h"
-#include "motionstate.h"
-#include "raycastvehicle.h"
-#include "collisionobjectaffector.h"
-#include "collisionobjectaffectordelete.h"
-#include "collisionobjectaffectorattract.h"
+#include "irrBulletCommon.h"
+#include "irrBulletWorld.h"
+#include "irrBulletBoxShape.h"
+#include "irrBulletSphereShape.h"
+#include "irrBulletGImpactMeshShape.h"
+#include "irrBulletBvhTriangleMeshShape.h"
+#include "irrBulletConvexHullShape.h"
+#include "irrBulletMotionState.h"
+#include "irrBulletRayCastVehicle.h"
+#include "irrBulletCollisionObjectAffector.h"
+#include "irrBulletCollisionObjectAffectorDelete.h"
+#include "irrBulletCollisionObjectAffectorAttract.h"
 //#include "collisionobjectaffectorbuoyancy.h"
-#include "collisioncallbackinformation.h"
-#include "liquidbody.h"
-#include "kinematiccharactercontroller.h"
+#include "irrBulletCollisionCallBackInformation.h"
+#include "irrBulletLiquidBody.h"
+#include "irrBulletKinematicCharacterController.h"
 
 
 /*!
-    @mainpage irrBullet Wrapper Documentation
+@mainpage irrBullet Wrapper Documentation
 
 
-    @section intro Introduction
+@section intro Introduction
 
-    Welcome to the irrBullet API documenation.
-
-
-    @section irrbulletexample irrBullet Example
-
-    Using irrBullet with Irrlicht is very straight-forward and simple.
+Welcome to the irrBullet API documenation.
 
 
-    Example source code and projects can be found in (irrBullet / examples),
-    and compiled examples can be found in (irrBullet / bin / win32_gcc) or  (irrBulletDir / bin / win32_VisualStudio) depending on your IDE.
+@section irrbulletexample irrBullet Example
+
+Using irrBullet with Irrlicht is very straight-forward and simple.
 
 
-    @section linkerandsearchdirs Linker and Search Directories Settings
-
-    Before you can begin integrating irrBullet in your application, there are a few things
-    to add to your project first.
-
-    Link against these static libraries (irrBullet.a/.lib will be available in (irrBullet / lib) after compiling):
-
-        irrBullet.a/.lib
-		BulletCollision.a/.lib
-		BulletDynamics.a/.lib
-		BulletSoftBody.a/.lib
-		ConvexDecomposition.a/.lib
-		LinearMath.a/.lib
-		Irrlicht.a/.lib
-
-    This is for most features and with GImpact included. Other libs must be linked against for some features,
-    such as libconvexdecomposition.a for decomposing objects.
-
-    <i>It is important that they are linked against in this order to avoid linker errors.</i>
+Example source code and projects can be found in (irrBullet / examples),
+and compiled examples can be found in (irrBullet / bin / win32_gcc) or  (irrBulletDir / bin / win32_VisualStudio) depending on your IDE.
 
 
-    Next, add these directories to your Search Directories list:
-		
-        irrBullet / include
+@section linkerandsearchdirs Linker and Search Directories Settings
 
-    Then just include irrBullet.h into the top of your files using irrBullet.
+Before you can begin integrating irrBullet in your application, there are a few things
+to add to your project first.
+
+Link against these static libraries (irrBullet.a/.lib will be available in (irrBullet / lib) after compiling):
+
+irrBullet.a/.lib
+BulletCollision.a/.lib
+BulletDynamics.a/.lib
+BulletSoftBody.a/.lib
+ConvexDecomposition.a/.lib
+LinearMath.a/.lib
+Irrlicht.a/.lib
+
+This is for most features and with GImpact included. Other libs must be linked against for some features,
+such as libconvexdecomposition.a for decomposing objects.
+
+<i>It is important that they are linked against in this order to avoid linker errors.</i>
 
 
-    You are now ready to begin the integration process!
+Next, add these directories to your Search Directories list:
+
+irrBullet / include
+
+Then just include irrBullet.h into the top of your files using irrBullet.
+
+
+You are now ready to begin the integration process!
 
 */
 
 irrBulletWorld *createIrrBulletWorld(irr::IrrlichtDevice* const device, bool useGImpact = false, bool useDebugDrawer = false);
-
-

@@ -3,7 +3,7 @@
 // For conditions of distribution and use, see license in irrbullet.h
 // The above copyright notice and its accompanying information must remain here.
 
-#include "irrbullet.h"
+#include "irrBullet.h"
 
 
 irrBulletWorld* createIrrBulletWorld(irr::IrrlichtDevice* const device, bool useGImpact, bool useDebugDrawer)

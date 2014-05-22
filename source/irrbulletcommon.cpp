@@ -6,9 +6,9 @@
 #include <btBulletDynamicsCommon.h>
 #include <btBulletCollisionCommon.h>
 
-#include "raycastvehicle.h"
-#include "collisionobject.h"
-#include "irrbulletcommon.h"
+#include "irrBulletRayCastVehicle.h"
+#include "irrBulletCollisionObject.h"
+#include "irrBulletCommon.h"
 
 
 void btTransformToIrrlichtMatrix(const btTransform& worldTrans, irr::core::matrix4& matr)

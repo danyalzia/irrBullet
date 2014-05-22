@@ -76,6 +76,12 @@
       <AdditionalLibraryDirectories>../../lib/Win32-visualstudio;$(BULLET_ROOT)/lib;$(IRRLICHT_ROOT)/lib/Win32-visualstudio/</AdditionalLibraryDirectories>
       <AdditionalDependencies>irrBullet.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;ConvexDecomposition.lib;LinearMath.lib;Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(IRRLICHT_ROOT)\bin\Win32-VisualStudio\Irrlicht.dll" "..\..\bin\Win32-VisualStudio\"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Copy Irrlicht's DLL to bin</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\framework\exampleframework.cpp" />
