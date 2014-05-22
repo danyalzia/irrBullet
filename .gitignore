@@ -19,3 +19,18 @@
 *.exe
 *.out
 *.app
+
+# For MSVC
+*.pdb
+*.ilk
+*.obj
+*.pch
+*.log
+*.dll
+*.exe
+*.map
+*.lib
+*.sdf
+*.ncb
+*.opensdf
+*.suo

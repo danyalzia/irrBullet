@@ -1,5 +1,5 @@
 irrBullet - Bullet Physics Wrapper for Irrlicht Engine
-==============================================
+======================================================
 
 Details
 -------
@@ -11,7 +11,9 @@ It is an updated version of irrBullet which works with Irrlicht 1.8.1 and latest
 Installation
 ------------
 
-Open Dependencies_Path.bat in directory and change respective environment variables to Bullet and Irrlicht's root directory and run it, then open the project file of your favorite IDE (Visual Studio and Code::Blocks is currently supported) and compile.
+On windows open Dependencies_Path.bat in directory and change respective environment variables to Bullet and Irrlicht's root directory and run it, then in "source/" open the project file of your favorite IDE (Visual Studio and Code::Blocks is currently supported) and compile. You will then find the compiled library in "lib/your_platform".
+
+To compile examples go to "examples/" and open the project and compile, you'll then find the compiled binaries in "bin/". Please note that if you have compiled using shared Irrlicht binary then you need to copy Irrlicht.dll/.so from Irrlicht's directory to "bin/" in order to run the examples.
 
 License
 -------
