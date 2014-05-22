@@ -21,17 +21,24 @@
 *.app
 
 # For MSVC
+*.lastcodeanalysissucceeded
 *.pdb
 *.ilk
 *.obj
 *.pch
 *.log
 *.dll
+*.rar
 *.exe
 *.map
 *.lib
+*.user
 *.sdf
 *.ncb
 *.opensdf
 *.suo
-*.user
+*.aps
+*.exp
+*.tlog
+Debug
+Release

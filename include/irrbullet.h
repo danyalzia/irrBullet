@@ -76,26 +76,27 @@ to add to your project first.
 
 Link against these static libraries (irrBullet.a/.lib will be available in (irrBullet / lib) after compiling):
 
-irrBullet.a/.lib
-BulletCollision.a/.lib
-BulletDynamics.a/.lib
-BulletSoftBody.a/.lib
-ConvexDecomposition.a/.lib
-LinearMath.a/.lib
-Irrlicht.a/.lib
+    irrBullet.a/.lib
+    BulletCollision.a/.lib
+    BulletDynamics.a/.lib
+    BulletSoftBody.a/.lib
+    ConvexDecomposition.a/.lib
+    LinearMath.a/.lib
+    Irrlicht.a/.lib
 
 This is for most features and with GImpact included. Other libs must be linked against for some features,
-such as libconvexdecomposition.a for decomposing objects.
+such as ConvexDecomposition.lib/.a for decomposing objects.
 
 <i>It is important that they are linked against in this order to avoid linker errors.</i>
 
 
 Next, add these directories to your Search Directories list:
 
-irrBullet / include
-
+    irrBullet / include
+    $(IRRLICHT_ROOT) / include
+    $(BULLET_ROOT) / src
+    
 Then just include irrBullet.h into the top of your files using irrBullet.
-
 
 You are now ready to begin the integration process!
 

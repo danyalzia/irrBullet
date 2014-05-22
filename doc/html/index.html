@@ -96,15 +96,17 @@ BulletSoftBody.a/.lib
 ConvexDecomposition.a/.lib
 LinearMath.a/.lib
 Irrlicht.a/.lib
-</pre><p>This is for most features and with GImpact included. Other libs must be linked against for some features, such as libconvexdecomposition.a for decomposing objects.</p>
+</pre><p>This is for most features and with GImpact included. Other libs must be linked against for some features, such as ConvexDecomposition.lib/.a for decomposing objects.</p>
 <p><em>It is important that they are linked against in this order to avoid linker errors.</em></p>
 <p>Next, add these directories to your Search Directories list: </p><pre class="fragment">irrBullet / include
-</pre><p>Then just include <a class="el" href="irrbullet_8h_source.html">irrBullet.h</a> into the top of your files using irrBullet.</p>
+$(IRRLICHT_ROOT) / include
+$(BULLET_ROOT) / src
+</pre><p>Then just include <a class="el" href="irr_bullet_8h_source.html">irrBullet.h</a> into the top of your files using irrBullet.</p>
 <p>You are now ready to begin the integration process! </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 22 2014 00:45:09 for irrBullet by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri May 23 2014 00:52:04 for irrBullet by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

@@ -13,7 +13,7 @@ var searchData=
   ['getnumcollisionobjects',['getNumCollisionObjects',['../classirr_bullet_world.html#a339871597797b759fb3d02e32e3eff67',1,'irrBulletWorld']]],
   ['getnumconstraintrefs',['getNumConstraintRefs',['../class_i_rigid_body.html#af32443d9c7a649f49164ea6ea9d4aa9f',1,'IRigidBody']]],
   ['getnummanifolds',['getNumManifolds',['../classirr_bullet_world.html#a252a58c9b08b9abe67607720508d2e99',1,'irrBulletWorld']]],
-  ['getpointer',['getPointer',['../classirr_bullet_world.html#ad5797056c12dd2fa7ab1334eb80ee695',1,'irrBulletWorld::getPointer()'],['../class_i_collision_object.html#a21d7eb63a97bcaf5bd5ff3ac8efd4035',1,'ICollisionObject::getPointer()'],['../class_i_raycast_vehicle.html#a20cafb1699dc358adac04d2898bb1bb1',1,'IRaycastVehicle::getPointer()'],['../class_i_rigid_body.html#a715facacf50933fc95b30267628afc9a',1,'IRigidBody::getPointer()']]],
+  ['getpointer',['getPointer',['../class_i_collision_object.html#a21d7eb63a97bcaf5bd5ff3ac8efd4035',1,'ICollisionObject::getPointer()'],['../class_i_raycast_vehicle.html#a20cafb1699dc358adac04d2898bb1bb1',1,'IRaycastVehicle::getPointer()'],['../class_i_rigid_body.html#a715facacf50933fc95b30267628afc9a',1,'IRigidBody::getPointer()'],['../classirr_bullet_world.html#ad5797056c12dd2fa7ab1334eb80ee695',1,'irrBulletWorld::getPointer()']]],
   ['getrestitution',['getRestitution',['../class_i_collision_object.html#aa8adb77a72e8c94a1f40e907e47c59d4',1,'ICollisionObject']]],
   ['getrigidbody',['getRigidBody',['../class_i_raycast_vehicle.html#abcb1334adbce04d69d9e9358e2dd7130',1,'IRaycastVehicle']]],
   ['getsoftbodyworldinfo',['getSoftBodyWorldInfo',['../classirr_bullet_world.html#ae0aa5ec50bf2341965a4f1a5b739806a',1,'irrBulletWorld']]],
