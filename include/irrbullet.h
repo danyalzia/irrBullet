@@ -95,7 +95,7 @@ Next, add these directories to your Search Directories list:
     irrBullet / include
     $(IRRLICHT_ROOT) / include
     $(BULLET_ROOT) / src
-    
+
 Then just include irrBullet.h into the top of your files using irrBullet.
 
 You are now ready to begin the integration process!
