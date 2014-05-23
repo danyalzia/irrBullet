@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="BuildAllExamples">
+		<Project filename="HelloWorld/HelloWorld.cbp" />
+		<Project filename="SoftBody/SoftBody.cbp" />
+		<Project filename="RaycastTank/RaycastTank.cbp" />
+		<Project filename="LoadScene/LoadScene.cbp" />
+		<Project filename="LiquidBody/LiquidBody.cbp" />
+		<Project filename="Collision/Collision.cbp" />
+		<Project filename="Character/Character.cbp" />
+		<Project filename="Affectors/Affectors.cbp" />
+		<Project filename="../source/irrBullet-gcc.cbp" />
+	</Workspace>
+</CodeBlocks_workspace_file>

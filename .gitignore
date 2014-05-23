@@ -3,6 +3,7 @@
 *.lo
 *.o
 *.obj
+*.objs
 
 # Compiled Dynamic libraries
 *.so
@@ -42,3 +43,7 @@
 *.tlog
 Debug
 Release
+
+# For Code::Blocks
+*.layout
+*.depend
