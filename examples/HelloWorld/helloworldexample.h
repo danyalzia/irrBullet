@@ -1,7 +1,6 @@
 // This example is part of irrBullet by Josiah Hartzell (fighterstw@hotmail.com or josiah.hartzell@gmail.com)
 
-#ifndef __HELLO_WORLD_EXAMPLE_H_INCLUDED__
-#define __HELLO_WORLD_EXAMPLE_H_INCLUDED__
+#pragma once
 
 #include "../framework/exampleframework.h"
 #include <irrString.h>
@@ -27,8 +26,4 @@ class CHelloWorldExample : public CExampleFramework
     private:
         irr::u32 rows;
         irr::u32 columns;
-
-
 };
-
-#endif // __HELLO_WORLD_EXAMPLE_H_INCLUDED__

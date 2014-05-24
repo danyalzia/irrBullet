@@ -94,7 +94,7 @@ void CCharacterExample::runExample()
 
     device->setWindowCaption(L"irrBullet Character Example - Josiah Hartzell");
     device->setResizable(true);
-    device->getFileSystem()->addFolderFileArchive("../../media/");
+    device->getFileSystem()->addFileArchive("../../media/");
 
 
     device->getSceneManager()->addLightSceneNode(0, vector3df(20, 40, -50), SColorf(1.0f, 1.0f, 1.0f), 4000.0f);

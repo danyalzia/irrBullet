@@ -1,7 +1,6 @@
 // This example is part of irrBullet by Josiah Hartzell (fighterstw@hotmail.com or josiah.hartzell@gmail.com)
 
-#ifndef __COLLISION_EXAMPLE_H_INCLUDED__
-#define __COLLISION_EXAMPLE_H_INCLUDED__
+#pragma once
 
 #include "../framework/exampleframework.h"
 #include <irrString.h>
@@ -24,5 +23,3 @@ class CCollisionExample : public CExampleFramework
 
     private:
 };
-
-#endif // __COLLISION_EXAMPLE_H_INCLUDED__

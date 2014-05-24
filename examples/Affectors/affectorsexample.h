@@ -1,7 +1,6 @@
 // This example is part of irrBullet by Josiah Hartzell (fighterstw@hotmail.com or josiah.hartzell@gmail.com)
 
-#ifndef __AFFECTORS_EXAMPLE_H_INCLUDED__
-#define __AFFECTORS_EXAMPLE_H_INCLUDED__
+#pragma once
 
 #include "../framework/exampleframework.h"
 #include <irrString.h>
@@ -29,5 +28,3 @@ class CAffectorsExample : public CExampleFramework
     private:
         irr::u32 AffectorType;
 };
-
-#endif // __AFFECTORS_EXAMPLE_H_INCLUDED__

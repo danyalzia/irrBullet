@@ -1,7 +1,6 @@
 // This example is part of irrBullet by Josiah Hartzell (fighterstw@hotmail.com or josiah.hartzell@gmail.com)
 
-#ifndef __CHARACTER_EXAMPLE_H_INCLUDED__
-#define __CHARACTER_EXAMPLE_H_INCLUDED__
+#pragma once
 
 #include "../framework/exampleframework.h"
 #include <irrString.h>
@@ -40,5 +39,3 @@ class CCharacterExample : public CExampleFramework
 
 
 };
-
-#endif // __CHARACTER_EXAMPLE_H_INCLUDED__

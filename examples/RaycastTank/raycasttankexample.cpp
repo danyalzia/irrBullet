@@ -101,7 +101,7 @@ void CRaycastTankExample::runExample()
 
     device->setWindowCaption(L"irrBullet Raycast Tank Example - Josiah Hartzell");
 
-    device->getFileSystem()->addFolderFileArchive("../../media/");
+    device->getFileSystem()->addFileArchive("../../media/");
 
 
     IGUIStaticText *tankProperties = device->getGUIEnvironment()->addStaticText(L"Tank:",

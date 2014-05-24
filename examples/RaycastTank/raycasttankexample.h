@@ -1,5 +1,4 @@
-#ifndef __RAYCAST_VEHICLE_EXAMPLE_H_INCLUDED__
-#define __RAYCAST_VEHICLE_EXAMPLE_H_INCLUDED__
+#pragma once
 
 #include "../framework/exampleframework.h"
 #include <irrString.h>
@@ -49,5 +48,3 @@ class CRaycastTankExample : public CExampleFramework
         irr::f32 rightTrackSpeed;
 
 };
-
-#endif // __RAYCAST_VEHICLE_EXAMPLE_H_INCLUDED__

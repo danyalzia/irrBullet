@@ -1,5 +1,4 @@
-#ifndef __HELLO_WORLD_EXAMPLE_H_INCLUDED__
-#define __HELLO_WORLD_EXAMPLE_H_INCLUDED__
+#pragma once
 
 #include "../framework/exampleframework.h"
 #include <irrString.h>
@@ -18,5 +17,3 @@ class CLoadSceneExample : public CExampleFramework
 
         virtual bool OnEvent(const irr::SEvent& event);
 };
-
-#endif // __HELLO_WORLD_EXAMPLE_H_INCLUDED__
