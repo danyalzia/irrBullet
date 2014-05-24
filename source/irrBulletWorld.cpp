@@ -75,10 +75,8 @@ irrBulletWorld::irrBulletWorld(irr::IrrlichtDevice* const Device, bool useGImpac
         debugMat.Lighting = false;
     }
 
-    // For displaying debugging properties
-    propertyText = device->getGUIEnvironment()->addStaticText(L"",
-            rect<s32>(10,10,120,240), false);
-
+    // For displaying debugging properties - by default on TOP_LEFT
+    setPropertiesTextPosition(EDPT_POSITION::EDPT_TOP_LEFT);
 
     printf("irrBullet %i.%i.%i\n", IRRBULLET_VER_MAJOR, IRRBULLET_VER_MINOR, IRRBULLET_VER_MICRO);
 }
@@ -352,6 +350,42 @@ void irrBulletWorld::setDebugMode(u32 mode)
         debug->setDebugMode(mode);
 }
 
+void irrBulletWorld::setPropertiesTextPosition(EDPT_POSITION pos)
+{
+    TextPropertiesPosition = pos;
+
+    if (propertyText)
+        propertyText->remove();
+
+    OriginalScreenSize = device->getVideoDriver()->getScreenSize();
+
+    irr::u32 width = OriginalScreenSize.Width;
+    irr::u32 height = OriginalScreenSize.Height;
+
+    if (pos == EDPT_POSITION::EDPT_TOP_LEFT)
+    {
+        propertyText = device->getGUIEnvironment()->addStaticText(L"",
+            rect<s32>(10, 10, 120, 240), false);
+    }
+
+    else if (pos == EDPT_POSITION::EDPT_TOP_RIGHT)
+    {
+        propertyText = device->getGUIEnvironment()->addStaticText(L"",
+            rect<s32>(width - 60, 10, width, height), false);
+    }
+
+    else if (pos == EDPT_POSITION::EDPT_BOTTOM_LEFT)
+    {
+        propertyText = device->getGUIEnvironment()->addStaticText(L"",
+            rect<s32>(10, height - 60, 150, height), false);
+    }
+
+    else if (pos == EDPT_POSITION::EDPT_BOTTOM_RIGHT)
+    {
+       propertyText = device->getGUIEnvironment()->addStaticText(L"",
+            rect<s32>(width - 60, height - 70, width, height), false);
+    }
+}
 
 void irrBulletWorld::debugDrawWorld(bool setDriverMaterial)
 {
@@ -404,6 +438,12 @@ void irrBulletWorld::debugDrawProperties(bool b, const SColor& col)
 
         if(propertyText->getOverrideColor() != col)
             propertyText->setOverrideColor(col);
+
+
+        // Check resized event
+        irr::core::dimension2du CurrentScreenSize = device->getVideoDriver()->getScreenSize();
+        if (CurrentScreenSize != OriginalScreenSize)
+            setPropertiesTextPosition(TextPropertiesPosition);
     }
 
     else

@@ -31,6 +31,13 @@ class btConstraintSolver;
 struct btVehicleRaycaster;
 class ILiquidBody;
 
+enum EDPT_POSITION
+{
+    EDPT_TOP_LEFT,
+    EDPT_TOP_RIGHT,
+    EDPT_BOTTOM_LEFT,
+    EDPT_BOTTOM_RIGHT
+};
 
 /// The interface that drives the physics simulation and debug drawer.
 class irrBulletWorld
@@ -136,11 +143,18 @@ public:
 	void setDebugMode(irr::u32 mode);
 
 	/*!
+		Set the position of debugging text
+		@param pos Sets where to place the debugging text list.
+		*/
+    void setPropertiesTextPosition(EDPT_POSITION pos);
+
+    /*!
 		Draws the debugging data once based on the flags set.
 		Needs to be called every frame for data to be visible.
 		@param setDriverMaterial Sets whether or not the debugger will automatically change the driver material so that
 		the debugging data will be visible. Defaults to false. Leave false if you do this manually.
 		*/
+
 	void debugDrawWorld(bool setDriverMaterial = false);
 
 	/*!
@@ -204,7 +218,6 @@ private:
 	IPhysicsDebugDraw* debug;
 	irr::video::SMaterial debugMat;
 
-
 	irr::IrrlichtDevice* device;
 	irr::gui::IGUIStaticText* propertyText;
 
@@ -216,7 +229,11 @@ private:
 
 	bool gimpactEnabled;
 	bool isPaused;
+    bool isResized;
 
 	irr::u32 LiquidBodyCount;
 	irr::u32 CollisionObjectCount;
+	irr::core::dimension2du OriginalScreenSize;
+
+	EDPT_POSITION TextPropertiesPosition;
 };

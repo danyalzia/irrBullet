@@ -93,7 +93,7 @@ void CCharacterExample::runExample()
 
 
     device->setWindowCaption(L"irrBullet Character Example - Josiah Hartzell");
-
+    device->setResizable(true);
     device->getFileSystem()->addFolderFileArchive("../../media/");
 
 
@@ -109,7 +109,7 @@ void CCharacterExample::runExample()
             EPDM_DrawContactPoints);
 
     world->setGravity(vector3df(0,-10,0));
-
+    world->setPropertiesTextPosition(EDPT_POSITION::EDPT_TOP_RIGHT);
 
     camera = device->getSceneManager()->addCameraSceneNodeMaya();
 	camera->setPosition(vector3df(50,15,200));

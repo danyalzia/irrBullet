@@ -93,7 +93,7 @@ void CHelloWorldExample::runExample()
 
 
     device->setWindowCaption(L"irrBullet Hello World Example - Josiah Hartzell");
-
+    device->setResizable(true);
     device->getFileSystem()->addFolderFileArchive("../../media/");
 
 
@@ -107,7 +107,7 @@ void CHelloWorldExample::runExample()
 
     world->setDebugMode(EPDM_DrawAabb |
             EPDM_DrawContactPoints);
-
+    world->setPropertiesTextPosition(EDPT_BOTTOM_RIGHT);
     world->setGravity(vector3df(0,-10,0));
 
 

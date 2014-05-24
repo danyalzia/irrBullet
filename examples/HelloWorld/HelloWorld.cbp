@@ -31,7 +31,7 @@
 				</Linker>
 			</Target>
 			<Target title="Release Win32">
-				<Option output="HelloWorld_vc12" prefix_auto="1" extension_auto="1" />
+				<Option output="../../bin/Win32-gcc/HelloWorld" prefix_auto="1" extension_auto="1" />
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
