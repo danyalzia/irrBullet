@@ -3,6 +3,7 @@
 #include "liquidbodyexample.h"
 #include <irrlicht.h>
 #include <irrBullet.h>
+#include <vector>
 
 using namespace irr;
 using namespace core;
@@ -34,7 +35,7 @@ bool CLiquidbodyExample::OnEvent(const SEvent& event)
                 irr::f32 t = 0.5f;
                 irr::f32 buoyancy = 0.8f;
 
-                irr::core::array<SBuoyancyPoint> points;
+                vector<SBuoyancyPoint> points;
                 //points.push_back(SBuoyancyPoint(irr::core::vector3df(0,0,0), 180.0f));
                 points.push_back(SBuoyancyPoint(irr::core::vector3df(t,t,t), buoyancy));
                 points.push_back(SBuoyancyPoint(irr::core::vector3df(-t,t,t), buoyancy));
@@ -159,7 +160,7 @@ void CLiquidbodyExample::runExample()
             irr::f32 t = 0.5f;
             irr::f32 buoyancy = 0.2f;
 
-            irr::core::array<SBuoyancyPoint> points;
+            vector<SBuoyancyPoint> points;
             //points.push_back(SBuoyancyPoint(irr::core::vector3df(0,0,0), 180.0f));
             points.push_back(SBuoyancyPoint(irr::core::vector3df(t,t,t), buoyancy));
             points.push_back(SBuoyancyPoint(irr::core::vector3df(-t,t,t), buoyancy));

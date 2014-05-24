@@ -9,7 +9,7 @@
 #include "irrBulletCollisionObject.h"
 #include "BulletDynamics/Dynamics/btRigidBody.h"
 #include "irrBulletRayCastVehicle.h"
-
+#include <vector>
 
 class IMotionState;
 
@@ -190,13 +190,13 @@ public:
     /// Sets the collision shape for the object to use.
     void setCollisionShape(ICollisionShape* const shape);
 
-    void setBuoyancyPoints(const irr::core::array<SBuoyancyPoint>& points) { BuoyancyPoints = points; BuoyancyPointCount = points.size(); };
+    void setBuoyancyPoints(const std::vector<SBuoyancyPoint>& points) { BuoyancyPoints = points; BuoyancyPointCount = points.size(); };
 
     void updateLiquidBox();
 
     void setDebugLiquidBox(bool b) { DebugLiquidBox = b; };
 
-    const irr::core::array<SBuoyancyPoint>& getBuoyancyPoints() const { return BuoyancyPoints; };
+    const std::vector<SBuoyancyPoint>& getBuoyancyPoints() const { return BuoyancyPoints; };
 
     bool compare(btRigidBody* const other) const
     {
@@ -279,7 +279,7 @@ protected:
     irr::core::matrix4 worldTransform;
     IMotionState *motionState;
     IRaycastVehicle* vehicleReference;
-    irr::core::array<SBuoyancyPoint> BuoyancyPoints;
+    std::vector<SBuoyancyPoint> BuoyancyPoints;
     irr::u32 BuoyancyPointCount;
     irr::core::aabbox3d<irr::f32> LiquidBox;
     bool DebugLiquidBox;

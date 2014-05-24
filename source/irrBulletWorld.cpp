@@ -100,22 +100,18 @@ u32 irrBulletWorld::stepSimulation(f32 timeStep, u32 maxSubSteps, f32 fixedTimeS
 
 void irrBulletWorld::updateLiquidBodies()
 {
-    list<ILiquidBody*>::Iterator it = liquidBodies.begin();
-
-    for(; it != liquidBodies.end(); it++)
+	for (auto it : liquidBodies)
     {
-        (*it)->updateLiquidBody();
+        it->updateLiquidBody();
     }
 }
 
 
 void irrBulletWorld::updateCollisionObjects()
 {
-    list<ICollisionObject*>::Iterator cbit = collisionObjects.begin();
-
-    for(; cbit != collisionObjects.end(); cbit++)
+	for (auto cbit : collisionObjects)
     {
-        ICollisionObject* obj = (*cbit);
+        ICollisionObject* obj = cbit;
 
         if(obj->getObjectType() == ECOT_SOFT_BODY)
         {
@@ -135,7 +131,7 @@ void irrBulletWorld::updateCollisionObjects()
         }
     }
 
-    list<ICollisionObject*>::Iterator dlit = deletionList.begin();
+	auto dlit = deletionList.begin();
 
     for(; dlit != deletionList.end(); )
     {
@@ -237,7 +233,7 @@ void irrBulletWorld::removeCollisionObject(ICollisionObject* const obj, bool del
 {
     if(obj)
     {
-        list<ICollisionObject*>::Iterator cbit = collisionObjects.begin();
+        auto cbit = collisionObjects.begin();
 
         for(; cbit != collisionObjects.end(); )
         {
@@ -293,7 +289,7 @@ void irrBulletWorld::removeRaycastVehicle(IRaycastVehicle* const vehicle)
 {
     if(vehicle)
     {
-        list<IRaycastVehicle*>::Iterator rvit = raycastVehicles.begin();
+        auto rvit = raycastVehicles.begin();
 
         for(; rvit != raycastVehicles.end(); )
         {
@@ -321,7 +317,7 @@ void irrBulletWorld::removeLiquidBody(ILiquidBody* const liquidBody)
 {
     if(liquidBody)
     {
-        list<ILiquidBody*>::Iterator rvit = liquidBodies.begin();
+        auto rvit = liquidBodies.begin();
 
         for(; rvit != liquidBodies.end(); )
         {
@@ -492,7 +488,7 @@ void irrBulletWorld::setGravity(const vector3df &gravity)
 
 ICollisionObject* irrBulletWorld::getCollisionObjectByIndex(irr::u32 index) const
 {
-    list<ICollisionObject*>::ConstIterator it = collisionObjects.begin();
+    auto it = collisionObjects.begin();
 
     it += index;
     ICollisionObject *obj = (*it);
@@ -503,7 +499,7 @@ ICollisionObject* irrBulletWorld::getCollisionObjectByIndex(irr::u32 index) cons
 
 ILiquidBody* irrBulletWorld::getLiquidBodyByIndex(irr::u32 index) const
 {
-    list<ILiquidBody*>::ConstIterator it = liquidBodies.begin();
+    auto it = liquidBodies.begin();
 
     it += index;
     ILiquidBody *body = (*it);
@@ -514,11 +510,9 @@ ILiquidBody* irrBulletWorld::getLiquidBodyByIndex(irr::u32 index) const
 
 ILiquidBody* irrBulletWorld::getLiquidBodyByID(irr::u32 ID) const
 {
-    list<ILiquidBody*>::ConstIterator it = liquidBodies.begin();
-
-    for(; it != liquidBodies.end(); it++)
+	for (auto it : liquidBodies)
     {
-        ILiquidBody* obj = (*it);
+        ILiquidBody* obj = it;
         if(obj->getUniqueID() == ID)
             return obj;
 
@@ -528,11 +522,9 @@ ILiquidBody* irrBulletWorld::getLiquidBodyByID(irr::u32 ID) const
 
 ICollisionObject* irrBulletWorld::getCollisionObjectByID(irr::u32 ID) const
 {
-    list<ICollisionObject*>::ConstIterator it = collisionObjects.begin();
-
-    for(; it != collisionObjects.end(); it++)
+	for (auto it : collisionObjects)
     {
-        ICollisionObject* obj = (*it);
+        ICollisionObject* obj = it;
         if(obj->getUniqueID() == ID)
             return obj;
 
@@ -542,11 +534,9 @@ ICollisionObject* irrBulletWorld::getCollisionObjectByID(irr::u32 ID) const
 
 ICollisionObject* irrBulletWorld::getCollisionObjectByName(const irr::core::stringc& name) const
 {
-    list<ICollisionObject*>::ConstIterator it = collisionObjects.begin();
-
-    for(; it != collisionObjects.end(); it++)
+	for (auto it : collisionObjects)
     {
-        ICollisionObject* obj = (*it);
+        ICollisionObject* obj = it;
         if(obj->getIdentification()->getName() == name)
             return obj;
 
@@ -584,28 +574,22 @@ irrBulletWorld::~irrBulletWorld()
 		}
 	}*/
 
-	list<ILiquidBody*>::Iterator wbit = liquidBodies.begin();
-
-    for(; wbit != liquidBodies.end(); )
+	for (auto& wbit : liquidBodies)
     {
-        ILiquidBody *liquidBody = (*wbit);
+        ILiquidBody *liquidBody = wbit;
         if(liquidBody)
         {
             delete liquidBody;
             liquidBody = 0;
         }
 
-        wbit = liquidBodies.erase(wbit);
+		wbit = *liquidBodies.erase(liquidBodies.begin(), liquidBodies.end());
     }
 
-
-
     // remove the raycast vehicles
-    list<IRaycastVehicle*>::Iterator rvit = raycastVehicles.begin();
-
-    for(; rvit != raycastVehicles.end(); )
+    for (auto& wbit : raycastVehicles)
     {
-        IRaycastVehicle *vehicle = (*rvit);
+        IRaycastVehicle *vehicle = wbit;
         if(vehicle)
         {
             getPointer()->removeVehicle(vehicle->getPointer());
@@ -613,8 +597,10 @@ irrBulletWorld::~irrBulletWorld()
             vehicle = 0;
         }
 
-        rvit = raycastVehicles.erase(rvit);
+		wbit = *raycastVehicles.erase(raycastVehicles.begin(), raycastVehicles.end());
     }
+
+
 
     // Remove the collision objects
     /*list<ICollisionObject*>::Iterator rbit = collisionObjects.begin();

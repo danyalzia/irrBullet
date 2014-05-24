@@ -142,22 +142,19 @@ void ISoftBody::createShape(IMesh* const collMesh)
     }
 
     // Reverse node->index to index->node (should be unique on both sides)
-    std::map<btSoftBody::Node*, int>::const_iterator node_iter;
-    for(node_iter = node_map.begin(); node_iter != node_map.end(); ++node_iter)
+    for(auto& node_iter : node_map)
     {
-        m_vertices.insert(std::make_pair(node_iter->second, node_iter->first));
+        m_vertices.insert(std::make_pair(node_iter.second, node_iter.first));
     }
 
     //std::cout << "update Irrlicht vertices" << std::endl;
-    std::map<int, btSoftBody::Node*>::const_iterator it;
-
 
     for(u32 i=0; i<mb->getVertexCount(); i++)
     {
-        for(it=m_vertices.begin(); it != m_vertices.end(); ++it)
+        for(auto& it : m_vertices)
         {
-            int v_index = it->first;
-            btSoftBody::Node* node = it->second;
+            int v_index = it.first;
+            btSoftBody::Node* node = it.second;
             if(node->m_x.x() == mb_vertices[i].Pos.X &&
                 node->m_x.y() == mb_vertices[i].Pos.Y &&
                 node->m_x.z() == mb_vertices[i].Pos.Z)

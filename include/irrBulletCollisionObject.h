@@ -10,6 +10,7 @@
 #include "BulletCollision/CollisionDispatch/btCollisionObject.h"
 #include "irrBulletCollisionObjectAffector.h"
 #include <IAttributes.h>
+#include <vector>
 
 enum EActivationState
 {
@@ -239,7 +240,7 @@ class ICollisionObject
         irr::u32 uniqueID;
         ECollisionObjectType objectType;
         irr::io::IAttributes *attributes;
-        irr::core::list<ICollisionObjectAffector*> affectors;
+        std::vector<ICollisionObjectAffector*> affectors;
         bool IncludeNodeOnRemoval;
         bool LiquidSimulationEnabled;
         btTransform internalTransform;

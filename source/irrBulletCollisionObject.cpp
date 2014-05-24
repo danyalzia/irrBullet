@@ -164,19 +164,17 @@ void ICollisionObject::removeAffector(ICollisionObjectAffector* const affector)
     // Remove the collision object
     if(affector)
     {
-        list<ICollisionObjectAffector*>::Iterator it = affectors.begin();
-
-        for(; it != affectors.end(); )
+        for(auto& it : affectors )
         {
-            if((*it) == affector)
+            if(it == affector)
             {
                 #ifdef IRRBULLET_DEBUG_MODE
                     printf("irrBullet: Removing animator (BODY: %i)\n", this->getUniqueID());
                 #endif
-                delete (*it);
-                (*it) = 0;
+                delete it;
+                it = 0;
 
-                it = affectors.erase(it);
+                it = *affectors.erase(affectors.begin(), affectors.end());
             }
 
             else
@@ -187,17 +185,15 @@ void ICollisionObject::removeAffector(ICollisionObjectAffector* const affector)
 
 void ICollisionObject::removeAffectors()
 {
-    list<ICollisionObjectAffector*>::Iterator it = affectors.begin();
-
-    for(; it != affectors.end(); )
+    for(auto it :  affectors)
     {
         #ifdef IRRBULLET_DEBUG_MODE
             printf("irrBullet: Removing animator (BODY: %i)\n", this->getUniqueID());
         #endif
-        delete (*it);
-        (*it) = 0;
+        delete it;
+        it = 0;
 
-        it = affectors.erase(it);
+        it = *affectors.erase(affectors.begin(), affectors.end());
     }
 }
 
@@ -337,9 +333,7 @@ irr::u32 ICollisionObject::getNumAffectors() const
 {
     u32 num = 0;
 
-    list<ICollisionObjectAffector*>::ConstIterator it = affectors.begin();
-
-    for(; it != affectors.end(); it++)
+    for(auto it : affectors)
     {
         num++;
     }
@@ -349,7 +343,7 @@ irr::u32 ICollisionObject::getNumAffectors() const
 
 ICollisionObjectAffector* ICollisionObject::getAffector(irr::u32 index)
 {
-    list<ICollisionObjectAffector*>::ConstIterator it = affectors.begin();
+    auto it = affectors.begin();
 
     it += index;
     ICollisionObjectAffector* affector = (*it);

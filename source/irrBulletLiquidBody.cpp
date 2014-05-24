@@ -120,7 +120,7 @@ void ILiquidBody::affectRigidBody(IRigidBody* const body)
     /*else
         CurrentPosition = static_cast<ISoftBody*>(object)->getSceneNode()->getAbsolutePosition();*/
 
-    const irr::core::array<SBuoyancyPoint>& points = body->getBuoyancyPoints();
+    const std::vector<SBuoyancyPoint>& points = body->getBuoyancyPoints();
 
     body->setAngularVelocity(body->getAngularVelocity()*(AngularLimitation));
 

@@ -12,10 +12,22 @@
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add directory="../../include" />
+					<Add option="-std=c++11" />
+					<Add directory="../../include/" />
+					<Add directory="$(IRRLICHT_ROOT)/include" />
+					<Add directory="$(BULLET_ROOT)/src" />
 				</Compiler>
 				<Linker>
-					<Add directory="../../lib/Win32-visualstudio" />
+					<Add library="libirrBullet.a" />
+					<Add library="libBulletSoftBody.a" />
+					<Add library="libBulletDynamics.a" />
+					<Add library="libBulletCollision.a" />
+					<Add library="libLinearMath.a" />
+					<Add library="libConvexDecomposition.a" />
+					<Add library="libIrrlicht.a" />
+					<Add directory="../../lib/Win32-gcc" />
+					<Add directory="$(BULLET_ROOT)/lib" />
+					<Add directory="$(IRRLICHT_ROOT)/lib/Win32-gcc/" />
 				</Linker>
 			</Target>
 			<Target title="Release Win32">
@@ -24,21 +36,24 @@
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-march=pentium4" />
+					<Add option="-O3" />
+					<Add option="-std=c++11" />
 					<Add directory="../../include/" />
 					<Add directory="$(IRRLICHT_ROOT)/include" />
 					<Add directory="$(BULLET_ROOT)/src" />
 				</Compiler>
 				<Linker>
-					<Add library="irrBullet.lib" />
-					<Add library="BulletCollision.lib" />
-					<Add library="BulletDynamics.lib" />
-					<Add library="BulletSoftBody.lib" />
-					<Add library="ConvexDecomposition.lib" />
-					<Add library="LinearMath.lib" />
-					<Add library="Irrlicht.lib" />
-					<Add directory="../../lib/Win32-visualstudio" />
+					<Add library="libirrBullet.a" />
+					<Add library="libBulletSoftBody.a" />
+					<Add library="libBulletDynamics.a" />
+					<Add library="libBulletCollision.a" />
+					<Add library="libLinearMath.a" />
+					<Add library="libConvexDecomposition.a" />
+					<Add library="libIrrlicht.a" />
+					<Add directory="../../lib/Win32-gcc" />
 					<Add directory="$(BULLET_ROOT)/lib" />
-					<Add directory="$(IRRLICHT_ROOT)/lib/Win32-visualstudio/" />
+					<Add directory="$(IRRLICHT_ROOT)/lib/Win32-gcc/" />
 				</Linker>
 			</Target>
 		</Build>

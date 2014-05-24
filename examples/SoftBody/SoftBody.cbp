@@ -12,6 +12,7 @@
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add directory="../../include" />
 					<Add directory="../../include/" />
 					<Add directory="$(IRRLICHT_ROOT)/include" />
@@ -37,6 +38,9 @@
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-march=pentium4" />
+					<Add option="-O3" />
+					<Add option="-std=c++11" />
 					<Add directory="../../include/" />
 					<Add directory="$(IRRLICHT_ROOT)/include" />
 					<Add directory="$(BULLET_ROOT)/src" />
@@ -65,9 +69,9 @@
 			<Add library="libIrrlicht.a" />
 		</Linker>
 		<Unit filename="../framework/exampleframework.cpp" />
+		<Unit filename="main.cpp" />
 		<Unit filename="softbodyexample.cpp" />
 		<Unit filename="softbodyexample.h" />
-		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
