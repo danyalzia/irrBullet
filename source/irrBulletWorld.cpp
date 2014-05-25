@@ -76,7 +76,9 @@ irrBulletWorld::irrBulletWorld(irr::IrrlichtDevice* const Device, bool useGImpac
     }
 
     // For displaying debugging properties - by default on TOP_LEFT
-    setPropertiesTextPosition(EDPT_POSITION::EDPT_TOP_LEFT);
+	propertyText = device->getGUIEnvironment()->addStaticText(L"",
+		rect<s32>(10, 10, 120, 240), false);
+	TextPropertiesPosition = EDPT_POSITION::EDPT_TOP_LEFT;
 
     printf("irrBullet %i.%i.%i\n", IRRBULLET_VER_MAJOR, IRRBULLET_VER_MINOR, IRRBULLET_VER_MICRO);
 }
@@ -354,33 +356,33 @@ void irrBulletWorld::setPropertiesTextPosition(EDPT_POSITION pos)
 {
     TextPropertiesPosition = pos;
 
-    if (propertyText)
-        propertyText->remove();
+	if (propertyText != nullptr)
+		propertyText->remove();
 
     OriginalScreenSize = device->getVideoDriver()->getScreenSize();
 
     irr::u32 width = OriginalScreenSize.Width;
     irr::u32 height = OriginalScreenSize.Height;
 
-    if (pos == EDPT_POSITION::EDPT_TOP_LEFT)
+	if (TextPropertiesPosition == EDPT_POSITION::EDPT_TOP_LEFT)
     {
         propertyText = device->getGUIEnvironment()->addStaticText(L"",
             rect<s32>(10, 10, 120, 240), false);
     }
 
-    else if (pos == EDPT_POSITION::EDPT_TOP_RIGHT)
+	else if (TextPropertiesPosition == EDPT_POSITION::EDPT_TOP_RIGHT)
     {
         propertyText = device->getGUIEnvironment()->addStaticText(L"",
             rect<s32>(width - 60, 10, width, height), false);
     }
 
-    else if (pos == EDPT_POSITION::EDPT_BOTTOM_LEFT)
+	else if (TextPropertiesPosition == EDPT_POSITION::EDPT_BOTTOM_LEFT)
     {
         propertyText = device->getGUIEnvironment()->addStaticText(L"",
             rect<s32>(10, height - 60, 150, height), false);
     }
 
-    else if (pos == EDPT_POSITION::EDPT_BOTTOM_RIGHT)
+	else if (TextPropertiesPosition == EDPT_POSITION::EDPT_BOTTOM_RIGHT)
     {
        propertyText = device->getGUIEnvironment()->addStaticText(L"",
             rect<s32>(width - 60, height - 70, width, height), false);
@@ -442,8 +444,12 @@ void irrBulletWorld::debugDrawProperties(bool b, const SColor& col)
 
         // Check resized event
         irr::core::dimension2du CurrentScreenSize = device->getVideoDriver()->getScreenSize();
-        if (CurrentScreenSize != OriginalScreenSize)
-            setPropertiesTextPosition(TextPropertiesPosition);
+		if (CurrentScreenSize != OriginalScreenSize)
+		{
+			printf("-- irrBullet: Resized... --\n");
+			setPropertiesTextPosition(TextPropertiesPosition);
+		}
+			
     }
 
     else
@@ -614,22 +620,27 @@ irrBulletWorld::~irrBulletWorld()
 		}
 	}*/
 
-	for (auto& wbit : liquidBodies)
+	// remove liquid bodies
+    auto wbit = liquidBodies.begin();
+
+	for(; wbit != liquidBodies.end(); )
     {
-        ILiquidBody *liquidBody = wbit;
+        ILiquidBody *liquidBody = (*wbit);
         if(liquidBody)
         {
             delete liquidBody;
             liquidBody = 0;
         }
 
-		wbit = *liquidBodies.erase(liquidBodies.begin(), liquidBodies.end());
+		wbit = liquidBodies.erase(wbit);
     }
 
     // remove the raycast vehicles
-    for (auto& wbit : raycastVehicles)
+    auto rvit = raycastVehicles.begin();
+
+    for(; rvit != raycastVehicles.end(); )
     {
-        IRaycastVehicle *vehicle = wbit;
+        IRaycastVehicle *vehicle = (*rvit);
         if(vehicle)
         {
             getPointer()->removeVehicle(vehicle->getPointer());
@@ -637,7 +648,7 @@ irrBulletWorld::~irrBulletWorld()
             vehicle = 0;
         }
 
-		wbit = *raycastVehicles.erase(raycastVehicles.begin(), raycastVehicles.end());
+		rvit = raycastVehicles.erase(rvit);
     }
 
 

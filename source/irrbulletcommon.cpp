@@ -116,12 +116,10 @@ irr::core::vector3df compensateForNodeType(const irr::core::vector3df& scale, ir
     return irr::core::vector3df(scale) * compensator;
 }
 
-
 btVector3 irrlichtToBulletVector(const irr::core::vector3df& vec)
 {
     return btVector3(vec.X,vec.Y,vec.Z);
 }
-
 
 irr::core::vector3df bulletToIrrlichtVector(const btVector3& vec)
 {

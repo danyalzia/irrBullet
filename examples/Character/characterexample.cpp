@@ -141,13 +141,13 @@ void CCharacterExample::runExample()
 		TimeStamp = device->getTimer()->getTime();
 
 
-		/*sydney->setPosition(character->getWorldTransform().getTranslation()+vector3df(0,-((sydney->getBoundingBox().MaxEdge.Y-sydney->getBoundingBox().MinEdge.Y)*0.1*0.5f),0));
+		sydney->setPosition(character->getWorldTransform().getTranslation()+vector3df(0,-((sydney->getBoundingBox().MaxEdge.Y-sydney->getBoundingBox().MinEdge.Y)*0.1*0.5f),0));
         vector3df dir = camera->getAbsolutePosition()-sydney->getAbsolutePosition();
         dir.normalize();
         dir.Y = 0;
         dir *= -1;
 
-        character->setWalkDirection(dir*0.3f);*/
+        character->setWalkDirection(dir*0.3f);
 
         if(IsKeyDown(KEY_KEY_W))
         {
@@ -221,7 +221,7 @@ void CCharacterExample::runExample()
 
         m.transformVect(direction);
 
-        // character->setWalkDirection(direction*0.3f);
+        character->setWalkDirection(direction*0.3f);
 
         camera->setTarget(sydney->getPosition());
 

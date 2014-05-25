@@ -10,5 +10,6 @@
 		<Project filename="Character/Character.cbp" />
 		<Project filename="Affectors/Affectors.cbp" />
 		<Project filename="../source/irrBullet-gcc.cbp" />
+		<Project filename="C:/Users/Danyal/Desktop/Irrlicht GCC/Irrlicht GCC.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

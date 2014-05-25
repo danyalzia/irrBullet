@@ -77,7 +77,8 @@
       <AdditionalDependencies>irrBullet.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;ConvexDecomposition.lib;LinearMath.lib;Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(IRRLICHT_ROOT)\bin\Win32-VisualStudio\Irrlicht.dll" "..\..\bin\Win32-VisualStudio\"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Copy Irrlicht's DLL to bin</Message>

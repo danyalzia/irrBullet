@@ -142,7 +142,7 @@ void ISoftBody::createShape(IMesh* const collMesh)
     }
 
     // Reverse node->index to index->node (should be unique on both sides)
-    for(auto& node_iter : node_map)
+    for(auto node_iter : node_map)
     {
         m_vertices.insert(std::make_pair(node_iter.second, node_iter.first));
     }
@@ -151,7 +151,7 @@ void ISoftBody::createShape(IMesh* const collMesh)
 
     for(u32 i=0; i<mb->getVertexCount(); i++)
     {
-        for(auto& it : m_vertices)
+        for(auto it : m_vertices)
         {
             int v_index = it.first;
             btSoftBody::Node* node = it.second;

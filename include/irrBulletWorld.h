@@ -31,7 +31,7 @@ class btConstraintSolver;
 struct btVehicleRaycaster;
 class ILiquidBody;
 
-enum EDPT_POSITION
+enum class EDPT_POSITION
 {
     EDPT_TOP_LEFT,
     EDPT_TOP_RIGHT,
@@ -202,10 +202,14 @@ public:
 	/// @return A reference to the soft body world info (gravity, water density, air density, dispatcher, etc.)
 	btSoftBodyWorldInfo& getSoftBodyWorldInfo() { return softBodyWorldInfo; };
 
+	/// @return IrrlichtDevice
 	irr::IrrlichtDevice* getIrrlichtDevice() const { return device; };
 
+	/// @return Material for debugging, internal use only
 	const irr::video::SMaterial& getDebugMaterial() const { return debugMat; };
 
+	/// @return Collision world
+	btSoftRigidDynamicsWorld* getWorld() { return world; }
 
 private:
 	btSoftRigidDynamicsWorld* world;
@@ -229,7 +233,6 @@ private:
 
 	bool gimpactEnabled;
 	bool isPaused;
-    bool isResized;
 
 	irr::u32 LiquidBodyCount;
 	irr::u32 CollisionObjectCount;
