@@ -3,6 +3,7 @@
 #include <irrTypes.h>
 #include <vector3d.h>
 #include <matrix4.h>
+#include <irrlicht.h>
 
 class irrBulletWorld;
 
@@ -17,7 +18,11 @@ class btKinematicCharacterController;
 class IKinematicCharacterController
 {
 public:
-	IKinematicCharacterController(irrBulletWorld* const world);
+	/*!
+		Default constructor that uses btCapsuleShape for approximating character - fast
+	*/
+	IKinematicCharacterController(irrBulletWorld* const world, irr::f32 height = 5.0f, irr::f32 width = 2.0f, irr::f32 stepHeight = 1.0f);
+
 	~IKinematicCharacterController();
 
 	void setWalkDirection(const irr::core::vector3df& dir);
@@ -25,6 +30,10 @@ public:
 	void reset();
 
 	void warp(const irr::core::vector3df& origin);
+
+	void preStep(irrBulletWorld* world);
+
+	void playerStep(irrBulletWorld* world, irr::f32 dt);
 
 	void setFallSpeed(irr::f32 fallSpeed);
 
@@ -37,9 +46,15 @@ public:
 
 	void setUseGhostSweepTest(bool useGhostObjectSweepTest);
 
+	void updateAction(irrBulletWorld* world, irr::f32 dt)
+	{
+		preStep(world);
+		playerStep(world, dt);
+	}
+
 	void setUpAxis(irr::u32 axis);
 
-	/*!
+	/*! 
 		This is neither a direction nor a velocity, but the amount to
 		increment the position each simulation iteration, regardless of deltatime.
 		This call will reset any velocity set by setVelocityForTimeInterval().
@@ -54,6 +69,11 @@ public:
 		*/
 	void setVelocityForTimeInterval(const irr::core::vector3df& velocity, irr::f32 timeInterval);
 
+	/*!
+	set Bullet world gravity, default to the one provided with irrBulletWorld
+	@param gravity Y-axis of gravitational force
+	*/
+
 	void setGravity(irr::f32 gravity);
 
 	/*!
@@ -65,9 +85,11 @@ public:
 	btPairCachingGhostObject* getGhostObject() const;
 
 	/// Return the world transform of the character
-	const irr::core::matrix4 getWorldTransform() const;
+	irr::core::matrix4 getWorldTransform();
 
 	bool isOnGround() const;
+
+	void setUpInterpolate(bool value);
 
 	bool canJump() const;
 

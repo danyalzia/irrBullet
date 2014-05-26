@@ -3,7 +3,7 @@
 #include "BulletDynamics/Character/btKinematicCharacterController.h"
 #include "irrBullet.h"
 
-IKinematicCharacterController::IKinematicCharacterController(irrBulletWorld* const world) : World(world)
+IKinematicCharacterController::IKinematicCharacterController(irrBulletWorld* const world, irr::f32 height, irr::f32 width, irr::f32 stepHeight) : World(world)
 {
 	btTransform startTransform;
 	startTransform.setIdentity();
@@ -11,15 +11,14 @@ IKinematicCharacterController::IKinematicCharacterController(irrBulletWorld* con
 
 	GhostObject = new btPairCachingGhostObject();
 	GhostObject->setWorldTransform(startTransform);
-	btScalar characterHeight = 3.0;
-	btScalar characterWidth = 1.95;
+	btScalar characterHeight = height;
+	btScalar characterWidth = width;
 	Capsule = new btCapsuleShape(characterWidth, characterHeight);
 	GhostObject->setCollisionShape(Capsule);
 	GhostObject->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
 
-	btScalar stepHeight = btScalar(0.35);
-	Character = new btKinematicCharacterController(GhostObject, Capsule, stepHeight);
-
+	Character = new btKinematicCharacterController(GhostObject, Capsule, btScalar(stepHeight));
+	
 	World->getPointer()->addCollisionObject(GhostObject, btBroadphaseProxy::CharacterFilter, btBroadphaseProxy::StaticFilter | btBroadphaseProxy::DefaultFilter);
 
 	World->getPointer()->addAction(Character);
@@ -38,6 +37,17 @@ void IKinematicCharacterController::reset()
 void IKinematicCharacterController::warp(const irr::core::vector3df& origin)
 {
 	Character->warp(irrlichtToBulletVector(origin));
+}
+
+
+void IKinematicCharacterController::preStep(irrBulletWorld* world)
+{
+	Character->preStep(static_cast<btCollisionWorld*>(world->getWorld()));
+}
+
+void IKinematicCharacterController::playerStep(irrBulletWorld* world, irr::f32 dt)
+{
+    Character->playerStep(static_cast<btCollisionWorld*>(world->getWorld()), btScalar(dt));
 }
 
 void IKinematicCharacterController::setFallSpeed(irr::f32 fallSpeed)
@@ -90,7 +100,7 @@ void IKinematicCharacterController::setMaxSlope(irr::f32 slopeRadians)
 	Character->setMaxSlope(slopeRadians);
 }
 
-const irr::core::matrix4 IKinematicCharacterController::getWorldTransform() const
+irr::core::matrix4 IKinematicCharacterController::getWorldTransform()
 {
 	irr::core::matrix4 mat;
 	btTransformToIrrlichtMatrix(GhostObject->getWorldTransform(), mat);
@@ -113,6 +123,10 @@ bool IKinematicCharacterController::isOnGround() const
 	return Character->onGround();
 }
 
+void IKinematicCharacterController::setUpInterpolate(bool value)
+{
+	Character->setUpInterpolate(value);
+}
 irr::f32 IKinematicCharacterController::getGravity() const
 {
 	return Character->getGravity();
