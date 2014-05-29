@@ -67,7 +67,7 @@ bool CRaycastTankExample::OnEvent(const SEvent& event)
             if(event.KeyInput.Key == KEY_SPACE && event.KeyInput.PressedDown == false)
             {
                 IAnimatedMeshSceneNode *node = static_cast<IAnimatedMeshSceneNode*>(tank->getCollisionShape()->getSceneNode());
-                vehicle->getRigidBody()->applyImpulse(vector3df(0,0,-500), node->getJointNode("Muzzle")->getPosition(), ERBTS_LOCAL);
+                vehicle->getRigidBody()->applyImpulse(vector3df(0,0,-500), node->getJointNode("Muzzle")->getPosition(), ERBTransformSpace::ERBTS_LOCAL);
                 createMuzzleFlash(node->getJointNode("Muzzle"));
             }
 
@@ -119,8 +119,8 @@ void CRaycastTankExample::runExample()
     ////////////////////////////
     world = createIrrBulletWorld(device, true, debugDraw);
 
-    world->setDebugMode(EPDM_DrawAabb |
-            EPDM_DrawContactPoints);
+	world->setDebugMode(irrPhysicsDebugMode::EPDM_DrawAabb |
+		irrPhysicsDebugMode::EPDM_DrawContactPoints);
 
     world->setGravity(vector3df(0,-10,0));
 
@@ -229,7 +229,7 @@ void CRaycastTankExample::updateTank()
 
         if(IsKeyDown(KEY_KEY_F))
         {
-            tank->applyForce(vector3df(0,1600,1200), vector3df(0,0,0), ERBTS_LOCAL);
+			tank->applyForce(vector3df(0, 1600, 1200), vector3df(0, 0, 0), ERBTransformSpace::ERBTS_LOCAL);
         }
     }
 
@@ -264,11 +264,11 @@ void CRaycastTankExample::createTerrain()
 	IRigidBody *terrain = world->addRigidBody(shape);
 
 
-    shape->setLocalScaling(vector3df(4,4,4), ESP_BOTH);
+    shape->setLocalScaling(vector3df(4,4,4), EScalingPair::ESP_BOTH);
 
 	// When setting a rigid body to a static object, please be sure that you have
 	// that object's mass set to 0.0. Otherwise, undesired results will occur.
-	terrain->setCollisionFlags(ECF_STATIC_OBJECT);
+	terrain->setCollisionFlags(ECollisionFlag::ECF_STATIC_OBJECT);
 }
 
 
@@ -289,7 +289,7 @@ void CRaycastTankExample::createTank(const stringw file, const stringw collFile,
 	tank = world->addRigidBody(shape);
 
     // When using a raycast vehicle, we don't want this rigid body to deactivate.
-	tank->setActivationState(EAS_DISABLE_DEACTIVATION);
+	tank->setActivationState(EActivationState::EAS_DISABLE_DEACTIVATION);
 
     // Set some damping on the rigid body because the raycast vehicles tend to bounce a lot without a lot of tweaking.
     // (cheap fix for the example only)

@@ -64,7 +64,7 @@ class ILiquidBody
 			*this = std::move(other);
 		}
 
-		// Move assignment operator.
+		// Move assignment operator
 		ILiquidBody& operator=(ILiquidBody&& other)
 		{
 			if (this != &other)

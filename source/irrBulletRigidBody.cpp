@@ -28,7 +28,7 @@ IRigidBody::IRigidBody(irrBulletWorld* const world, ICollisionShape* const collS
     #endif
     shape = collShape;
 
-    objectType = ECOT_RIGID_BODY;
+	objectType = ECollisionObjectType::ECOT_RIGID_BODY;
 
     dynamicsWorld = world;
 
@@ -110,7 +110,7 @@ IRigidBody::IRigidBody(irrBulletWorld* const world, const SRigidBodyConstruction
 
 void IRigidBody::setCollisionShape(ICollisionShape* const Shape)
 {
-    if(objectType == ECOT_RIGID_BODY)
+	if (objectType == ECollisionObjectType::ECOT_RIGID_BODY)
     {
         shape = Shape;
         shape->calculateLocalInertia(shape->getMass(), vector3df(0.0f,0.0f,0.0f));
@@ -164,7 +164,7 @@ void IRigidBody::updateDeactivation(f32 timeStep)
 
 void IRigidBody::setLinearVelocity(const vector3df& linVel, ERBTransformSpace transformSpace)
 {
-    getPointer()->setLinearVelocity((transformSpace==ERBTS_WORLD) ?
+	getPointer()->setLinearVelocity((transformSpace == ERBTransformSpace::ERBTS_WORLD) ?
         irrlichtToBulletVector(linVel) :
         btVector3(getPointer()->getWorldTransform().getBasis()*irrlichtToBulletVector(linVel)));
 }
@@ -172,7 +172,7 @@ void IRigidBody::setLinearVelocity(const vector3df& linVel, ERBTransformSpace tr
 
 void IRigidBody::setAngularVelocity(const vector3df& angVel, ERBTransformSpace transformSpace)
 {
-    getPointer()->setAngularVelocity((transformSpace==ERBTS_WORLD) ?
+	getPointer()->setAngularVelocity((transformSpace == ERBTransformSpace::ERBTS_WORLD) ?
         irrlichtToBulletVector(angVel) :
         btVector3(getPointer()->getWorldTransform().getBasis()*irrlichtToBulletVector(angVel)));
 }
@@ -186,7 +186,7 @@ void IRigidBody::saveKinematicState(f32 step)
 
 void IRigidBody::applyCentralForce(const vector3df& force, ERBTransformSpace transformSpace)
 {
-    getPointer()->applyCentralForce((transformSpace==ERBTS_WORLD) ?
+	getPointer()->applyCentralForce((transformSpace == ERBTransformSpace::ERBTS_WORLD) ?
         irrlichtToBulletVector(force) :
         btVector3(getPointer()->getWorldTransform().getBasis()*irrlichtToBulletVector(force)));
 }
@@ -194,7 +194,7 @@ void IRigidBody::applyCentralForce(const vector3df& force, ERBTransformSpace tra
 
 void IRigidBody::applyForce(const vector3df& force, const vector3df &relPos, ERBTransformSpace transformSpace)
 {
-    getPointer()->applyForce((transformSpace==ERBTS_WORLD) ?
+	getPointer()->applyForce((transformSpace == ERBTransformSpace::ERBTS_WORLD) ?
         irrlichtToBulletVector(force) :
         btVector3(getPointer()->getWorldTransform().getBasis()*irrlichtToBulletVector(force)),
         irrlichtToBulletVector(relPos));
@@ -203,7 +203,7 @@ void IRigidBody::applyForce(const vector3df& force, const vector3df &relPos, ERB
 
 void IRigidBody::applyCentralImpulse(const vector3df& impulse, ERBTransformSpace transformSpace)
 {
-    getPointer()->applyCentralImpulse((transformSpace==ERBTS_WORLD) ?
+	getPointer()->applyCentralImpulse((transformSpace == ERBTransformSpace::ERBTS_WORLD) ?
         irrlichtToBulletVector(impulse) :
         btVector3(getPointer()->getWorldTransform().getBasis()*irrlichtToBulletVector(impulse)));
 }
@@ -211,7 +211,7 @@ void IRigidBody::applyCentralImpulse(const vector3df& impulse, ERBTransformSpace
 
 void IRigidBody::applyImpulse(const vector3df& impulse, const vector3df& relPos, ERBTransformSpace transformSpace)
 {
-    getPointer()->applyImpulse((transformSpace==ERBTS_WORLD) ?
+	getPointer()->applyImpulse((transformSpace == ERBTransformSpace::ERBTS_WORLD) ?
         irrlichtToBulletVector(impulse) :
         btVector3(getPointer()->getWorldTransform().getBasis()*irrlichtToBulletVector(impulse)),
         irrlichtToBulletVector(relPos));
@@ -220,14 +220,14 @@ void IRigidBody::applyImpulse(const vector3df& impulse, const vector3df& relPos,
 
 void IRigidBody::applyTorque(const vector3df& torque, ERBTransformSpace transformSpace)
 {
-    getPointer()->applyTorque((transformSpace==ERBTS_WORLD) ?
+	getPointer()->applyTorque((transformSpace == ERBTransformSpace::ERBTS_WORLD) ?
         irrlichtToBulletVector(torque) :
         btVector3(getPointer()->getWorldTransform().getBasis()*irrlichtToBulletVector(torque)));
 }
 
 void IRigidBody::applyTorqueImpulse(const vector3df& torque, ERBTransformSpace transformSpace)
 {
-    getPointer()->applyTorqueImpulse((transformSpace==ERBTS_WORLD) ?
+	getPointer()->applyTorqueImpulse((transformSpace == ERBTransformSpace::ERBTS_WORLD) ?
         irrlichtToBulletVector(torque) :
         btVector3(getPointer()->getWorldTransform().getBasis()*irrlichtToBulletVector(torque)));
 }
@@ -236,9 +236,9 @@ void IRigidBody::applyTorqueImpulse(const vector3df& torque, ERBTransformSpace t
 void IRigidBody::internalApplyImpulse(const vector3df& linearComponent,
 	const vector3df &angularComponent, f32 impulseMagnitude, ERBTransformSpace linTransformSpace, ERBTransformSpace angTransformSpace)
 {
-	getPointer()->applyImpulse((linTransformSpace == ERBTS_WORLD) ? irrlichtToBulletVector(linearComponent) :
+	getPointer()->applyImpulse((linTransformSpace == ERBTransformSpace::ERBTS_WORLD) ? irrlichtToBulletVector(linearComponent) :
 		btVector3(getPointer()->getWorldTransform().getBasis()*irrlichtToBulletVector(linearComponent)),
-		(angTransformSpace == ERBTS_WORLD) ? irrlichtToBulletVector(angularComponent) :
+		(angTransformSpace == ERBTransformSpace::ERBTS_WORLD) ? irrlichtToBulletVector(angularComponent) :
 		btVector3(getPointer()->getWorldTransform().getBasis()*irrlichtToBulletVector(angularComponent)));
 }
 

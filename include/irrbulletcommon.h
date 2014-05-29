@@ -44,7 +44,7 @@ irr::core::vector3df bulletToIrrlichtVector(T1 x, T2 y, T3 z)
 
 
 
-enum irrPhysicsDebugMode
+enum class irrPhysicsDebugMode
 {
   EPDM_NoDebug = 0,
   EPDM_DrawWireframe = 1,
@@ -63,3 +63,8 @@ enum irrPhysicsDebugMode
   EPDM_FastWireframe = (1<<13),
   EPDM_MAX_DEBUG_DRAW_MODE
 };
+
+inline irrPhysicsDebugMode operator|(irrPhysicsDebugMode a, irrPhysicsDebugMode b)
+{
+	return static_cast<irrPhysicsDebugMode>(static_cast<int>(a) | static_cast<int>(b));
+}

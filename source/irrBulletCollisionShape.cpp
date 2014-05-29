@@ -26,10 +26,10 @@ void ICollisionShape::setLocalScaling(const vector3df &scaling, const EScalingPa
 
     vector3df comp = compensateForNodeType(scaling, node->getType());
 
-    if(esp == ESP_BOTH || esp == ESP_COLLISIONSHAPE)
+	if (esp == EScalingPair::ESP_BOTH || esp == EScalingPair::ESP_COLLISIONSHAPE)
     {
         shape->setLocalScaling(btVector3(comp.X,comp.Y,comp.Z));
-        if(getShapeType() == ECST_GIMPACT)
+		if (getShapeType() == ECollisionShapeType::ECST_GIMPACT)
         {
             btGImpactMeshShape *gshape = static_cast<btGImpactMeshShape *>(shape);
             //gshape->setLocalScaling(irrlichtToBulletVector(comp));
@@ -39,7 +39,7 @@ void ICollisionShape::setLocalScaling(const vector3df &scaling, const EScalingPa
         }
     }
 
-    if(esp == ESP_BOTH || esp == ESP_VISUAL)
+	if (esp == EScalingPair::ESP_BOTH || esp == EScalingPair::ESP_VISUAL)
         node->setScale(scaling);
 
 

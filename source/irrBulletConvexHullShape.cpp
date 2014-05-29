@@ -19,7 +19,7 @@ IConvexHullShape::IConvexHullShape(irr::scene::ISceneNode *n, irr::scene::IMesh 
     node = n;
     mass = m;
 
-    type = ECST_CONVEXHULL;
+	type = ECollisionShapeType::ECST_CONVEXHULL;
 
     createShape(collMesh);
 }

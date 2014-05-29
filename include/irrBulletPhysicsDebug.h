@@ -40,12 +40,12 @@ public:
 
 	void draw3dText(const btVector3& location, const char* text);
 
-	void setDebugMode(int mode) { this->mode = mode; }
+	void setDebugMode(int mode) { this->mode = static_cast<irrPhysicsDebugMode>(mode); }
 
-	int getDebugMode() const { return this->mode; }
+	int getDebugMode() const { return static_cast<int>(this->mode); }
 
 private:
-	int mode;
+	irrPhysicsDebugMode mode;
 
 	irr::video::IVideoDriver* const driver;
 

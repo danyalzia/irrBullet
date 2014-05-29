@@ -6,6 +6,7 @@
 #pragma once
 
 #include "irrBulletCommon.h"
+#include "irrBulletCompileConfig.h"
 #include "irrBulletCollisionObject.h"
 #include "BulletDynamics/Dynamics/btRigidBody.h"
 #include "irrBulletRayCastVehicle.h"
@@ -47,7 +48,7 @@ struct SBuoyancyPoint
     If it was set to ERBTS_WORLD, it would apply a force of 100 in the direction of
     the fixed Z axis of the world. All of the functions default this parameter to ERBTS_WORLD.
 */
-enum ERBTransformSpace
+enum class ERBTransformSpace
 {
     ERBTS_LOCAL, // RigidBody forces will be applied in local space
     ERBTS_WORLD  // RigidBody forces will be applied in world space
@@ -75,7 +76,7 @@ public:
 		*this = std::move(other);
 	}
 
-	// Move assignment operator.
+	// Move assignment operator
 	IRigidBody& operator=(IRigidBody&& other)
 	{
 		if (this != &other)
@@ -124,7 +125,7 @@ public:
             However, calling setLinearVelocity() in local space would be great for something
             such as an unguided rocket that only needs one direction at the time of its creation.
     */
-    void setLinearVelocity(const irr::core::vector3df& linVel, ERBTransformSpace transformSpace=ERBTS_WORLD);
+	void setLinearVelocity(const irr::core::vector3df& linVel, ERBTransformSpace transformSpace = ERBTransformSpace::ERBTS_WORLD);
 
     /*!
         Angular velocity is the speed at which an object rotates.
@@ -136,32 +137,32 @@ public:
             The velocity will not be applied in current local directions of the rigid body.
             If you wish to achieve this, please see applyTorque(), applyTorqueImpulse() and internalApplyImpulse().
     */
-    void setAngularVelocity(const irr::core::vector3df& angVel, ERBTransformSpace transformSpace=ERBTS_WORLD);
+	void setAngularVelocity(const irr::core::vector3df& angVel, ERBTransformSpace transformSpace = ERBTransformSpace::ERBTS_WORLD);
 
     void saveKinematicState(irr::f32 step);
 
     /// Applies a force from the center of the object.
-    void applyCentralForce(const irr::core::vector3df& force, ERBTransformSpace transformSpace=ERBTS_WORLD);
+	void applyCentralForce(const irr::core::vector3df& force, ERBTransformSpace transformSpace = ERBTransformSpace::ERBTS_WORLD);
 
     /*!
         Applies a force from a relative position of the object. This can be useful for things
         such as the thrust from several aircraft engines, rockets, etc.
     */
-    void applyForce(const irr::core::vector3df& force, const irr::core::vector3df& relPos, ERBTransformSpace transformSpace=ERBTS_WORLD);
+	void applyForce(const irr::core::vector3df& force, const irr::core::vector3df& relPos, ERBTransformSpace transformSpace = ERBTransformSpace::ERBTS_WORLD);
 
     /// This can be thought of as one quick application of force to induce linear motion.
-    void applyCentralImpulse(const irr::core::vector3df& impulse, ERBTransformSpace transformSpace=ERBTS_WORLD);
+	void applyCentralImpulse(const irr::core::vector3df& impulse, ERBTransformSpace transformSpace = ERBTransformSpace::ERBTS_WORLD);
 
     /*!
         This is the same as applyCentralImpulse, with the exception that it applies the force
         from a relative position of the object.
     */
-    void applyImpulse(const irr::core::vector3df& impulse, const irr::core::vector3df &relPos, ERBTransformSpace transformSpace=ERBTS_WORLD);
+	void applyImpulse(const irr::core::vector3df& impulse, const irr::core::vector3df &relPos, ERBTransformSpace transformSpace = ERBTransformSpace::ERBTS_WORLD);
 
-    void applyTorque(const irr::core::vector3df& torque, ERBTransformSpace transformSpace=ERBTS_WORLD);
+	void applyTorque(const irr::core::vector3df& torque, ERBTransformSpace transformSpace = ERBTransformSpace::ERBTS_WORLD);
 
     /// This can be thought of as one quick application of force to induce angular motion (torque).
-    void applyTorqueImpulse(const irr::core::vector3df& torque, ERBTransformSpace transformSpace=ERBTS_WORLD);
+	void applyTorqueImpulse(const irr::core::vector3df& torque, ERBTransformSpace transformSpace = ERBTransformSpace::ERBTS_WORLD);
 
     /*!
         This simply combines applyImpulse and applyTorqueImpulse into one function.
@@ -172,7 +173,7 @@ public:
     */
     void internalApplyImpulse(const irr::core::vector3df &linearComponent,
         const irr::core::vector3df &angularComponent, irr::f32 impulseMagnitude,
-        ERBTransformSpace linTransformSpace=ERBTS_WORLD, ERBTransformSpace angTransformSpace=ERBTS_WORLD);
+		ERBTransformSpace linTransformSpace = ERBTransformSpace::ERBTS_WORLD, ERBTransformSpace angTransformSpace = ERBTransformSpace::ERBTS_WORLD);
 
     void clearForces();
 

@@ -42,10 +42,10 @@ void ICollisionObject::setWorldTransform(const irr::core::matrix4& irrmat)
 {
     btTransformFromIrrlichtMatrix(irrmat, internalTransform);
 
-    if(getObjectType() == ECOT_RIGID_BODY)
+	if (getObjectType() == ECollisionObjectType::ECOT_RIGID_BODY)
         getPointer()->setWorldTransform(internalTransform);
 
-    else if(getObjectType() == ECOT_SOFT_BODY)
+	else if (getObjectType() == ECollisionObjectType::ECOT_SOFT_BODY)
         static_cast<btSoftBody*>(getPointer())->transform(internalTransform);
 }
 
@@ -91,13 +91,13 @@ void ICollisionObject::setContactProcessingThreshold(f32 cpt)
 
 void ICollisionObject::setActivationState(EActivationState newState)
 {
-    getPointer()->setActivationState(newState);
+    getPointer()->setActivationState(static_cast<int>(newState));
 }
 
 
 void ICollisionObject::forceActivationState(EActivationState newState)
 {
-    getPointer()->forceActivationState(newState);
+	getPointer()->forceActivationState(static_cast<int>(newState));
 }
 
 
@@ -151,7 +151,7 @@ void ICollisionObject::setHitFraction(f32 hitFraction)
 
 void ICollisionObject::setCollisionFlags(ECollisionFlag flags)
 {
-    getPointer()->setCollisionFlags(flags);
+    getPointer()->setCollisionFlags(static_cast<int>(flags));
 }
 
 void ICollisionObject::addAffector(ICollisionObjectAffector* const affector)
@@ -244,23 +244,23 @@ bool ICollisionObject::hasContactResponse() const
 
 EActivationState ICollisionObject::getActivationState() const
 {
-    EActivationState state = EAS_SLEEPING;
+	EActivationState state = EActivationState::EAS_SLEEPING;
     switch(getPointer()->getActivationState())
     {
         case 1:
-            state = EAS_ACTIVE;
+			state = EActivationState::EAS_ACTIVE;
             break;
         case 2:
-            state = EAS_SLEEPING;
+			state = EActivationState::EAS_SLEEPING;
             break;
         case 3:
-            state = EAS_WANTS_DEACTIVATION;
+			state = EActivationState::EAS_WANTS_DEACTIVATION;
             break;
         case 4:
-            state = EAS_DISABLE_DEACTIVATION;
+			state = EActivationState::EAS_DISABLE_DEACTIVATION;
             break;
         case 5:
-            state = EAS_DISABLE_SIMULATION;
+			state = EActivationState::EAS_DISABLE_SIMULATION;
     }
 
     return state;
@@ -381,10 +381,10 @@ ICollisionObject::~ICollisionObject()
     #ifdef IRRBULLET_DEBUG_MODE
         switch(this->getObjectType())
         {
-            case ECOT_RIGID_BODY:
+		case ECollisionObjectType::ECOT_RIGID_BODY:
                 printf("irrBullet: Deleting rigid body (%i)\n", this->getUniqueID());
                 break;
-            case ECOT_SOFT_BODY:
+		case ECollisionObjectType::ECOT_SOFT_BODY:
                 printf("irrBullet: Deleting soft body (%i)\n", this->getUniqueID());
                 break;
             default:

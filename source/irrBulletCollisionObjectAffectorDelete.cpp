@@ -13,7 +13,7 @@ ICollisionObjectAffectorDelete::ICollisionObjectAffectorDelete(irr::u32 delay)
     EndTime = 0;
     TimeDelay = delay;
     FirstRun = true;
-    Type = ECOAT_DELETE_AFFECTOR;
+	Type = ECollisionObjectAffectorType::ECOAT_DELETE_AFFECTOR;
 }
 
 void ICollisionObjectAffectorDelete::affectObject(ICollisionObject* object, irr::u32 timeMS)

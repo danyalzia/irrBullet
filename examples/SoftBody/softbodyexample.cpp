@@ -115,8 +115,8 @@ void CSoftbodyExample::runExample()
     ////////////////////////////
     world = createIrrBulletWorld(device, true, debugDraw);
 
-    world->setDebugMode(EPDM_DrawAabb |
-            EPDM_DrawContactPoints);
+	world->setDebugMode(irrPhysicsDebugMode::EPDM_DrawAabb |
+		irrPhysicsDebugMode::EPDM_DrawContactPoints);
 
     world->setGravity(vector3df(0,-10,0));
 
@@ -168,7 +168,7 @@ void CSoftbodyExample::runExample()
                 for(u32 i=0; i < world->getNumCollisionObjects(); ++i)
                 {
                     ICollisionObject* object = world->getCollisionObjectByIndex(i);
-                    if(object->getObjectType() == ECOT_SOFT_BODY)
+                    if(object->getObjectType() == ECollisionObjectType::ECOT_SOFT_BODY)
                         static_cast<ISoftBody*>(object)->addForce(vector3df(xWind,0,zWind));
                 }
             }
@@ -310,12 +310,12 @@ ISoftBody* CSoftbodyExample::createSoftbodyType(u32 type, const vector3df& posit
     ISoftBody* softbody = world->addSoftBody(softbodyNode);
 
     softbody->setName("SOFTBODY1");
-    softbody->setActivationState(EAS_DISABLE_DEACTIVATION);
+    softbody->setActivationState(EActivationState::EAS_DISABLE_DEACTIVATION);
 
     if(softVersusSoft)
     {
         softbody->generateClusters(60.0f);
-        softbody->addCollisionFlag(ESBCM_CLUSTER_SOFT_VERSUS_SOFT);
+        softbody->addCollisionFlag(ESoftBodyCollisionFlag::ESBCM_CLUSTER_SOFT_VERSUS_SOFT);
     }
 
     switch(type)
@@ -337,7 +337,7 @@ ISoftBody* CSoftbodyExample::createSoftbodyType(u32 type, const vector3df& posit
             softbody->getConfiguration().liftCoefficient = 1.004;
             softbody->getConfiguration().dragCoefficient = 0.0003;
             softbody->getConfiguration().dampingCoefficient = 0.0;
-            softbody->getConfiguration().aeroModel = ESBAM_VERTEX_TWO_SIDED;
+            softbody->getConfiguration().aeroModel = ESoftBodyAeroModel::ESBAM_VERTEX_TWO_SIDED;
             softbody->updateConfiguration();
 
             softbody->setTotalMass(0.001);
@@ -365,7 +365,7 @@ ISoftBody* CSoftbodyExample::createSoftbodyType(u32 type, const vector3df& posit
             softbody->getConfiguration().liftCoefficient = 1.004;
             softbody->getConfiguration().dragCoefficient = 0.0;
             softbody->getConfiguration().dampingCoefficient = 0.0;
-            softbody->getConfiguration().aeroModel = ESBAM_VERTEX_TWO_SIDED;
+            softbody->getConfiguration().aeroModel = ESoftBodyAeroModel::ESBAM_VERTEX_TWO_SIDED;
             softbody->updateConfiguration();
 
             softbody->setTotalMass(0.00001);
@@ -395,7 +395,7 @@ ISoftBody* CSoftbodyExample::createSoftbodyType(u32 type, const vector3df& posit
 
             softbody->getConfiguration().dragCoefficient = 0.0;
             softbody->getConfiguration().dampingCoefficient = 0.0;
-            softbody->getConfiguration().aeroModel = ESBAM_VERTEX_TWO_SIDED;
+			softbody->getConfiguration().aeroModel = ESoftBodyAeroModel::ESBAM_VERTEX_TWO_SIDED;
             softbody->updateConfiguration();
 
             softbody->setTotalMass(0.00001);

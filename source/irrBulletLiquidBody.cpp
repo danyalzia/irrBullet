@@ -97,7 +97,7 @@ void ILiquidBody::updateLiquidBody()
 
         if(obj->isLiquidSimulationEnabled())
         {
-            if(obj->getObjectType() == ECOT_RIGID_BODY)
+			if (obj->getObjectType() == ECollisionObjectType::ECOT_RIGID_BODY)
             {
                 if((!Infinite && LiquidExtents.intersectsWithBox(static_cast<IRigidBody*>(obj)->getLiquidBox()))
                     ||
@@ -112,13 +112,13 @@ void ILiquidBody::updateLiquidBody()
 void ILiquidBody::affectRigidBody(IRigidBody* const body)
 {
     // Make sure bodies don't "fall asleep" while they're in water
-    if(ForceActivation && (body->getActivationState() == EAS_SLEEPING || body->getActivationState() == EAS_WANTS_DEACTIVATION))
+	if (ForceActivation && (body->getActivationState() == EActivationState::EAS_SLEEPING || body->getActivationState() == EActivationState::EAS_WANTS_DEACTIVATION))
         body->activate();
 
     irr::core::vector3df CurrentPosition = irr::core::vector3df(0,0,0);
     irr::core::vector3df ForceDirection = irr::core::vector3df(0,0,0);
 
-    if(body->getObjectType() != ECOT_RIGID_BODY)
+	if (body->getObjectType() != ECollisionObjectType::ECOT_RIGID_BODY)
         return;
 
     CurrentPosition = body->getCollisionShape()->getSceneNode()->getAbsolutePosition();
@@ -131,7 +131,7 @@ void ILiquidBody::affectRigidBody(IRigidBody* const body)
 
     for(irr::u32 i=0; i < points.size(); i++)
     {
-        if(body->getObjectType() == ECOT_RIGID_BODY)
+		if (body->getObjectType() == ECollisionObjectType::ECOT_RIGID_BODY)
         {
             irr::core::matrix4 mat = body->getCollisionShape()->getSceneNode()->getAbsoluteTransformation();
             const irr::core::matrix4 mat2 = mat;

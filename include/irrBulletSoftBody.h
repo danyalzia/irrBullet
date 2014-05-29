@@ -27,7 +27,7 @@ namespace irr
 class irrBulletWorld;
 class IRigidBody;
 
-enum ESoftBodyCollisionFlag
+enum class ESoftBodyCollisionFlag
 {
     ESBCM_RIGID_VERSUS_SOFT_MASK = 0x000f,
     ESBCM_SDF_RIGID_VERSUS_SOFT = 0x0001,
@@ -40,7 +40,7 @@ enum ESoftBodyCollisionFlag
     ESBCM_END
 };
 
-enum ESoftBodyAeroModel
+enum class ESoftBodyAeroModel
 {
     ESBAM_VERTEX_POINT = 0,
     ESBAM_VERTEX_TWO_SIDED = 1,
@@ -234,9 +234,9 @@ class ISoftBody : public ICollisionObject
         void setTotalDensity(irr::f32 density);
 
         /// Adds a softbody collision flag to the collision flags
-        void addCollisionFlag(ESoftBodyCollisionFlag flag) { getPointer()->m_cfg.collisions += flag; };
+        void addCollisionFlag(ESoftBodyCollisionFlag flag) { getPointer()->m_cfg.collisions += static_cast<int>(flag); };
 
-        void removeCollisionFlag(ESoftBodyCollisionFlag flag) { getPointer()->m_cfg.collisions -= flag; };
+		void removeCollisionFlag(ESoftBodyCollisionFlag flag) { getPointer()->m_cfg.collisions -= static_cast<int>(flag); };
 
         void generateClusters(irr::u32 count, irr::u32 maxIterations=8192) { getPointer()->generateClusters(count, maxIterations); };
 

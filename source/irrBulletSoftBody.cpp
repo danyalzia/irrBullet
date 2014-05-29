@@ -20,7 +20,7 @@ using namespace video;
 
 ISoftBody::ISoftBody(irrBulletWorld* const world, IMeshSceneNode* const Node)
 {
-    objectType = ECOT_SOFT_BODY;
+	objectType = ECollisionObjectType::ECOT_SOFT_BODY;
 
     dynamicsWorld = world;
 

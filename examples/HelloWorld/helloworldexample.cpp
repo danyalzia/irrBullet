@@ -104,8 +104,8 @@ void CHelloWorldExample::runExample()
     ////////////////////////////
     world = createIrrBulletWorld(device, true, debugDraw);
 
-    world->setDebugMode(EPDM_DrawAabb |
-            EPDM_DrawContactPoints);
+	world->setDebugMode(irrPhysicsDebugMode::EPDM_DrawAabb |
+		irrPhysicsDebugMode::EPDM_DrawContactPoints);
     //world->setPropertiesTextPosition(EDPT_BOTTOM_RIGHT);
     world->setGravity(vector3df(0,-10,0));
 

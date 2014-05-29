@@ -102,8 +102,8 @@ void CLoadSceneExample::runExample()
     ////////////////////////////
     world = createIrrBulletWorld(device, true, debugDraw);
 
-    world->setDebugMode(EPDM_DrawAabb |
-            EPDM_DrawContactPoints);
+	world->setDebugMode(irrPhysicsDebugMode::EPDM_DrawAabb |
+		irrPhysicsDebugMode::EPDM_DrawContactPoints);
 
     world->setGravity(vector3df(0,-10,0));
 
@@ -155,7 +155,7 @@ void CLoadSceneExample::runExample()
             {
                 ISoftBody* softbody = world->addSoftBody(static_cast<IMeshSceneNode*>(node));
                 softbody->setTotalMass(0.1f, false);
-                softbody->setActivationState(EAS_DISABLE_DEACTIVATION);
+				softbody->setActivationState(EActivationState::EAS_DISABLE_DEACTIVATION);
                 node->setMaterialFlag(EMF_BACK_FACE_CULLING, false);
                 node->setAutomaticCulling(EAC_OFF);
 

@@ -12,7 +12,7 @@
 #include <IAttributes.h>
 #include <vector>
 
-enum EActivationState
+enum class EActivationState
 {
     EAS_ACTIVE = 1,
     EAS_SLEEPING = 2,
@@ -22,7 +22,7 @@ enum EActivationState
 };
 
 
-enum ECollisionObjectType
+enum class ECollisionObjectType
 {
   ECOT_COLLISION_OBJECT = 1,
   ECOT_RIGID_BODY,
@@ -32,7 +32,7 @@ enum ECollisionObjectType
 };
 
 
-enum ECollisionFlag
+enum class ECollisionFlag
 {
     ECF_STATIC_OBJECT = 1,
     ECF_KINEMATIC_OBJECT = 2,
@@ -85,7 +85,7 @@ class ICollisionObject
 			*this = std::move(other);
 		}
 
-		// Move assignment operator.
+		// Move assignment operator
 		ICollisionObject& operator=(ICollisionObject&& other)
 		{
 			if (this != &other)

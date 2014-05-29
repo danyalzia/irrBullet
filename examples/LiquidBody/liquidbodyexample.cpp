@@ -117,8 +117,8 @@ void CLiquidbodyExample::runExample()
     ////////////////////////////
     world = createIrrBulletWorld(device, true, debugDraw);
 
-    world->setDebugMode(EPDM_DrawAabb |
-            EPDM_DrawContactPoints);
+	world->setDebugMode(irrPhysicsDebugMode::EPDM_DrawAabb |
+		irrPhysicsDebugMode::EPDM_DrawContactPoints);
 
     world->setGravity(vector3df(0,-10,0));
 

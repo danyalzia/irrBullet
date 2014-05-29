@@ -17,7 +17,7 @@ IBoxShape::IBoxShape(ISceneNode* const n, f32 m, bool overrideMargin)
     node = n;
     mass = m;
 
-    type = ECST_BOX;
+	type = ECollisionShapeType::ECST_BOX;
 
     createShape(overrideMargin);
 }
@@ -38,7 +38,7 @@ void IBoxShape::createShape(bool overrideMargin)
         shape = new btBoxShape(irrlichtToBulletVector(extent * 0.5));
     }
 
-	setLocalScaling(node->getScale(), ESP_COLLISIONSHAPE);
+	setLocalScaling(node->getScale(), EScalingPair::ESP_COLLISIONSHAPE);
 	calculateLocalInertia(getMass(), vector3df(0.0f,0.0f,0.0f));
 }
 

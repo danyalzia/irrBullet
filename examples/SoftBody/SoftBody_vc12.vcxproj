@@ -75,6 +75,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>../../lib/Win32-visualstudio;$(BULLET_ROOT)/lib;$(IRRLICHT_ROOT)/lib/Win32-visualstudio/</AdditionalLibraryDirectories>
       <AdditionalDependencies>irrBullet.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;ConvexDecomposition.lib;LinearMath.lib;Irrlicht.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateMapFile>true</GenerateMapFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

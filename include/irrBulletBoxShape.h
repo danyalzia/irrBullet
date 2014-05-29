@@ -25,7 +25,7 @@ public:
 		*this = std::move(other);
 	}
 
-	// Move assignment operator.
+	// Move assignment operator
 	IBoxShape& operator=(IBoxShape&& other)
 	{
 		if (this != &other)

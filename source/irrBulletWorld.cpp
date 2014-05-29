@@ -113,7 +113,7 @@ void irrBulletWorld::updateCollisionObjects()
     {
         auto obj = cbit;
 
-        if(obj->getObjectType() == ECOT_SOFT_BODY)
+		if (obj->getObjectType() == ECollisionObjectType::ECOT_SOFT_BODY)
         {
             static_cast<ISoftBody*>(obj)->updateSoftBody();
         }
@@ -239,7 +239,7 @@ void irrBulletWorld::removeCollisionObject(ICollisionObject* const obj, bool del
         {
             if((*cbit) == obj)
             {
-                if((*cbit)->getObjectType() == ECOT_RIGID_BODY)
+				if ((*cbit)->getObjectType() == ECollisionObjectType::ECOT_RIGID_BODY)
                 {
                     #ifdef IRRBULLET_DEBUG_MODE
                         printf("irrBullet: Removing rigid body (%i)\n", obj->getUniqueID());
@@ -250,7 +250,7 @@ void irrBulletWorld::removeCollisionObject(ICollisionObject* const obj, bool del
                 }
 
                 else
-                if((*cbit)->getObjectType() == ECOT_SOFT_BODY)
+				if ((*cbit)->getObjectType() == ECollisionObjectType::ECOT_SOFT_BODY)
                 {
                     #ifdef IRRBULLET_DEBUG_MODE
                         printf("irrBullet: Removing soft body (%i)\n", obj->getUniqueID());
@@ -260,7 +260,7 @@ void irrBulletWorld::removeCollisionObject(ICollisionObject* const obj, bool del
 
                 if(deleteObject == true)
                 {
-                    if((*cbit)->getObjectType() == ECOT_RIGID_BODY)
+					if ((*cbit)->getObjectType() == ECollisionObjectType::ECOT_RIGID_BODY)
                     {
                         delete static_cast<IRigidBody*>(*cbit);
                         (*cbit) = 0;
@@ -346,10 +346,10 @@ void irrBulletWorld::clearForces()
 }
 
 
-void irrBulletWorld::setDebugMode(u32 mode)
+void irrBulletWorld::setDebugMode(irrPhysicsDebugMode mode)
 {
     if(debug != 0)
-        debug->setDebugMode(mode);
+        debug->setDebugMode(static_cast<int>(mode));
 }
 
 void irrBulletWorld::setPropertiesTextPosition(EDPT_POSITION pos)
@@ -412,11 +412,11 @@ void irrBulletWorld::debugDrawProperties(bool b, const SColor& col)
 
         for(u32 i=0; i < numObjects; i++)
         {
-            if(getCollisionObjectByIndex(i)->getActivationState() == EAS_ACTIVE)
+			if (getCollisionObjectByIndex(i)->getActivationState() == EActivationState::EAS_ACTIVE)
                 active++;
 
             else
-            if(getCollisionObjectByIndex(i)->getActivationState() == EAS_SLEEPING)
+			if (getCollisionObjectByIndex(i)->getActivationState() == EActivationState::EAS_SLEEPING)
                 sleeping++;
         }
 

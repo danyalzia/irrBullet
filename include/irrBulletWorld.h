@@ -143,7 +143,7 @@ public:
 	void clearForces();
 
 	/// Changes the debugger's draw modes.
-	void setDebugMode(irr::u32 mode);
+	void setDebugMode(irrPhysicsDebugMode mode);
 
 	/*!
 		Set the position of debugging text

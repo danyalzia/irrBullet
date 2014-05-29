@@ -24,7 +24,7 @@ namespace irr
 }
 
 
-enum ECollisionShapeType
+enum class ECollisionShapeType
 {
     ECST_BOX,
     ECST_CONE,
@@ -34,7 +34,7 @@ enum ECollisionShapeType
     ECST_GIMPACT
 };
 
-enum EScalingPair
+enum class EScalingPair
 {
     ESP_BOTH,
     ESP_COLLISIONSHAPE,
@@ -61,7 +61,7 @@ public:
 		*this = std::move(other);
 	}
 
-	// Move assignment operator.
+	// Move assignment operator
 	ICollisionShape& operator=(ICollisionShape&& other)
 	{
 		if (this != &other)

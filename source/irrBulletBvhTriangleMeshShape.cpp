@@ -16,7 +16,7 @@ IBvhTriangleMeshShape::IBvhTriangleMeshShape(ISceneNode *n, IMesh *collMesh, f32
     node = n;
     mass = m;
 
-    type = ECST_BVHTRIMESH;
+	type = ECollisionShapeType::ECST_BVHTRIMESH;
 
     createShape(collMesh);
 }

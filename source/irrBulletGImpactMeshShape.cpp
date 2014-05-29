@@ -18,7 +18,7 @@ IGImpactMeshShape::IGImpactMeshShape(ISceneNode *n, IMesh *collMesh, f32 m)
     node = n;
     mass = m;
 
-    type = ECST_GIMPACT;
+	type = ECollisionShapeType::ECST_GIMPACT;
 
     createShape(collMesh);
 }

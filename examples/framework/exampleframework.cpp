@@ -141,7 +141,7 @@ IRigidBody* const CExampleFramework::createTank(const irr::core::stringw& file, 
 	tank->getAttributes()->addBool("isDestroyed", false);
 
     // When using a raycast vehicle, we don't want this rigid body to deactivate.
-	tank->setActivationState(EAS_DISABLE_DEACTIVATION);
+	tank->setActivationState(EActivationState::EAS_DISABLE_DEACTIVATION);
 
     // We create our vehicle, passing our newly created rigid body as a parameter.
 	IRaycastVehicle* vehicle = world->addRaycastVehicle(tank);

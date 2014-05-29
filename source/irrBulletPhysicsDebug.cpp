@@ -5,7 +5,7 @@
 
 
 IPhysicsDebugDraw::IPhysicsDebugDraw(irr::IrrlichtDevice* const device) :
-	mode(EPDM_NoDebug), driver(device->getVideoDriver()), logger(device->getLogger())
+mode(irrPhysicsDebugMode::EPDM_NoDebug), driver(device->getVideoDriver()), logger(device->getLogger())
 {
 
 }

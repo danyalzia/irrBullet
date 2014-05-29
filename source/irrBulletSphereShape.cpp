@@ -16,7 +16,7 @@ ISphereShape::ISphereShape(ISceneNode *n, f32 m, bool overrideMargin)
     node = n;
     mass = m;
 
-    type = ECST_SPHERE;
+	type = ECollisionShapeType::ECST_SPHERE;
 
     createShape(overrideMargin);
 }

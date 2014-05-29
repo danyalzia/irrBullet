@@ -17,7 +17,7 @@ ICollisionObjectAffectorAttract::ICollisionObjectAffectorAttract(const irr::core
     TargetPosition = target;
     TargetNode = 0;
     PullForce = force;
-    Type = ECOAT_ATTRACT_AFFECTOR;
+	Type = ECollisionObjectAffectorType::ECOAT_ATTRACT_AFFECTOR;
 }
 
 ICollisionObjectAffectorAttract::ICollisionObjectAffectorAttract(irr::scene::ISceneNode* const target, irr::f32 force)
@@ -25,12 +25,12 @@ ICollisionObjectAffectorAttract::ICollisionObjectAffectorAttract(irr::scene::ISc
     TargetNode = target;
     TargetPosition = TargetNode->getAbsolutePosition();
     PullForce = force;
-    Type = ECOAT_ATTRACT_AFFECTOR;
+	Type = ECollisionObjectAffectorType::ECOAT_ATTRACT_AFFECTOR;
 }
 
 void ICollisionObjectAffectorAttract::affectObject(ICollisionObject* object, irr::u32 timeMS)
 {
-    if(object->getObjectType() == ECOT_RIGID_BODY)
+	if (object->getObjectType() == ECollisionObjectType::ECOT_RIGID_BODY)
         CurrentPosition = static_cast<IRigidBody*>(object)->getCollisionShape()->getSceneNode()->getAbsolutePosition();
 
     else
@@ -47,12 +47,12 @@ void ICollisionObjectAffectorAttract::affectObject(ICollisionObject* object, irr
     object->getDynamicsWorld()->getIrrlichtDevice()->getVideoDriver()->draw3DLine(
         CurrentPosition, ForceDirection, irr::video::SColor(255, 255, 255, 255));*/
 
-    if(object->getObjectType() == ECOT_RIGID_BODY)
+	if (object->getObjectType() == ECollisionObjectType::ECOT_RIGID_BODY)
     {
         static_cast<IRigidBody*>(object)->applyCentralForce(ForceDirection);
     }
 
-    else if(object->getObjectType() == ECOT_SOFT_BODY)
+	else if (object->getObjectType() == ECollisionObjectType::ECOT_SOFT_BODY)
     {
         static_cast<ISoftBody*>(object)->addForce(ForceDirection);
     }

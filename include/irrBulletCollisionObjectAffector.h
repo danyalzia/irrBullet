@@ -9,7 +9,7 @@
 
 class ICollisionObject;
 
-enum ECollisionObjectAffectorType
+enum class ECollisionObjectAffectorType
 {
     ECOAT_DELETE_AFFECTOR,
     ECOAT_ATTRACT_AFFECTOR,
