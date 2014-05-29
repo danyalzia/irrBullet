@@ -22,7 +22,7 @@ IRaycastVehicle::IRaycastVehicle(IRigidBody* const body, const vector3d<s32>& co
         printf("irrBullet: Creating raycast vehicle (BODY: %i)\n", body->getUniqueID());
     #endif
 
-    irrBulletWorld* world = body->getDynamicsWorld();
+    auto world = body->getDynamicsWorld();
 
     vehicleRaycaster = new IVehicleRaycaster(world->getPointer());
     usesOriginalRaycaster = true;

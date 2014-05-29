@@ -13,7 +13,6 @@
 
 class IMotionState;
 
-
 struct SRigidBodyConstructionInfo
 {
     ICollisionShape *collisionShape;
@@ -54,7 +53,6 @@ enum ERBTransformSpace
     ERBTS_WORLD  // RigidBody forces will be applied in world space
 };
 
-
 /// The rigid body is the main type for all "hard" simulation objects (The opposite of a soft body).
 class IRigidBody : public ICollisionObject
 {
@@ -63,7 +61,45 @@ public:
     IRigidBody(irrBulletWorld* const world, ICollisionShape* const collShape);
 
     IRigidBody(irrBulletWorld* const world, const SRigidBodyConstructionInfo& info);
-    virtual ~IRigidBody();
+    
+	IRigidBody(const IRigidBody& other) = default;
+
+	IRigidBody& operator=(const IRigidBody& other) = default;
+
+	// Move constructor
+	IRigidBody(const IRigidBody&& other)
+	{
+#ifdef IRRBULLET_DEBUG_MODE
+#pragma message("IRigidBody move constructor called...")
+#endif
+		*this = std::move(other);
+	}
+
+	// Move assignment operator.
+	IRigidBody& operator=(IRigidBody&& other)
+	{
+		if (this != &other)
+		{
+			delete shape;
+			delete vehicleReference;
+
+			shape = other.shape;
+			worldTransform = other.worldTransform;
+			motionState = other.motionState;
+			vehicleReference = other.vehicleReference;
+			BuoyancyPoints = other.BuoyancyPoints;
+			BuoyancyPointCount = other.BuoyancyPointCount;
+			LiquidBox = other.LiquidBox;
+			DebugLiquidBox = other.DebugLiquidBox;
+
+			shape = nullptr;
+			motionState = nullptr;
+			vehicleReference = nullptr;
+		}
+		return *this;
+	}
+
+	virtual ~IRigidBody();
 
     void translate(const irr::core::vector3df& v);
 

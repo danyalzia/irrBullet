@@ -9,7 +9,8 @@
 #include <irrTypes.h>
 #include <aabbox3d.h>
 #include <IrrlichtDevice.h>
-
+#include <memory> // std::move
+#include "IrrCompileConfig.h"
 
 class irrBulletWorld;
 class IRigidBody;
@@ -49,7 +50,33 @@ class ILiquidBody
     public:
         ILiquidBody(irrBulletWorld* const world, const irr::core::vector3df& pos, const irr::core::aabbox3df& aabb,
             irr::f32 waveFrequency=40000.0f, irr::f32 density=0.4f, bool makeInfinite=false);
-        ~ILiquidBody();
+        
+		ILiquidBody(const ILiquidBody& other) = default;
+
+		ILiquidBody& operator=(const ILiquidBody& other) = default;
+
+		// move constructor
+		ILiquidBody(const ILiquidBody&& other)
+		{
+#ifdef IRRBULLET_DEBUG_MODE
+#pragma message("ILiquidBody move constructor called...")
+#endif
+			*this = std::move(other);
+		}
+
+		// Move assignment operator.
+		ILiquidBody& operator=(ILiquidBody&& other)
+		{
+			if (this != &other)
+			{
+				DynamicsWorld = other.DynamicsWorld;
+
+				other.DynamicsWorld = nullptr;
+			}
+			return *this;
+		}
+
+		~ILiquidBody();
 
         ///! For internal use only
         void updateLiquidBody();

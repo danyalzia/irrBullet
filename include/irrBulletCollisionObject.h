@@ -72,6 +72,47 @@ class ICollisionObject
     public:
         ICollisionObject();
 
+		ICollisionObject(const ICollisionObject& other) = default;
+
+		ICollisionObject& operator=(const ICollisionObject& other) = default;
+
+		// Move constructor
+		ICollisionObject(const ICollisionObject&& other)
+		{
+#ifdef IRRBULLET_DEBUG_MODE
+#pragma message("ICollisionObject move constructor called...")
+#endif
+			*this = std::move(other);
+		}
+
+		// Move assignment operator.
+		ICollisionObject& operator=(ICollisionObject&& other)
+		{
+			if (this != &other)
+			{
+				delete object;
+				delete attributes;
+				delete collID;
+
+				dynamicsWorld = other.dynamicsWorld;
+				object = other.object;
+				uniqueID = other.uniqueID;
+				objectType = other.objectType;
+				attributes = other.attributes;
+				affectors = other.affectors;
+				IncludeNodeOnRemoval = other.IncludeNodeOnRemoval;
+				LiquidSimulationEnabled = other.LiquidSimulationEnabled;
+				internalTransform = other.internalTransform;
+				worldTransform = other.worldTransform;
+				collID = other.collID;
+
+				object = nullptr;
+				attributes = nullptr;
+				collID = nullptr;
+			}
+			return *this;
+		}
+
         virtual ~ICollisionObject();
 
         void updateObject();
@@ -168,7 +209,7 @@ class ICollisionObject
         getWorldTransform() will return a btTransform in Bullet, but returns a matrix4 in irrBullet.
         This matrix includes rotation and position.
         */
-        const irr::core::matrix4& getWorldTransform()
+        irr::core::matrix4 getWorldTransform()
         {
             btTransformToIrrlichtMatrix(getPointer()->getWorldTransform(), worldTransform);
             return worldTransform;

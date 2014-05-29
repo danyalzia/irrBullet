@@ -24,8 +24,6 @@
 - When using the attraction affector, Bullet will sometimes report an AABB overflow error and remove the object
 */
 
-
-
 #define IRRBULLET_VER_MAJOR 0
 #define IRRBULLET_VER_MINOR 1
-#define IRRBULLET_VER_MICRO 8
+#define IRRBULLET_VER_MICRO 9

@@ -9,10 +9,12 @@
 #include <vector3d.h>
 #include <irrTypes.h>
 #include <irrString.h>
+#include <memory> // std::move
 #include "irrBulletCommon.h"
 
 class btVector3;
 class btTransform;
+
 namespace irr
 {
     namespace scene
@@ -46,6 +48,40 @@ class ICollisionShape
 public:
     ICollisionShape();
 
+	ICollisionShape(const ICollisionShape& other) = default;
+	
+	ICollisionShape& operator=(const ICollisionShape& other) = default;
+
+	// Move constructor
+	ICollisionShape(const ICollisionShape&& other)
+	{
+#ifdef IRRBULLET_DEBUG_MODE
+#pragma message("ICollisionShape move constructor called...")
+#endif
+		*this = std::move(other);
+	}
+
+	// Move assignment operator.
+	ICollisionShape& operator=(ICollisionShape&& other)
+	{
+		if (this != &other)
+		{
+			delete node;
+			delete shape;
+
+			type = other.type;
+			node = other.node;
+			shape = other.shape;
+			name = other.name;
+			mass = other.mass;
+			localInertia = other.localInertia;
+
+			node = nullptr;
+			shape = nullptr;
+		}
+		return *this;
+	}
+
     virtual ~ICollisionShape();
 
     /*!
@@ -68,8 +104,6 @@ public:
     void calculateLocalInertia(irr::f32 Mass, const irr::core::vector3df &inertia);
 
     void removeNode() { node->remove(); };
-
-
 
     const irr::core::vector3df getLocalScaling() const;
 

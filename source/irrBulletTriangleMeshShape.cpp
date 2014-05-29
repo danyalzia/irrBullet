@@ -25,11 +25,11 @@ btTriangleMesh *ITriangleMeshShape::createTriangleMesh(IMesh* const mesh)
 	u16* mb_indices;
 	const vector3df &scale = node->getScale();
 
-	btTriangleMesh *pTriMesh = new btTriangleMesh();
+	auto pTriMesh = new btTriangleMesh();
 
 	for(i = 0; i < mesh->getMeshBufferCount(); i++)
 	{
-		irr::scene::IMeshBuffer* mb=mesh->getMeshBuffer(i);
+		auto mb = mesh->getMeshBuffer(i);
 
         //////////////////////////////////////////////////////////////////////////
 		// Extract vertex data                                                  //
@@ -38,12 +38,12 @@ btTriangleMesh *ITriangleMeshShape::createTriangleMesh(IMesh* const mesh)
 		//////////////////////////////////////////////////////////////////////////
 		if(mb->getVertexType() == irr::video::EVT_STANDARD)
 		{
-			irr::video::S3DVertex* mb_vertices=(irr::video::S3DVertex*)mb->getVertices();
+			auto mb_vertices = (irr::video::S3DVertex*)mb->getVertices();
 			mb_indices = mb->getIndices();
 			numVertices = mb->getVertexCount();
-			for(j=0;j<mb->getIndexCount();j+=3)
+			for(j = 0; j < mb->getIndexCount(); j+=3)
 			{ //get index into vertex list
-				for (k=0;k<3;k++)
+				for (k = 0; k < 3; k++)
 				{
 				    //three verts per triangle
 					index = mb_indices[j+k];
@@ -59,12 +59,13 @@ btTriangleMesh *ITriangleMeshShape::createTriangleMesh(IMesh* const mesh)
 		if(mb->getVertexType()==irr::video::EVT_2TCOORDS)
 		{
 			// Same but for S3DVertex2TCoords data
-			irr::video::S3DVertex2TCoords* mb_vertices=(irr::video::S3DVertex2TCoords*)mb->getVertices();
+			auto mb_vertices=(irr::video::S3DVertex2TCoords*)mb->getVertices();
 			u16* mb_indices = mb->getIndices();
 			s32 numVertices = mb->getVertexCount();
-			for(j=0;j<mb->getIndexCount();j+=3)
-			{ //index into irrlicht data
-				for (k=0;k<3;k++)
+			for(j = 0; j < mb->getIndexCount(); j+=3)
+			{   
+				//index into irrlicht data
+				for (k = 0; k < 3; k++)
 				{
 					s32 index = mb_indices[j+k];
 					if (index > numVertices) continue;
@@ -82,6 +83,6 @@ btTriangleMesh *ITriangleMeshShape::createTriangleMesh(IMesh* const mesh)
 
 ITriangleMeshShape::~ITriangleMeshShape()
 {
-    if(CollisionMesh != 0)
+    if(CollisionMesh != nullptr)
         delete CollisionMesh;
 }

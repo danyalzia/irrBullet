@@ -12,6 +12,35 @@ class IBoxShape : public ICollisionShape
 public:
 	IBoxShape(irr::scene::ISceneNode* const n, irr::f32 m, bool overrideMargin = false);
 
+	IBoxShape(const IBoxShape& other) = default;
+
+	IBoxShape& operator=(const IBoxShape& other) = default;
+
+	// move constructor
+	IBoxShape(const IBoxShape&& other)
+	{
+#ifdef IRRBULLET_DEBUG_MODE
+#pragma message("IBoxShape move constructor called...")
+#endif
+		*this = std::move(other);
+	}
+
+	// Move assignment operator.
+	IBoxShape& operator=(IBoxShape&& other)
+	{
+		if (this != &other)
+		{
+			delete node;
+
+			node = other.node;
+			mass = other.mass;
+
+			other.node = nullptr;
+			other.mass = 0;
+		}
+		return *this;
+	}
+
 	virtual ~IBoxShape();
 
 protected:

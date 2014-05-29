@@ -141,12 +141,54 @@ struct SSoftBodyConfiguration
     ESoftBodyAeroModel aeroModel;
 };
 
-
 class ISoftBody : public ICollisionObject
 {
     public:
         ISoftBody(irrBulletWorld* const world, irr::scene::IMeshSceneNode* const Node);
-        virtual ~ISoftBody();
+        
+		ISoftBody(const ISoftBody& other) = default;
+
+		ISoftBody& operator=(const ISoftBody& other) = default;
+
+		// Move constructor
+		ISoftBody(const ISoftBody&& other)
+		{
+#ifdef IRRBULLET_DEBUG_MODE
+#pragma message("ISoftBody move constructor called...")
+#endif
+			*this = std::move(other);
+		}
+
+		// Move assignment operator
+		ISoftBody& operator=(ISoftBody&& other)
+		{
+			if (this != &other)
+			{
+				delete vertices;
+				delete indices;
+				node = other.node;
+				scale = other.scale;
+
+				configuration = other.configuration;
+
+				vertices = other.vertices;
+				indices = other.indices;
+				indexCount = other.indexCount;
+				vertexCount = other.vertexCount;
+				realVertexCount = other.realVertexCount;
+
+				MeshMap = other.MeshMap;
+				node_map = other.node_map;
+				m_indices = other.m_indices;
+				m_vertices = other.m_vertices;
+
+				vertices = nullptr;
+				indices = nullptr;
+			}
+			return *this;
+		}
+
+		virtual ~ISoftBody();
 
         /// @note Internal use only!
         void updateSoftBody();
@@ -197,9 +239,6 @@ class ISoftBody : public ICollisionObject
         void removeCollisionFlag(ESoftBodyCollisionFlag flag) { getPointer()->m_cfg.collisions -= flag; };
 
         void generateClusters(irr::u32 count, irr::u32 maxIterations=8192) { getPointer()->generateClusters(count, maxIterations); };
-
-
-
 
 
         btSoftBody* getPointer() const { return static_cast<btSoftBody*>(object); };

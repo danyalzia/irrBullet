@@ -164,7 +164,7 @@ void ICollisionObject::removeAffector(ICollisionObjectAffector* const affector)
     // Remove the collision object
     if(affector)
     {
-        for(auto& it : affectors )
+        for(auto& it : std::move(affectors) )
         {
             if(it == affector)
             {

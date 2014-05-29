@@ -13,6 +13,35 @@ class IBvhTriangleMeshShape : public ITriangleMeshShape
     public:
         IBvhTriangleMeshShape(irr::scene::ISceneNode *n, irr::scene::IMesh *collMesh, irr::f32 m);
 
+		IBvhTriangleMeshShape(const IBvhTriangleMeshShape& other) = default;
+
+		IBvhTriangleMeshShape& operator=(const IBvhTriangleMeshShape& other) = default;
+
+		// Move constructor
+		IBvhTriangleMeshShape(const IBvhTriangleMeshShape&& other)
+		{
+#ifdef IRRBULLET_DEBUG_MODE
+#pragma message("IBvhTriangleMeshShape move constructor called...")
+#endif
+			*this = std::move(other);
+		}
+
+		// Move assignment operator.
+		IBvhTriangleMeshShape& operator=(IBvhTriangleMeshShape&& other)
+		{
+			if (this != &other)
+			{
+				delete node;
+
+				node = other.node;
+				mass = other.mass;
+
+				other.node = nullptr;
+				other.mass = 0;
+			}
+			return *this;
+		}
+
         virtual ~IBvhTriangleMeshShape();
 
 

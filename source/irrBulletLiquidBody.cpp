@@ -50,6 +50,11 @@ ILiquidBody::ILiquidBody(irrBulletWorld* const world, const irr::core::vector3df
     AngularLimitation = 0.995f;
 }
 
+//ILiquidBody::ILiquidBody(const ILiquidBody& other)
+//{
+//	*this = other;
+//}
+
 void ILiquidBody::updateLiquidBody()
 {
     if(EnableGlobalWave)
@@ -88,7 +93,7 @@ void ILiquidBody::updateLiquidBody()
 
     for(u32 i=0; i < DynamicsWorld->getNumCollisionObjects(); i++)
     {
-        ICollisionObject* obj = DynamicsWorld->getCollisionObjectByIndex(i);
+        auto obj = DynamicsWorld->getCollisionObjectByIndex(i);
 
         if(obj->isLiquidSimulationEnabled())
         {

@@ -100,7 +100,7 @@ u32 irrBulletWorld::stepSimulation(f32 timeStep, u32 maxSubSteps, f32 fixedTimeS
 
 void irrBulletWorld::updateLiquidBodies()
 {
-	for (auto it : liquidBodies)
+	for (auto& it : std::move(liquidBodies))
     {
         it->updateLiquidBody();
     }
@@ -109,9 +109,9 @@ void irrBulletWorld::updateLiquidBodies()
 
 void irrBulletWorld::updateCollisionObjects()
 {
-	for (auto cbit : collisionObjects)
+	for (auto& cbit : std::move(collisionObjects))
     {
-        ICollisionObject* obj = cbit;
+        auto obj = cbit;
 
         if(obj->getObjectType() == ECOT_SOFT_BODY)
         {
@@ -122,7 +122,7 @@ void irrBulletWorld::updateCollisionObjects()
         {
             for(u32 j=0; j < obj->getNumAffectors(); j++)
             {
-                ICollisionObjectAffector* affector = obj->getAffector(j);
+                auto affector = obj->getAffector(j);
                 if(affector->hasFinished() == false)
                 {
                     affector->affectObject(obj, device->getTimer()->getTime());
@@ -131,12 +131,12 @@ void irrBulletWorld::updateCollisionObjects()
         }
     }
 
-	auto dlit = deletionList.begin();
+	auto dlit = std::move(deletionList.begin());
 
-    for(; dlit != deletionList.end(); )
+	for (; dlit != std::move(deletionList.end());)
     {
         this->removeCollisionObject((*dlit));
-        dlit = deletionList.erase(dlit);
+		dlit = std::move(deletionList.erase(dlit));
     }
 }
 
@@ -153,7 +153,7 @@ void irrBulletWorld::registerGImpactAlgorithm()
 
 IRigidBody* irrBulletWorld::addRigidBody(ICollisionShape* shape)
 {
-    IRigidBody* b = new IRigidBody(this, shape);
+    auto b = new IRigidBody(this, shape);
     collisionObjects.push_back(b);
     getPointer()->addRigidBody(b->getPointer());
 
@@ -165,7 +165,7 @@ IRigidBody* irrBulletWorld::addRigidBody(ICollisionShape* shape)
 
 IRigidBody* irrBulletWorld::addRigidBody(ICollisionShape *shape, s32 group, s32 mask)
 {
-    IRigidBody* b = new IRigidBody(this, shape);
+    auto b = new IRigidBody(this, shape);
     collisionObjects.push_back(b);
     getPointer()->addRigidBody(b->getPointer(), group, mask);
 
@@ -177,7 +177,7 @@ IRigidBody* irrBulletWorld::addRigidBody(ICollisionShape *shape, s32 group, s32 
 
 ISoftBody* irrBulletWorld::addSoftBody(IMeshSceneNode* const node)
 {
-    ISoftBody* b = new ISoftBody(this, node);
+    auto b = new ISoftBody(this, node);
     collisionObjects.push_back(b);
     getPointer()->addSoftBody(b->getPointer());
 
@@ -197,7 +197,7 @@ void irrBulletWorld::addToDeletionQueue(ICollisionObject* obj)
 ILiquidBody* irrBulletWorld::addLiquidBody(const irr::core::vector3df& pos, const irr::core::aabbox3df& aabb,
     irr::f32 waveFrequency, irr::f32 density)
 {
-    ILiquidBody *liquidBody = new ILiquidBody(this, pos, aabb, waveFrequency, density);
+    auto liquidBody = new ILiquidBody(this, pos, aabb, waveFrequency, density);
 
     liquidBodies.push_back(liquidBody);
 
@@ -209,7 +209,7 @@ ILiquidBody* irrBulletWorld::addLiquidBody(const irr::core::vector3df& pos, cons
 
 IRaycastVehicle* irrBulletWorld::addRaycastVehicle(IRigidBody* const body, const vector3d<s32>& coordSys)
 {
-    IRaycastVehicle *vehicle = new IRaycastVehicle(body, coordSys);
+    auto vehicle = new IRaycastVehicle(body, coordSys);
 
     raycastVehicles.push_back(vehicle);
 
@@ -220,7 +220,7 @@ IRaycastVehicle* irrBulletWorld::addRaycastVehicle(IRigidBody* const body, const
 
 IRaycastVehicle* irrBulletWorld::addRaycastVehicle(IRigidBody* const body, btVehicleRaycaster* const raycaster, const vector3d<s32>& coordSys)
 {
-    IRaycastVehicle *vehicle = new IRaycastVehicle(body, raycaster, coordSys);
+    auto vehicle = new IRaycastVehicle(body, raycaster, coordSys);
 
     raycastVehicles.push_back(vehicle);
 
@@ -449,7 +449,7 @@ void irrBulletWorld::debugDrawProperties(bool b, const SColor& col)
 			printf("-- irrBullet: Resized... --\n");
 			setPropertiesTextPosition(TextPropertiesPosition);
 		}
-			
+
     }
 
     else
@@ -537,7 +537,7 @@ ICollisionObject* irrBulletWorld::getCollisionObjectByIndex(irr::u32 index) cons
     auto it = collisionObjects.begin();
 
     it += index;
-    ICollisionObject *obj = (*it);
+    auto obj = (*it);
     if(obj)
         return obj;
     return 0;
@@ -548,7 +548,7 @@ ILiquidBody* irrBulletWorld::getLiquidBodyByIndex(irr::u32 index) const
     auto it = liquidBodies.begin();
 
     it += index;
-    ILiquidBody *body = (*it);
+    auto body = (*it);
     if(body)
         return body;
     return 0;
@@ -558,7 +558,7 @@ ILiquidBody* irrBulletWorld::getLiquidBodyByID(irr::u32 ID) const
 {
 	for (auto it : liquidBodies)
     {
-        ILiquidBody* obj = it;
+        auto obj = it;
         if(obj->getUniqueID() == ID)
             return obj;
 
@@ -570,7 +570,7 @@ ICollisionObject* irrBulletWorld::getCollisionObjectByID(irr::u32 ID) const
 {
 	for (auto it : collisionObjects)
     {
-        ICollisionObject* obj = it;
+        auto obj = it;
         if(obj->getUniqueID() == ID)
             return obj;
 
@@ -582,7 +582,7 @@ ICollisionObject* irrBulletWorld::getCollisionObjectByName(const irr::core::stri
 {
 	for (auto it : collisionObjects)
     {
-        ICollisionObject* obj = it;
+        auto obj = it;
         if(obj->getIdentification()->getName() == name)
             return obj;
 
@@ -593,7 +593,7 @@ ICollisionObject* irrBulletWorld::getCollisionObjectByName(const irr::core::stri
 
 ICollisionCallbackInformation* irrBulletWorld::getCollisionCallback(irr::u32 index) const
 {
-    ICollisionCallbackInformation *callback = new ICollisionCallbackInformation(dispatcher->getManifoldByIndexInternal(index), (irrBulletWorld*)this);
+    auto callback = new ICollisionCallbackInformation(dispatcher->getManifoldByIndexInternal(index), (irrBulletWorld*)this);
     return callback;
 }
 
@@ -625,7 +625,7 @@ irrBulletWorld::~irrBulletWorld()
 
 	for(; wbit != liquidBodies.end(); )
     {
-        ILiquidBody *liquidBody = (*wbit);
+        auto liquidBody = (*wbit);
         if(liquidBody)
         {
             delete liquidBody;
@@ -640,7 +640,7 @@ irrBulletWorld::~irrBulletWorld()
 
     for(; rvit != raycastVehicles.end(); )
     {
-        IRaycastVehicle *vehicle = (*rvit);
+        auto vehicle = (*rvit);
         if(vehicle)
         {
             getPointer()->removeVehicle(vehicle->getPointer());
@@ -650,7 +650,6 @@ irrBulletWorld::~irrBulletWorld()
 
 		rvit = raycastVehicles.erase(rvit);
     }
-
 
 
     // Remove the collision objects

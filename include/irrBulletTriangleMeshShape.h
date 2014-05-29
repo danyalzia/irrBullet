@@ -25,7 +25,7 @@ namespace irr
 class ITriangleMeshShape : public ICollisionShape
 {
     public:
-        ITriangleMeshShape();
+		ITriangleMeshShape();
         virtual ~ITriangleMeshShape();
 
     protected:

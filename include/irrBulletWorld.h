@@ -12,6 +12,7 @@
 #include "BulletSoftBody/btSoftRigidDynamicsWorld.h"
 #include "irrBulletCollisionCallBackInformation.h"
 #include "irrBulletCompileConfig.h"
+#include <irrlicht.h>
 #include <vector>
 
 class IRaycastVehicle;
@@ -30,6 +31,8 @@ class btBroadphaseInterface;
 class btConstraintSolver;
 struct btVehicleRaycaster;
 class ILiquidBody;
+class ISoftBody;
+class ICollisionShape;
 
 enum class EDPT_POSITION
 {
@@ -208,7 +211,7 @@ public:
 	/// @return Material for debugging, internal use only
 	const irr::video::SMaterial& getDebugMaterial() const { return debugMat; };
 
-	/// @return Collision world
+	/// @return Bullet Collision world
 	btSoftRigidDynamicsWorld* getWorld() { return world; }
 
 private:

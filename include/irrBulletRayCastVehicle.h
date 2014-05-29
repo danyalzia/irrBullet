@@ -6,7 +6,9 @@
 #pragma once
 
 #include "irrBulletCommon.h"
+#include "IrrCompileConfig.h"
 #include "BulletDynamics/Vehicle/btRayCastVehicle.h"
+#include <memory> // std::move
 
 class irrBulletWorld;
 class IRigidBody;
@@ -128,6 +130,45 @@ class IRaycastVehicle
 
         ~IRaycastVehicle();
 
+		IRaycastVehicle(const IRaycastVehicle& other) = default;
+
+		IRaycastVehicle& operator=(const IRaycastVehicle& other) = default;
+
+		// Move constructor
+		IRaycastVehicle(const IRaycastVehicle&& other)
+		{
+#ifdef IRRBULLET_DEBUG_MODE
+#pragma message("IRaycastVehicle move constructor called...")
+#endif
+			*this = std::move(other);
+		}
+
+		// Move assignment operator
+		IRaycastVehicle& operator=(IRaycastVehicle&& other)
+		{
+			if (this != &other)
+			{
+				delete vehicleRaycaster;
+				delete raycastVehicle;
+				delete attributes;
+
+				vehicleTuning = other.vehicleTuning;
+				vehicleRaycaster = other.vehicleRaycaster;
+				raycastVehicle = other.raycastVehicle;
+				rigidBody = other.rigidBody;
+				axes = other.axes;
+				attributes = other.attributes;
+				InternalTransform = other.InternalTransform;
+				usesOriginalRaycaster = other.usesOriginalRaycaster;
+				wheelInfo = other.wheelInfo;
+
+				vehicleRaycaster = nullptr;
+				raycastVehicle = nullptr;
+				rigidBody = nullptr;
+				attributes = nullptr;
+			}
+			return *this;
+		}
 
         /// Adds a new wheel to the vehicle using the construction info given.
         SWheelInfo& addWheel(const SWheelInfoConstructionInfo& info);

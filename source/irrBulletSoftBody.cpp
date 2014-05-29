@@ -104,14 +104,14 @@ void ISoftBody::createShape(IMesh* const collMesh)
     vertexCount = vertex_map.size();
     vertices = new btScalar[vertexCount*3];
 
-    for(j=0; j<indexCount; j++)
+    for(j = 0; j < indexCount; j++)
     {
         int index1 = index_map.find(j)->second;
         int index2 = bullet_map.find(index1)->second;
         indices[j]   = index2;
     }
 
-    for(j=0; j<vertexCount; j++)
+    for(j = 0; j < vertexCount; j++)
     {
         vertices[3*j] =   vertex_map[j].Pos.X;
         vertices[3*j+1] = vertex_map[j].Pos.Y;
@@ -123,11 +123,11 @@ void ISoftBody::createShape(IMesh* const collMesh)
         dynamicsWorld->getSoftBodyWorldInfo(), vertices,indices, indexCount/3);
 
     //std::cout << "create map" << std::endl;
-    for(int i=0; i<getPointer()->m_faces.size(); i++)
+    for(int i = 0; i < getPointer()->m_faces.size(); i++)
     {
-        btSoftBody::Face face = getPointer()->m_faces[i];
+        auto face = getPointer()->m_faces[i];
 
-        for(int j=0; j<3; j++)
+        for(int j = 0; j < 3; j++)
         {
             if(node_map.find(face.m_n[j]) == node_map.end())
             {
@@ -135,26 +135,26 @@ void ISoftBody::createShape(IMesh* const collMesh)
             }
         }
 
-        for(int j=0; j<3; j++)
+        for(int j = 0; j < 3; j++)
         {
             m_indices.push_back(node_map.find(face.m_n[j])->second);
         }
     }
 
     // Reverse node->index to index->node (should be unique on both sides)
-    for(auto node_iter : node_map)
+    for(auto& node_iter : std::move(node_map))
     {
         m_vertices.insert(std::make_pair(node_iter.second, node_iter.first));
     }
 
     //std::cout << "update Irrlicht vertices" << std::endl;
 
-    for(u32 i=0; i<mb->getVertexCount(); i++)
+    for(u32 i = 0; i < mb->getVertexCount(); i++)
     {
-        for(auto it : m_vertices)
+        for(auto& it : std::move(m_vertices))
         {
             int v_index = it.first;
-            btSoftBody::Node* node = it.second;
+            auto node = it.second;
             if(node->m_x.x() == mb_vertices[i].Pos.X &&
                 node->m_x.y() == mb_vertices[i].Pos.Y &&
                 node->m_x.z() == mb_vertices[i].Pos.Z)
@@ -298,6 +298,7 @@ void ISoftBody::updateSoftBody()
         updateMeshBuffer(mb, count);
         mb->recalculateBoundingBox();
     }
+    
     // Update the normals so they're not messed up by the soft body calculations
     node->getSceneManager()->getMeshManipulator()->recalculateNormals(collMesh, false, false);
 }
@@ -305,17 +306,17 @@ void ISoftBody::updateSoftBody()
 void ISoftBody::updateMeshBuffer(IMeshBuffer* mb, s32& count)
 {
     count++;
-    S3DVertex* mb_vertices = (irr::video::S3DVertex*)mb->getVertices();
+    auto mb_vertices = (irr::video::S3DVertex*)mb->getVertices();
     //u16* mb_indices = mb->getIndices();
 
-    for(u32 i=0; i<mb->getVertexCount(); i++)
-    {
-        int index = MeshMap.find(i)->second;
-        btSoftBody::Node* vNode = m_vertices.find(index)->second;
-        mb_vertices[i].Pos.X = vNode->m_x.x();
-        mb_vertices[i].Pos.Y = vNode->m_x.y();
-        mb_vertices[i].Pos.Z = vNode->m_x.z();
-    }
+	for (u32 i = 0; i<mb->getVertexCount(); i++)
+	{
+		int index = MeshMap.find(i)->second;
+		auto vNode = m_vertices.find(index)->second;
+		mb_vertices[i].Pos.X = vNode->m_x.x();
+		mb_vertices[i].Pos.Y = vNode->m_x.y();
+		mb_vertices[i].Pos.Z = vNode->m_x.z();
+	}
 }
 
 ISoftBody::~ISoftBody()

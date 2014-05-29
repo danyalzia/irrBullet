@@ -42,7 +42,7 @@ void IConvexHullShape::getConvexHull(IMesh *collMesh, btConvexHullShape *hullSha
 
 	for(i = 0; i < collMesh->getMeshBufferCount(); i++)
 	{
-		irr::scene::IMeshBuffer* mb=collMesh->getMeshBuffer(i);
+		auto mb=collMesh->getMeshBuffer(i);
 
         //////////////////////////////////////////////////////////////////////////
 		// Extract vertex data                                                  //
@@ -51,7 +51,7 @@ void IConvexHullShape::getConvexHull(IMesh *collMesh, btConvexHullShape *hullSha
 		//////////////////////////////////////////////////////////////////////////
 		if(mb->getVertexType() == irr::video::EVT_STANDARD)
 		{
-			irr::video::S3DVertex* mb_vertices=(irr::video::S3DVertex*)mb->getVertices();
+			auto mb_vertices=(irr::video::S3DVertex*)mb->getVertices();
 			numVertices = mb->getVertexCount();
 			for(j=0;j<numVertices;j++)
 			{
@@ -63,7 +63,7 @@ void IConvexHullShape::getConvexHull(IMesh *collMesh, btConvexHullShape *hullSha
 		if(mb->getVertexType()==irr::video::EVT_2TCOORDS)
 		{
 			// Same but for S3DVertex2TCoords data
-			irr::video::S3DVertex2TCoords* mb_vertices=(irr::video::S3DVertex2TCoords*)mb->getVertices();
+			auto mb_vertices=(irr::video::S3DVertex2TCoords*)mb->getVertices();
 			u32 numVertices = mb->getVertexCount();
 			for(j=0;j<numVertices;j++)
 			{

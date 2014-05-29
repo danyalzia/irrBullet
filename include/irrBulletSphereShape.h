@@ -13,6 +13,35 @@ class ISphereShape : public ICollisionShape
 public:
     ISphereShape(irr::scene::ISceneNode *n, irr::f32 m, bool overrideMargin = false);
 
+	ISphereShape(const ISphereShape& other) = default;
+
+	ISphereShape& operator=(const ISphereShape& other) = default;
+
+	// Move constructor
+	ISphereShape(const ISphereShape&& other)
+	{
+#ifdef IRRBULLET_DEBUG_MODE
+#pragma message("ISphereShape move constructor called...")
+#endif
+		*this = std::move(other);
+	}
+
+	// Move assignment operator
+	ISphereShape& operator=(ISphereShape&& other)
+	{
+		if (this != &other)
+		{
+			delete node;
+
+			node = other.node;
+			mass = other.mass;
+
+			other.node = nullptr;
+			other.mass = 0;
+		}
+		return *this;
+	}
+
     virtual ~ISphereShape();
 
     void setUnscaledRadius(irr::f32 newRadius) { static_cast<btSphereShape*>(shape)->setUnscaledRadius(btScalar(newRadius)); };

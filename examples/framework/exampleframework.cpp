@@ -7,7 +7,6 @@
 #include <irrBulletRayCastVehicle.h>
 #include <irrBulletCollisionObjectAffectorDelete.h>
 #include <irrBulletCollisionObjectAffectorAttract.h>
-//#include <collisionobjectaffectorbuoyancy.h>
 #include "exampleframework.h"
 
 

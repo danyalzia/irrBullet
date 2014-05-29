@@ -36,6 +36,4 @@ class CCharacterExample : public CExampleFramework
 
         irr::f32 DirZ;
         irr::f32 DirX;
-
-
 };

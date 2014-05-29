@@ -120,12 +120,12 @@ void CCharacterExample::runExample()
 	createBoxes();
 
 	IKinematicCharacterController* character = new IKinematicCharacterController(world);
+    character->setJumpForce(30);
 
 	IAnimatedMeshSceneNode* sydney = device->getSceneManager()->addAnimatedMeshSceneNode(device->getSceneManager()->getMesh("sydney.md2"));
-	sydney->setScale(vector3df(0.14,0.14,0.14));
+	sydney->setScale(vector3df(0.5,0.5,0.5));
 	sydney->getMaterial(0).setTexture(0, device->getVideoDriver()->getTexture("sydney.bmp"));
 	sydney->setMD2Animation(scene::EMAT_STAND);
-
 
     // Set our delta time and time stamp
     u32 TimeStamp = device->getTimer()->getTime();
@@ -141,7 +141,7 @@ void CCharacterExample::runExample()
 		TimeStamp = device->getTimer()->getTime();
 
 
-		sydney->setPosition(character->getWorldTransform().getTranslation()+vector3df(0,-((sydney->getBoundingBox().MaxEdge.Y-sydney->getBoundingBox().MinEdge.Y)*0.1*0.5f),0));
+		sydney->setPosition(character->getWorldTransform().getTranslation());
         vector3df dir = camera->getAbsolutePosition()-sydney->getAbsolutePosition();
         dir.normalize();
         dir.Y = 0;
@@ -259,7 +259,7 @@ void CCharacterExample::createBoxes()
     {
         for(u32 i=0; i < rows; i++)
         {
-            addCube(vector3df(3*j, 0+3*i+3, 0), vector3df(3,3,3), 3);
+            addCube(vector3df(3*j, 0+3*i+3, 0), vector3df(10,10,10), 3);
         }
     }
 }

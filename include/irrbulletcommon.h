@@ -10,7 +10,6 @@
 #include <matrix4.h>
 #include <ISceneNode.h>
 
-
 struct SWheelInfo;
 class btVector3;
 class btTransform;
@@ -30,7 +29,18 @@ irr::core::vector3df compensateForNodeType(const irr::core::vector3df& scale, ir
 
 btVector3 irrlichtToBulletVector(const irr::core::vector3df& vec);
 
+//btVector3 irrlichtToBulletVector(float x, float y, float z)
+//{
+//	return btVector3(x, y, z);
+//}
+
 irr::core::vector3df bulletToIrrlichtVector(const btVector3& vec);
+
+template<class T1, class T2, class T3>
+irr::core::vector3df bulletToIrrlichtVector(T1 x, T2 y, T3 z)
+{
+	return irr::core::vector3df(x, y, z);
+}
 
 
 

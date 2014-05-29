@@ -83,10 +83,10 @@ IRigidBody::IRigidBody(irrBulletWorld* const world, const SRigidBodyConstruction
     // Set the initial position of the object
     btTransformFromIrrlichtMatrix(worldTransform, internalTransform);
 
-    IMotionState *motionState = new IMotionState(internalTransform);
+    auto motionState = new IMotionState(internalTransform);
     motionState->setRigidBody(this);
 
-    vector3df in = shape->getLocalInertia();
+	auto in = shape->getLocalInertia();
     object = new btRigidBody(shape->getMass(), motionState, shape->getPointer(),
         btVector3(in.X,in.Y,in.Z));
 
@@ -123,10 +123,10 @@ void IRigidBody::updateLiquidBox()
     LiquidBox.reset(getCollisionShape()->getSceneNode()->getAbsoluteTransformation().getTranslation());
     for(irr::u32 i=0; i < BuoyancyPointCount; i++)
     {
-        irr::core::matrix4 mat = getCollisionShape()->getSceneNode()->getAbsoluteTransformation();
-        const irr::core::matrix4 mat2 = mat;
+        auto mat = getCollisionShape()->getSceneNode()->getAbsoluteTransformation();
+		auto mat2 = mat;
 
-        irr::core::vector3df offset(BuoyancyPoints[i].localPoint);
+        auto offset(BuoyancyPoints[i].localPoint);
 
         mat.transformVect(offset);
         LiquidBox.addInternalPoint(offset);

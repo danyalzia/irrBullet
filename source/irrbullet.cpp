@@ -8,7 +8,7 @@
 
 irrBulletWorld* createIrrBulletWorld(irr::IrrlichtDevice* const device, bool useGImpact, bool useDebugDrawer)
 {
-    irrBulletWorld* world = new irrBulletWorld(device, useGImpact, useDebugDrawer);
+    auto world = new irrBulletWorld(device, useGImpact, useDebugDrawer);
 
     return world;
 }
