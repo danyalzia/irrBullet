@@ -87,9 +87,9 @@ void CCharacterExample::runExample()
     rows = 10;
 	columns = 10;
 
-    device =
+	device.reset(
         createDevice( video::EDT_OPENGL, dimension2d<u32>(640, 480), 16,
-            false, false, false, this);
+            false, false, false, this));
 
 
     device->setWindowCaption(L"irrBullet Character Example - Josiah Hartzell");
@@ -247,9 +247,6 @@ void CCharacterExample::runExample()
     // We're done with the IrrBullet world, so we free the memory that it takes up.
     if(world)
         delete world;
-
-    if(device)
-        device->drop();
 }
 
 

@@ -27,8 +27,6 @@ IRigidBody* const CExampleFramework::addCube(const irr::core::vector3df &pos, co
 
 	ICollisionShape *shape = new IBoxShape(Node, mass, false);
 
-	//shape->setMargin(0.01);
-
 	IRigidBody *body;
 	body = world->addRigidBody(shape);
 

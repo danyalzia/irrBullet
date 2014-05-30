@@ -9,12 +9,13 @@
 
 #include <matrix4.h>
 #include <ISceneNode.h>
+#include "irrBulletCompileConfig.h"
 
 struct SWheelInfo;
 class btVector3;
+class btQuaternion;
 class btTransform;
 struct btWheelInfo;
-
 
 //void QuaternionToEuler(const btQuaternion &TQuat, btVector3 &TEuler);
 void btTransformToIrrlichtMatrix(const btTransform& worldTrans, irr::core::matrix4& matr);
@@ -27,22 +28,17 @@ void btWheelInfoFromSWheelInfo(const SWheelInfo& info, btWheelInfo& btInfo);
 
 irr::core::vector3df compensateForNodeType(const irr::core::vector3df& scale, irr::scene::ESCENE_NODE_TYPE type);
 
-btVector3 irrlichtToBulletVector(const irr::core::vector3df& vec);
+FORCEINLINE btVector3 irrlichtToBulletVector(const irr::core::vector3df& vec);
 
-//btVector3 irrlichtToBulletVector(float x, float y, float z)
-//{
-//	return btVector3(x, y, z);
-//}
+FORCEINLINE btVector3 toBulletVector(float x, float y, float z);
 
-irr::core::vector3df bulletToIrrlichtVector(const btVector3& vec);
+FORCEINLINE irr::core::vector3df bulletToIrrlichtVector(const btVector3& vec);
 
-template<class T1, class T2, class T3>
-irr::core::vector3df bulletToIrrlichtVector(T1 x, T2 y, T3 z)
-{
-	return irr::core::vector3df(x, y, z);
-}
+FORCEINLINE irr::core::vector3df toIrrlichtVector(float x, float y, float z);
 
+FORCEINLINE btQuaternion irrlichtToBulletQuaternion(const irr::core::quaternion& quat);
 
+FORCEINLINE irr::core::quaternion bulletToIrrlichtQuaternion(const btQuaternion& quat);
 
 enum class irrPhysicsDebugMode
 {

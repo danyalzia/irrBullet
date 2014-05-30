@@ -6,7 +6,6 @@
 #include <irrString.h>
 #include <irrTypes.h>
 
-
 class IRigidBody;
 
 class CHelloWorldExample : public CExampleFramework

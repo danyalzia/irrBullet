@@ -4,7 +4,6 @@
 #include <irrBullet.h>
 #include "helloworldexample.h"
 
-
 using namespace irr;
 using namespace core;
 using namespace video;
@@ -81,9 +80,8 @@ void CHelloWorldExample::runExample()
     rows = 10;
 	columns = 10;
 
-    device =
-        createDevice( video::EDT_OPENGL, dimension2d<u32>(640, 480), 16,
-            false, false, false, this);
+    device.reset(createDevice( video::EDT_OPENGL, dimension2d<u32>(640, 480), 16,
+            false, false, false, this));
 
     printf("Number of stack rows: ");
     cin >> rows;
@@ -92,7 +90,6 @@ void CHelloWorldExample::runExample()
 
 
     device->setWindowCaption(L"irrBullet Hello World Example - Josiah Hartzell");
-   // device->setResizable(true);
     device->getFileSystem()->addFileArchive("../../media/");
 
 
@@ -102,7 +99,7 @@ void CHelloWorldExample::runExample()
     ////////////////////////////
     // Create irrBullet World //
     ////////////////////////////
-    world = createIrrBulletWorld(device, true, debugDraw);
+    world.reset(createIrrBulletWorld(device, true, debugDraw));
 
 	world->setDebugMode(irrPhysicsDebugMode::EPDM_DrawAabb |
 		irrPhysicsDebugMode::EPDM_DrawContactPoints);
@@ -112,7 +109,6 @@ void CHelloWorldExample::runExample()
 
     camera = device->getSceneManager()->addCameraSceneNodeFPS();
 	camera->setPosition(vector3df(50,15,200));
-
 
 	createGround();
 	createBoxes();
@@ -144,13 +140,6 @@ void CHelloWorldExample::runExample()
 
         device->getVideoDriver()->endScene();
     }
-
-    // We're done with the IrrBullet world, so we free the memory that it takes up.
-    if(world)
-        delete world;
-
-    if(device)
-        device->drop();
 }
 
 
@@ -179,8 +168,6 @@ void CHelloWorldExample::createGround()
         Node->setMaterialFlag(EMF_WIREFRAME, true);
 
 	ICollisionShape *shape = new IBoxShape(Node, 0, false);
-
-	//shape->setMargin(0.01);
 
 	IRigidBody *body;
 	body = world->addRigidBody(shape);

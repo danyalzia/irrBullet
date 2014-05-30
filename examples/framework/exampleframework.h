@@ -1,11 +1,11 @@
-#ifndef __EXAMPLE__FRAMEWORK_H_INCLUDED__
-#define __EXAMPLE__FRAMEWORK_H_INCLUDED__
+#pragma once
+
+#include <memory>
 #include <irrTypes.h>
 #include <vector3d.h>
 #include <SColor.h>
 #include <SMaterial.h>
 #include <IEventReceiver.h>
-
 
 namespace irr
 {
@@ -51,10 +51,8 @@ class CExampleFramework : public irr::IEventReceiver
         bool drawWireFrame;
 
     protected:
-        irr::IrrlichtDevice *device;
-        irrBulletWorld *world;
+        std::shared_ptr<irr::IrrlichtDevice> device;
+		std::shared_ptr<irrBulletWorld> world;
 
         irr::scene::ICameraSceneNode *camera;
 };
-
-#endif // __EXAMPLE__FRAMEWORK_H_INCLUDED__

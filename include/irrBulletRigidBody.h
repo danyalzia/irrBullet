@@ -102,6 +102,10 @@ public:
 
 	virtual ~IRigidBody();
 
+	void proceedToTransform(const irr::core::matrix4& irrmat);
+
+	void predictIntegratedTransform(irr::f32 step, const irr::core::matrix4& irrmat);
+
     void translate(const irr::core::vector3df& v);
 
     void updateDeactivation(irr::f32 timeStep);
@@ -285,6 +289,10 @@ public:
     const irr::core::vector3df getInvInertiaDiagLocal() const;
 
     const irr::core::vector3df getAngularFactor() const;
+
+	const irr::core::vector3df& getCenterOfMassPosition() const;
+
+	irr::core::quaternion getOrientation() const;
 
     /// @return Whether or not the rigid body is in the dynamics world being simulated.
     bool isInWorld() const;

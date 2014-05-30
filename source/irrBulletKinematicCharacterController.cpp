@@ -31,7 +31,7 @@ void IKinematicCharacterController::setWalkDirection(const irr::core::vector3df&
 
 void IKinematicCharacterController::reset()
 {
-	Character->reset(static_cast<btCollisionWorld*>(World->getWorld()));
+	Character->reset(static_cast<btCollisionWorld*>(World->getPointer()));
 }
 
 void IKinematicCharacterController::warp(const irr::core::vector3df& origin)
@@ -42,12 +42,12 @@ void IKinematicCharacterController::warp(const irr::core::vector3df& origin)
 
 void IKinematicCharacterController::preStep(irrBulletWorld* world)
 {
-	Character->preStep(static_cast<btCollisionWorld*>(world->getWorld()));
+	Character->preStep(static_cast<btCollisionWorld*>(world->getPointer()));
 }
 
 void IKinematicCharacterController::playerStep(irrBulletWorld* world, irr::f32 dt)
 {
-    Character->playerStep(static_cast<btCollisionWorld*>(world->getWorld()), btScalar(dt));
+    Character->playerStep(static_cast<btCollisionWorld*>(world->getPointer()), btScalar(dt));
 }
 
 void IKinematicCharacterController::setFallSpeed(irr::f32 fallSpeed)

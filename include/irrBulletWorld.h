@@ -55,6 +55,8 @@ public:
 		*/
 	irrBulletWorld(irr::IrrlichtDevice* const Device, bool useGImpact, bool useDebugDrawer);
 
+	irrBulletWorld(std::shared_ptr<irr::IrrlichtDevice> Device, bool useGImpact, bool useDebugDrawer);
+
 	~irrBulletWorld();
 
 	/*!
@@ -191,7 +193,7 @@ public:
 		Useful to use internal Bullet world functions if desired.
 		@return The underlaying Bullet physics simulation world.
 		*/
-	btSoftRigidDynamicsWorld* getPointer() const { return world; };
+	btSoftRigidDynamicsWorld* getPointer() const { return world.get(); };
 
 	/// @return Whether or not the GImpact algorithm has been registered.
 	bool isGImpactEnabled() const;
@@ -206,16 +208,13 @@ public:
 	btSoftBodyWorldInfo& getSoftBodyWorldInfo() { return softBodyWorldInfo; };
 
 	/// @return IrrlichtDevice
-	irr::IrrlichtDevice* getIrrlichtDevice() const { return device; };
+	irr::IrrlichtDevice* getIrrlichtDevice() const { return device.get(); };
 
 	/// @return Material for debugging, internal use only
 	const irr::video::SMaterial& getDebugMaterial() const { return debugMat; };
 
-	/// @return Bullet Collision world
-	btSoftRigidDynamicsWorld* getWorld() { return world; }
-
 private:
-	btSoftRigidDynamicsWorld* world;
+	std::shared_ptr<btSoftRigidDynamicsWorld> world;
 	btDefaultCollisionConfiguration* collisionConfiguration;
 	btDispatcher* dispatcher;
 	btBroadphaseInterface* pairCache;
@@ -225,7 +224,7 @@ private:
 	IPhysicsDebugDraw* debug;
 	irr::video::SMaterial debugMat;
 
-	irr::IrrlichtDevice* device;
+	std::shared_ptr<irr::IrrlichtDevice> device;
 	irr::gui::IGUIStaticText* propertyText;
 
 	std::vector<ICollisionObject*> collisionObjects;

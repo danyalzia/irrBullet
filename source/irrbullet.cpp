@@ -12,3 +12,10 @@ irrBulletWorld* createIrrBulletWorld(irr::IrrlichtDevice* const device, bool use
 
     return world;
 }
+
+irrBulletWorld *createIrrBulletWorld(std::shared_ptr<irr::IrrlichtDevice> device, bool useGImpact, bool useDebugDrawer)
+{
+	auto world = new irrBulletWorld(device, useGImpact, useDebugDrawer);
+
+	return world;
+}

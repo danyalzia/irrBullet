@@ -4,6 +4,7 @@
 
 #include <LinearMath/btIDebugDraw.h>
 #include "irrBulletCommon.h"
+#include <memory>
 
 namespace irr
 {
@@ -29,8 +30,7 @@ class IPhysicsDebugDraw : public btIDebugDraw
 {
 
 public:
-
-	IPhysicsDebugDraw(irr::IrrlichtDevice* const device);
+	IPhysicsDebugDraw(std::shared_ptr<irr::IrrlichtDevice> device);
 
 	void drawLine(const btVector3& from, const btVector3& to, const btVector3& color);
 

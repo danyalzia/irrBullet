@@ -100,3 +100,5 @@ You are now ready to begin the integration process!
 */
 
 irrBulletWorld *createIrrBulletWorld(irr::IrrlichtDevice* const device, bool useGImpact = false, bool useDebugDrawer = false);
+
+irrBulletWorld *createIrrBulletWorld(std::shared_ptr<irr::IrrlichtDevice> device, bool useGImpact = false, bool useDebugDrawer = false);

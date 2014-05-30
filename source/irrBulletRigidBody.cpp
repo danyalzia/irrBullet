@@ -141,6 +141,18 @@ void IRigidBody::updateLiquidBox()
     }
 }
 
+void IRigidBody::proceedToTransform(const irr::core::matrix4& irrmat)
+{
+	btTransformFromIrrlichtMatrix(irrmat, internalTransform);
+	getPointer()->proceedToTransform(internalTransform);
+}
+
+void IRigidBody::predictIntegratedTransform(irr::f32 step, const irr::core::matrix4& irrmat)
+{
+	btTransformFromIrrlichtMatrix(irrmat, internalTransform);
+	getPointer()->predictIntegratedTransform(step, internalTransform);
+}
+
 void IRigidBody::translate(const vector3df &v)
 {
     getPointer()->translate(irrlichtToBulletVector(v));
@@ -452,6 +464,17 @@ const vector3df IRigidBody::getAngularFactor() const
     return bulletToIrrlichtVector(angFac);
 }
 
+const irr::core::vector3df& IRigidBody::getCenterOfMassPosition() const
+{
+	const irr::core::vector3df& v = bulletToIrrlichtVector(getPointer()->getCenterOfMassPosition());
+	return v;
+}
+
+irr::core::quaternion IRigidBody::getOrientation() const
+{
+	auto q = getPointer()->getOrientation();
+	return bulletToIrrlichtQuaternion(q);
+}
 
 bool IRigidBody::isInWorld() const
 {

@@ -4,7 +4,7 @@
 #include <IrrlichtDevice.h>
 
 
-IPhysicsDebugDraw::IPhysicsDebugDraw(irr::IrrlichtDevice* const device) :
+IPhysicsDebugDraw::IPhysicsDebugDraw(std::shared_ptr<irr::IrrlichtDevice> device) :
 mode(irrPhysicsDebugMode::EPDM_NoDebug), driver(device->getVideoDriver()), logger(device->getLogger())
 {
 

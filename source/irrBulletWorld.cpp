@@ -24,8 +24,10 @@ using namespace core;
 using namespace scene;
 using namespace video;
 
-irrBulletWorld::irrBulletWorld(irr::IrrlichtDevice* const Device, bool useGImpact, bool useDebugDrawer) : device(Device)
+irrBulletWorld::irrBulletWorld(irr::IrrlichtDevice* const Device, bool useGImpact, bool useDebugDrawer)
 {
+	device.reset(Device);
+
     collisionConfiguration = new btSoftBodyRigidBodyCollisionConfiguration();
 	//collisionConfiguration->setConvexConvexMultipointIterations();
 	dispatcher = new btCollisionDispatcher(collisionConfiguration);
@@ -33,8 +35,8 @@ irrBulletWorld::irrBulletWorld(irr::IrrlichtDevice* const Device, bool useGImpac
 	pairCache->getOverlappingPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
 	constraintSolver = new btSequentialImpulseConstraintSolver();
 
-    world = new btSoftRigidDynamicsWorld(dispatcher, pairCache,
-        constraintSolver, collisionConfiguration);
+    world.reset(new btSoftRigidDynamicsWorld(dispatcher, pairCache,
+        constraintSolver, collisionConfiguration));
 
     // Initialize the softbody world info
     softBodyWorldInfo.m_broadphase = pairCache;
@@ -83,6 +85,66 @@ irrBulletWorld::irrBulletWorld(irr::IrrlichtDevice* const Device, bool useGImpac
     printf("irrBullet %i.%i.%i\n", IRRBULLET_VER_MAJOR, IRRBULLET_VER_MINOR, IRRBULLET_VER_MICRO);
 }
 
+irrBulletWorld::irrBulletWorld(std::shared_ptr<irr::IrrlichtDevice> Device, bool useGImpact, bool useDebugDrawer)
+{
+	device = std::move(Device);
+
+	collisionConfiguration = new btSoftBodyRigidBodyCollisionConfiguration();
+	//collisionConfiguration->setConvexConvexMultipointIterations();
+	dispatcher = new btCollisionDispatcher(collisionConfiguration);
+	pairCache = new btDbvtBroadphase();
+	pairCache->getOverlappingPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
+	constraintSolver = new btSequentialImpulseConstraintSolver();
+
+	world.reset(new btSoftRigidDynamicsWorld(dispatcher, pairCache,
+		constraintSolver, collisionConfiguration));
+
+	// Initialize the softbody world info
+	softBodyWorldInfo.m_broadphase = pairCache;
+	softBodyWorldInfo.m_dispatcher = dispatcher;
+
+	softBodyWorldInfo.m_sparsesdf.Initialize();
+	softBodyWorldInfo.m_gravity.setValue(0, -10.0, 0);
+	softBodyWorldInfo.air_density = (btScalar)1.2;
+	softBodyWorldInfo.water_density = 0;
+	softBodyWorldInfo.water_offset = 0;
+	softBodyWorldInfo.water_normal = btVector3(0, 0, 0);
+
+	LiquidBodyCount = 0;
+	CollisionObjectCount = 0;
+
+
+	isPaused = false;
+
+	if (useGImpact == true)
+	{
+		gimpactEnabled = true;
+		btGImpactCollisionAlgorithm::registerAlgorithm((btCollisionDispatcher*)dispatcher);
+	}
+
+	else
+	{
+		gimpactEnabled = false;
+	}
+
+
+	debug = 0;
+
+	if (useDebugDrawer)
+	{
+		debug = new IPhysicsDebugDraw(device);
+		world->setDebugDrawer(debug);
+
+		debugMat.Lighting = false;
+	}
+
+	// For displaying debugging properties - by default on TOP_LEFT
+	propertyText = device->getGUIEnvironment()->addStaticText(L"",
+		rect<s32>(10, 10, 120, 240), false);
+	TextPropertiesPosition = EDPT_POSITION::EDPT_TOP_LEFT;
+
+	printf("irrBullet %i.%i.%i\n", IRRBULLET_VER_MAJOR, IRRBULLET_VER_MINOR, IRRBULLET_VER_MICRO);
+}
 
 u32 irrBulletWorld::stepSimulation(f32 timeStep, u32 maxSubSteps, f32 fixedTimeStep)
 {
@@ -585,7 +647,6 @@ ICollisionObject* irrBulletWorld::getCollisionObjectByName(const irr::core::stri
         auto obj = it;
         if(obj->getIdentification()->getName() == name)
             return obj;
-
     }
 
     return 0;
@@ -675,10 +736,6 @@ irrBulletWorld::~irrBulletWorld()
 
     if(debug != 0)
         delete debug;
-
-
-    if(world)
-        delete world;
 
     delete constraintSolver;
     delete pairCache;

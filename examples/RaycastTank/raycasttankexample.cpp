@@ -94,9 +94,8 @@ void CRaycastTankExample::runExample()
     leftTrackSpeed = 0.0f;
     rightTrackSpeed = 0.0f;
 
-    device =
-        createDevice( video::EDT_OPENGL, dimension2d<u32>(640, 480), 16,
-            false, false, false, this);
+    device.reset(createDevice( video::EDT_OPENGL, dimension2d<u32>(640, 480), 16,
+            false, false, false, this));
 
 
     device->setWindowCaption(L"irrBullet Raycast Tank Example - Josiah Hartzell");
@@ -182,9 +181,6 @@ void CRaycastTankExample::runExample()
     // We're done with the IrrBullet world, so we free the memory that it takes up.
     if(world)
         delete world;
-
-    if(device)
-        device->drop();
 }
 
 void CRaycastTankExample::updateTank()

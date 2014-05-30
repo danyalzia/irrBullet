@@ -84,9 +84,9 @@ void CLoadSceneExample::runExample()
     drawWireFrame = false;
 
 
-    device =
-        createDevice( video::EDT_OPENGL, dimension2d<u32>(640, 480), 16,
-            false, false, false, this);
+	device.reset(
+		createDevice(video::EDT_OPENGL, dimension2d<u32>(640, 480), 16,
+		false, false, false, this));
 
 
     device->setWindowCaption(L"irrBullet Load Scene");
@@ -201,9 +201,6 @@ void CLoadSceneExample::runExample()
     // We're done with the IrrBullet world, so we free the memory that it takes up.
     if(world)
         delete world;
-
-    if(device)
-        device->drop();
 }
 
 

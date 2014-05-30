@@ -89,9 +89,8 @@ void CSoftbodyExample::runExample()
     printf("Enable soft-soft collision?\n");
     cin >> softVersusSoft;
 
-    device =
-        createDevice( video::EDT_OPENGL, dimension2d<u32>(640, 480), 16,
-            false, false, false, this);
+    device.reset(createDevice( video::EDT_OPENGL, dimension2d<u32>(640, 480), 16,
+            false, false, false, this));
 
 
     device->setWindowCaption(L"irrBullet Softbody Example - Josiah Hartzell");
@@ -191,9 +190,6 @@ void CSoftbodyExample::runExample()
     // We're done with the IrrBullet world, so we free the memory that it takes up.
     if(world)
         delete world;
-
-    if(device)
-        device->drop();
 }
 
 // 1 = sphere, 2 = newspaper(aero), 3 = cloth, 4 = feather(aero), 5 = flag(aero)
@@ -224,8 +220,6 @@ ISoftBody* CSoftbodyExample::createSoftbodyType(u32 type, const vector3df& posit
                 core::dimension2d<u32>(3,3), 0, 0,
                 core::dimension2d<f32>(0,0),
                 core::dimension2d<f32>(1,1));
-
-
 
             softbodyNode = device->getSceneManager()->addMeshSceneNode(mesh);
             softbodyNode->setMaterialFlag(EMF_BACK_FACE_CULLING, false);

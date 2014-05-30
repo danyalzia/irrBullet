@@ -83,9 +83,9 @@ void CCollisionExample::runExample()
     u32 rows = 10;
 	u32 columns = 10;
 
-    device =
-        createDevice( video::EDT_OPENGL, dimension2d<u32>(640, 480), 16,
-            false, false, false, this);
+	device.reset(
+		createDevice(video::EDT_OPENGL, dimension2d<u32>(640, 480), 16,
+		false, false, false, this));
 
 
     device->setWindowCaption(L"irrBullet Collision Example - Josiah Hartzell");
@@ -156,9 +156,6 @@ void CCollisionExample::runExample()
     // We're done with the IrrBullet world, so we free the memory that it takes up.
     if(world)
         delete world;
-
-    if(device)
-        device->drop();
 }
 
 void CCollisionExample::handleCollisions()

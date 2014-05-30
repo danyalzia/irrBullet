@@ -88,9 +88,8 @@ void CAffectorsExample::runExample()
 
     AffectorType = 1;
 
-    device =
-        createDevice( video::EDT_OPENGL, dimension2d<u32>(640, 480), 16,
-            false, false, false, this);
+    device.reset(createDevice( video::EDT_OPENGL, dimension2d<u32>(640, 480), 16,
+            false, false, false, this));
 
     printf("Affector type (1=deletion,2=attraction,3=repulsion):\n");
     cin >> AffectorType;
@@ -154,9 +153,6 @@ void CAffectorsExample::runExample()
     // We're done with the IrrBullet world, so we free the memory that it takes up.
     if(world)
         delete world;
-
-    if(device)
-        device->drop();
 }
 
 void CAffectorsExample::createBoxes()

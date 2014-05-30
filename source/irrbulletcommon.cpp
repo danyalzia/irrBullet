@@ -121,7 +121,27 @@ btVector3 irrlichtToBulletVector(const irr::core::vector3df& vec)
     return btVector3(vec.X,vec.Y,vec.Z);
 }
 
+btVector3 toBulletVector(float x, float y, float z)
+{
+	return btVector3(x, y, z);
+}
+
 irr::core::vector3df bulletToIrrlichtVector(const btVector3& vec)
 {
     return irr::core::vector3df(vec.getX(),vec.getY(),vec.getZ());
+}
+
+irr::core::vector3df toIrrlichtVector(float x, float y, float z)
+{
+	return irr::core::vector3df(x, y, z);
+}
+
+btQuaternion irrlichtToBulletQuaternion(const irr::core::quaternion& quat)
+{
+	return btQuaternion(quat.X, quat.Y, quat.Z, quat.W);
+}
+
+irr::core::quaternion bulletToIrrlichtQuaternion(const btQuaternion& quat)
+{
+	return irr::core::quaternion(quat.getX(), quat.getY(), quat.getZ(), quat.getW());
 }
