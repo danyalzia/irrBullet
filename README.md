@@ -8,6 +8,17 @@ This is a fork of irrBullet, which can be found at https://irrbullet.svn.sourcef
 
 It is an updated version of irrBullet which works with Irrlicht 1.8.1 and latest SVN branch (unstable) and Bullet 2.82. It also has several improvements over outdated irrBullet. I tried contacting the original author of irrBullet, but got no response.
 
+Note: The following version hasn't released yet.
+
+What's new in 0.1.9
+-------------------
+* Performance improvement (refactored loops, add move semantics)
+* Several bug fixes
+* Support for latest versions of Bullet and Irrlicht
+* IRigidBody, irrBulletWorld etc are feature complete (all methods have been wrapped)
+* Strong C++11 support - dropped support for non-C++11 compilers
+* irrBullet is forked - now maintained by Danyal Zia
+
 Installation
 ------------
 

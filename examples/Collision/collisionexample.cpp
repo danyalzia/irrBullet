@@ -1,4 +1,8 @@
-// This example is part of irrBullet by Josiah Hartzell (fighterstw@hotmail.com or josiah.hartzell@gmail.com)
+// Copyright (C) 2014- Danyal Zia
+// Copyright (C) 2009-2013 Josiah Hartzell (Skyreign Software)
+// This file is part of the "irrBullet" Bullet physics wrapper.
+// For conditions of distribution and use, see copyright notice in irrBullet.h
+// The above copyright notice and its accompanying information must remain here.
 
 #include "collisionexample.h"
 #include <irrlicht.h>
@@ -17,6 +21,7 @@ CCollisionExample::CCollisionExample()
 // To add a rigid body with collision masks, simply add two extra parameters to the creation code:
 // world->addRigidBody(shape, EMGM_GROUND, collideWithRigidBody);
 // instead of world->addRigidBody(shape)
+
 void CCollisionExample::createGround()
 {
     ISceneNode *Node = device->getSceneManager()->addCubeSceneNode(1.0);
@@ -95,12 +100,8 @@ void CCollisionExample::runExample()
 
     device->getSceneManager()->addLightSceneNode(0, vector3df(20, 40, -50), SColorf(1.0f, 1.0f, 1.0f), 4000.0f);
 
-
-
-    ////////////////////////////
-    // Create irrBullet World //
-    ////////////////////////////
-    world = createIrrBulletWorld(device, true, debugDraw);
+	// Create irrBullet World
+    world.reset(createIrrBulletWorld(device, true, debugDraw));
 
 	world->setDebugMode(irrPhysicsDebugMode::EPDM_DrawAabb |
 		irrPhysicsDebugMode::EPDM_DrawContactPoints);
@@ -152,20 +153,16 @@ void CCollisionExample::runExample()
 
         device->getVideoDriver()->endScene();
     }
-
-    // We're done with the IrrBullet world, so we free the memory that it takes up.
-    if(world)
-        delete world;
 }
 
 void CCollisionExample::handleCollisions()
 {
     for(int i=0; i < world->getNumManifolds(); i++)
     {
-        ICollisionCallbackInformation *info = world->getCollisionCallback(i);
+        auto info = world->getCollisionCallback(i);
 
         bool hasCollideAttribute = (info->getBody0()->getAttributes()->existsAttribute("collide"));
-        ICollisionObject* obj = (hasCollideAttribute) ? info->getBody0() : info->getBody1();
+        auto obj = (hasCollideAttribute) ? info->getBody0() : info->getBody1();
 
         if(obj->getAttributes()->existsAttribute("collide") && obj->getAttributes()->getAttributeAsBool("collide") == true)
         {
@@ -182,7 +179,7 @@ void CCollisionExample::handleCollisions()
                 {
                     obj->getAttributes()->setAttribute("isDestroyed", true);
 
-                    IParticleSystemSceneNode* ps = createParticleSystem(vector3df(0.0f,0.02f,0.0f), 80, 100,
+                    auto ps = createParticleSystem(vector3df(0.0f,0.02f,0.0f), 80, 100,
                         SColor(0,255,255,255), SColor(0,255,255,255), 800, 2000, 0,
                         dimension2df(5.f,5.f), dimension2df(10.f,10.f), "fire.bmp",
                         0.0, false, EMT_TRANSPARENT_VERTEX_ALPHA, true);
@@ -221,5 +218,5 @@ void CCollisionExample::handleCollisions()
 
 CCollisionExample::~CCollisionExample()
 {
-    //dtor
+    
 }

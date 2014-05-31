@@ -1,6 +1,7 @@
-// Copyright (C) 2009-2011 Josiah Hartzell (Skyreign Software)
-// This file is part of the "irrBullet" Bullet physics extension library and wrapper.
-// For conditions of distribution and use, see license in irrbullet.h
+// Copyright (C) 2014- Danyal Zia
+// Copyright (C) 2009-2013 Josiah Hartzell (Skyreign Software)
+// This file is part of the "irrBullet" Bullet physics wrapper.
+// For conditions of distribution and use, see copyright notice in irrBullet.h
 // The above copyright notice and its accompanying information must remain here.
 
 #pragma once
@@ -175,6 +176,26 @@ public:
 
 	/// @return The total number of collision objects in the world (both soft and rigid)
 	irr::u32 getNumCollisionObjects() const { return CollisionObjectCount; };
+
+	void setSynchronizeAllMotionStates(bool synchronizeAll)
+	{
+		getPointer()->setSynchronizeAllMotionStates(synchronizeAll);
+	}
+
+	bool getSynchronizeAllMotionStates() const
+	{
+		return getPointer()->getSynchronizeAllMotionStates();
+	}
+
+	void setApplySpeculativeContactRestitution(bool enable)
+	{
+		getPointer()->setApplySpeculativeContactRestitution(enable);
+	}
+
+	bool getApplySpeculativeContactRestitution() const
+	{
+		return getPointer()->getApplySpeculativeContactRestitution();
+	}
 
 	ILiquidBody* getLiquidBodyByIndex(irr::u32 index) const;
 

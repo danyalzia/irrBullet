@@ -1,3 +1,9 @@
+// Copyright (C) 2014- Danyal Zia
+// Copyright (C) 2009-2013 Josiah Hartzell (Skyreign Software)
+// This file is part of the "irrBullet" Bullet physics wrapper.
+// For conditions of distribution and use, see copyright notice in irrBullet.h
+// The above copyright notice and its accompanying information must remain here.
+
 #include <irrlicht.h>
 #include <irrBullet.h>
 #include "raycasttankexample.h"
@@ -66,7 +72,7 @@ bool CRaycastTankExample::OnEvent(const SEvent& event)
 
             if(event.KeyInput.Key == KEY_SPACE && event.KeyInput.PressedDown == false)
             {
-                IAnimatedMeshSceneNode *node = static_cast<IAnimatedMeshSceneNode*>(tank->getCollisionShape()->getSceneNode());
+				auto node = static_cast<IAnimatedMeshSceneNode*>(tank->getCollisionShape()->getSceneNode());
                 vehicle->getRigidBody()->applyImpulse(vector3df(0,0,-500), node->getJointNode("Muzzle")->getPosition(), ERBTransformSpace::ERBTS_LOCAL);
                 createMuzzleFlash(node->getJointNode("Muzzle"));
             }
@@ -103,7 +109,7 @@ void CRaycastTankExample::runExample()
     device->getFileSystem()->addFileArchive("../../media/");
 
 
-    IGUIStaticText *tankProperties = device->getGUIEnvironment()->addStaticText(L"Tank:",
+	auto tankProperties = device->getGUIEnvironment()->addStaticText(L"Tank:",
             rect<s32>(10,10,120,240), false);
 
     tankProperties->setOverrideColor(SColor(255,255,255,255));
@@ -111,12 +117,8 @@ void CRaycastTankExample::runExample()
 
     device->getSceneManager()->addLightSceneNode(0, vector3df(20, 40, -50), SColorf(1.0f, 1.0f, 1.0f), 4000.0f);
 
-
-
-    ////////////////////////////
-    // Create irrBullet World //
-    ////////////////////////////
-    world = createIrrBulletWorld(device, true, debugDraw);
+    // Create irrBullet World
+    world.reset(createIrrBulletWorld(device, true, debugDraw));
 
 	world->setDebugMode(irrPhysicsDebugMode::EPDM_DrawAabb |
 		irrPhysicsDebugMode::EPDM_DrawContactPoints);
@@ -177,10 +179,6 @@ void CRaycastTankExample::runExample()
         device->getGUIEnvironment()->drawAll();
         device->getVideoDriver()->endScene();
     }
-
-    // We're done with the IrrBullet world, so we free the memory that it takes up.
-    if(world)
-        delete world;
 }
 
 void CRaycastTankExample::updateTank()
@@ -242,7 +240,7 @@ void CRaycastTankExample::updateTank()
 void CRaycastTankExample::createTerrain()
 {
     // TERRAIN
-	IMeshSceneNode *Node = device->getSceneManager()->addMeshSceneNode(device->getSceneManager()->getMesh("terrainMain.b3d")->getMesh(0));
+	auto Node = device->getSceneManager()->addMeshSceneNode(device->getSceneManager()->getMesh("terrainMain.b3d")->getMesh(0));
 	Node->setPosition(vector3df(0,0,0));
 	Node->setMaterialFlag(video::EMF_LIGHTING, false);
 
@@ -257,7 +255,7 @@ void CRaycastTankExample::createTerrain()
 
     // The rigid body will be placed at the origin of the node that the collision shape is controlling,
     // so we do not need to set the position after positioning the node.
-	IRigidBody *terrain = world->addRigidBody(shape);
+	auto terrain = world->addRigidBody(shape);
 
 
     shape->setLocalScaling(vector3df(4,4,4), EScalingPair::ESP_BOTH);
@@ -270,14 +268,10 @@ void CRaycastTankExample::createTerrain()
 
 void CRaycastTankExample::createTank(const stringw file, const stringw collFile, const vector3df &pos, const f32 mass)
 {
-    IAnimatedMeshSceneNode *Node = device->getSceneManager()->addAnimatedMeshSceneNode(
+	auto Node = device->getSceneManager()->addAnimatedMeshSceneNode(
         device->getSceneManager()->getMesh(file.c_str()));
 	Node->setPosition(pos);
-	//Node->setRotation(vector3df(-40,90,0));
 	Node->setMaterialFlag(video::EMF_LIGHTING, true);
-	//Node->setScale(vector3df(2,2,4));
-
-
 
 	IGImpactMeshShape *shape = new IGImpactMeshShape(Node, device->getSceneManager()->getMesh(collFile.c_str()), mass);
 

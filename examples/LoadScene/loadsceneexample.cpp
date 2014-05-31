@@ -1,3 +1,9 @@
+// Copyright (C) 2014- Danyal Zia
+// Copyright (C) 2009-2013 Josiah Hartzell (Skyreign Software)
+// This file is part of the "irrBullet" Bullet physics wrapper.
+// For conditions of distribution and use, see copyright notice in irrBullet.h
+// The above copyright notice and its accompanying information must remain here.
+
 #include <irrlicht.h>
 #include <irrBullet.h>
 #include "loadsceneexample.h"
@@ -58,12 +64,6 @@ bool CLoadSceneExample::OnEvent(const SEvent& event)
             else
             if(event.KeyInput.Key == KEY_KEY_R && event.KeyInput.PressedDown == false)
             {
-                /*while(world->getNumCollisionObjects() > 0)
-                {
-                    world->removeCollisionObject(world->getCollisionObjectByIndex(0));
-                }
-                createGround();
-                createBoxes();*/
                 return true;
             }
         }
@@ -97,10 +97,8 @@ void CLoadSceneExample::runExample()
     device->getSceneManager()->addLightSceneNode(0, vector3df(20, 40, -50), SColorf(1.0f, 1.0f, 1.0f), 4000.0f);
 
 
-    ////////////////////////////
-    // Create irrBullet World //
-    ////////////////////////////
-    world = createIrrBulletWorld(device, true, debugDraw);
+    // Create irrBullet World 
+    world.reset(createIrrBulletWorld(device, true, debugDraw));
 
 	world->setDebugMode(irrPhysicsDebugMode::EPDM_DrawAabb |
 		irrPhysicsDebugMode::EPDM_DrawContactPoints);
@@ -119,19 +117,16 @@ void CLoadSceneExample::runExample()
 
 	for (u32 i=0; i < nodes.size(); ++i)
 	{
-		scene::ISceneNode* node = nodes[i];
+		auto node = nodes[i];
 		stringc name = node->getName();
 		const stringc prefix = name.subString(0,name.findFirst('_'));
 		const stringc suffix = name.subString(name.findFirst('_')+1, name.size()-name.findFirst('_'));
-
-		//printf("PREFIX: %s\n", prefix.c_str());
-		//printf("SUFFIX: %s\n", suffix.c_str());
 
 		if(node->getType() == scene::ESNT_MESH)
 		{
 		    if(prefix == "rigid")
             {
-                ICollisionShape* shape = 0;
+               ICollisionShape* shape = 0;
 
                 if(suffix == "mesh")
                     shape = new IGImpactMeshShape(node, static_cast<IMeshSceneNode*>(node)->getMesh(), node->getBoundingBox().getVolume()*0.001);
@@ -147,19 +142,17 @@ void CLoadSceneExample::runExample()
 
             else if(prefix == "static")
             {
-                IBvhTriangleMeshShape* shape = new IBvhTriangleMeshShape(node, static_cast<IMeshSceneNode*>(node)->getMesh(), 0.0f);
-                IRigidBody* body = world->addRigidBody(shape);
+                auto shape = new IBvhTriangleMeshShape(node, static_cast<IMeshSceneNode*>(node)->getMesh(), 0.0f);
+				auto body = world->addRigidBody(shape);
             }
 
             else if(prefix == "soft")
             {
-                ISoftBody* softbody = world->addSoftBody(static_cast<IMeshSceneNode*>(node));
+                auto softbody = world->addSoftBody(static_cast<IMeshSceneNode*>(node));
                 softbody->setTotalMass(0.1f, false);
 				softbody->setActivationState(EActivationState::EAS_DISABLE_DEACTIVATION);
                 node->setMaterialFlag(EMF_BACK_FACE_CULLING, false);
                 node->setAutomaticCulling(EAC_OFF);
-
-
 
                 softbody->getConfiguration().liftCoefficient = 0.0;
                 softbody->getConfiguration().dragCoefficient = 0.0;
@@ -197,10 +190,6 @@ void CLoadSceneExample::runExample()
 
         device->getVideoDriver()->endScene();
     }
-
-    // We're done with the IrrBullet world, so we free the memory that it takes up.
-    if(world)
-        delete world;
 }
 
 

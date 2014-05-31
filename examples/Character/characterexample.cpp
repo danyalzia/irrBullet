@@ -1,9 +1,12 @@
-// This example is part of irrBullet by Josiah Hartzell (fighterstw@hotmail.com or josiah.hartzell@gmail.com)
+// Copyright (C) 2014- Danyal Zia
+// Copyright (C) 2009-2013 Josiah Hartzell (Skyreign Software)
+// This file is part of the "irrBullet" Bullet physics wrapper.
+// For conditions of distribution and use, see copyright notice in irrBullet.h
+// The above copyright notice and its accompanying information must remain here.
 
 #include <irrlicht.h>
 #include <irrBullet.h>
 #include "characterexample.h"
-
 
 using namespace irr;
 using namespace core;
@@ -12,7 +15,6 @@ using namespace scene;
 using namespace gui;
 using namespace io;
 using namespace std;
-
 
 CCharacterExample::CCharacterExample() : DirZ(0.0f), DirX(0.0f)
 {
@@ -30,8 +32,8 @@ bool CCharacterExample::OnEvent(const SEvent& event)
         {
             if(event.MouseInput.Event==EMIE_LMOUSE_PRESSED_DOWN)
             {
-                //shootCube(vector3df(2,2,2), 1);
-                //return true;
+                /*shootCube(vector3df(2,2,2), 1);
+                return true;*/
             }
 
             else
@@ -70,8 +72,6 @@ bool CCharacterExample::OnEvent(const SEvent& event)
             break;
     }
     return false;
-
-
 }
 
 
@@ -92,7 +92,7 @@ void CCharacterExample::runExample()
             false, false, false, this));
 
 
-    device->setWindowCaption(L"irrBullet Character Example - Josiah Hartzell");
+    device->setWindowCaption(L"irrBullet Character Example");
     device->setResizable(true);
     device->getFileSystem()->addFileArchive("../../media/");
 
@@ -100,10 +100,8 @@ void CCharacterExample::runExample()
     device->getSceneManager()->addLightSceneNode(0, vector3df(20, 40, -50), SColorf(1.0f, 1.0f, 1.0f), 4000.0f);
 
 
-    ////////////////////////////
-    // Create irrBullet World //
-    ////////////////////////////
-    world = createIrrBulletWorld(device, true, debugDraw);
+    // Create irrBullet World 
+    world.reset(createIrrBulletWorld(device, true, debugDraw));
 
 	world->setDebugMode(irrPhysicsDebugMode::EPDM_DrawAabb |
 		irrPhysicsDebugMode::EPDM_DrawContactPoints);
@@ -115,11 +113,10 @@ void CCharacterExample::runExample()
 	camera->setPosition(vector3df(50,15,200));
 	camera->bindTargetAndRotation(true);
 
-
 	createGround();
 	createBoxes();
 
-	IKinematicCharacterController* character = new IKinematicCharacterController(world);
+	auto character = std::make_shared<IKinematicCharacterController>(world.get(), 20);
     character->setJumpForce(30);
 
 	IAnimatedMeshSceneNode* sydney = device->getSceneManager()->addAnimatedMeshSceneNode(device->getSceneManager()->getMesh("sydney.md2"));
@@ -207,11 +204,11 @@ void CCharacterExample::runExample()
         }
 
 
-        sydney->setPosition(character->getWorldTransform().getTranslation());
+		irr::core::vector3df pos = character->getWorldTransform().getTranslation();
+		sydney->setPosition(pos);
 
         vector3df rot(0, camera->getRotation().Y-90.0f, 0);
         sydney->setRotation(rot);
-
 
         vector3df direction(DirX, 0.0f, DirZ);
 
@@ -227,8 +224,6 @@ void CCharacterExample::runExample()
 
 		// Step the simulation with our delta time
         world->stepSimulation(DeltaTime*0.001f, 120);
-
-
         world->debugDrawWorld(debugDraw);
 
         // This call will draw the technical properties of the physics simulation
@@ -241,12 +236,6 @@ void CCharacterExample::runExample()
 
         device->getVideoDriver()->endScene();
     }
-
-    delete character;
-
-    // We're done with the IrrBullet world, so we free the memory that it takes up.
-    if(world)
-        delete world;
 }
 
 
@@ -264,7 +253,7 @@ void CCharacterExample::createBoxes()
 
 void CCharacterExample::createGround()
 {
-    ISceneNode *Node = device->getSceneManager()->addCubeSceneNode(1.0);
+	auto Node = device->getSceneManager()->addCubeSceneNode(1.0);
 	Node->setScale(vector3df(300,3,300)); // 400, 3, 400
 	Node->setPosition(vector3df(20,0,10));
 	Node->setMaterialFlag(video::EMF_LIGHTING, true);
@@ -274,12 +263,9 @@ void CCharacterExample::createGround()
     if(drawWireFrame)
         Node->setMaterialFlag(EMF_WIREFRAME, true);
 
-	ICollisionShape *shape = new IBoxShape(Node, 0, false);
+	auto shape = new IBoxShape(Node, 0, false);
 
-	//shape->setMargin(0.01);
-
-	IRigidBody *body;
-	body = world->addRigidBody(shape);
+	auto body = world->addRigidBody(shape);
 }
 
 

@@ -1,6 +1,7 @@
-// Copyright (C) 2009-2011 Josiah Hartzell (Skyreign Software)
-// This file is part of the "irrBullet" Bullet physics extension library and wrapper.
-// For conditions of distribution and use, see license in irrbullet.h
+// Copyright (C) 2014- Danyal Zia
+// Copyright (C) 2009-2013 Josiah Hartzell (Skyreign Software)
+// This file is part of the "irrBullet" Bullet physics wrapper.
+// For conditions of distribution and use, see copyright notice in irrBullet.h
 // The above copyright notice and its accompanying information must remain here.
 
 #pragma once
@@ -36,9 +37,9 @@ FORCEINLINE irr::core::vector3df bulletToIrrlichtVector(const btVector3& vec);
 
 FORCEINLINE irr::core::vector3df toIrrlichtVector(float x, float y, float z);
 
-FORCEINLINE btQuaternion irrlichtToBulletQuaternion(const irr::core::quaternion& quat);
+btQuaternion irrlichtToBulletQuaternion(const irr::core::quaternion& quat);
 
-FORCEINLINE irr::core::quaternion bulletToIrrlichtQuaternion(const btQuaternion& quat);
+irr::core::quaternion bulletToIrrlichtQuaternion(const btQuaternion& quat);
 
 enum class irrPhysicsDebugMode
 {

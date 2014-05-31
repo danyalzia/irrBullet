@@ -1,4 +1,8 @@
-// This example is part of irrBullet by Josiah Hartzell (fighterstw@hotmail.com or josiah.hartzell@gmail.com)
+// Copyright (C) 2014- Danyal Zia
+// Copyright (C) 2009-2013 Josiah Hartzell (Skyreign Software)
+// This file is part of the "irrBullet" Bullet physics wrapper.
+// For conditions of distribution and use, see copyright notice in irrBullet.h
+// The above copyright notice and its accompanying information must remain here.
 
 #include "liquidbodyexample.h"
 #include <irrlicht.h>
@@ -30,7 +34,7 @@ bool CLiquidbodyExample::OnEvent(const SEvent& event)
         {
             if(event.MouseInput.Event==EMIE_LMOUSE_PRESSED_DOWN)
             {
-                IRigidBody* body = shootCube(vector3df(10,10,10), 2, "crate.jpg");
+                auto body = shootCube(vector3df(10,10,10), 2, "crate.jpg");
 
                 irr::f32 t = 0.5f;
                 irr::f32 buoyancy = 0.8f;
@@ -112,10 +116,8 @@ void CLiquidbodyExample::runExample()
 	camera->setTarget(vector3df(0,0,0));
 
 
-    ////////////////////////////
-    // Create irrBullet World //
-    ////////////////////////////
-    world = createIrrBulletWorld(device, true, debugDraw);
+    // Create irrBullet World
+    world.reset(createIrrBulletWorld(device, true, debugDraw));
 
 	world->setDebugMode(irrPhysicsDebugMode::EPDM_DrawAabb |
 		irrPhysicsDebugMode::EPDM_DrawContactPoints);
@@ -132,7 +134,6 @@ void CLiquidbodyExample::runExample()
     water->setInfinite(true);
     water->setInfiniteDepth(true);
     water->setLiquidDensity(0.1f);
-    //water->setDebugDrawEnabled(false);
 
 
     IAnimatedMesh* mesh = device->getSceneManager()->addHillPlaneMesh( "myHill",
@@ -161,7 +162,6 @@ void CLiquidbodyExample::runExample()
             irr::f32 buoyancy = 0.2f;
 
             vector<SBuoyancyPoint> points;
-            //points.push_back(SBuoyancyPoint(irr::core::vector3df(0,0,0), 180.0f));
             points.push_back(SBuoyancyPoint(irr::core::vector3df(t,t,t), buoyancy));
             points.push_back(SBuoyancyPoint(irr::core::vector3df(-t,t,t), buoyancy));
             points.push_back(SBuoyancyPoint(irr::core::vector3df(-t,t,-t), buoyancy));
@@ -172,14 +172,7 @@ void CLiquidbodyExample::runExample()
             points.push_back(SBuoyancyPoint(irr::core::vector3df(-t,-t,-t), buoyancy));
             points.push_back(SBuoyancyPoint(irr::core::vector3df(t,-t,-t), buoyancy));
 
-
-            /*ICollisionObjectAffectorBuoyancy* affector = new ICollisionObjectAffectorBuoyancy(points,
-                irr::core::aabbox3df(0, -100, 0, 10000, 0, 10000), 1);
-            affector->setDebugDrawing(true);
-            body->addAffector(affector);*/
             body->setBuoyancyPoints(points);
-
-            //body->setActivationState(EAS_DISABLE_DEACTIVATION);
         }
 	}
 
@@ -195,7 +188,6 @@ void CLiquidbodyExample::runExample()
 
 		// Step the simulation with our delta time
         world->stepSimulation(DeltaTime*0.001f, 120);
-        //static_cast<ISoftBody*>(world->getCollisionObjectByName("SOFTBODY1"))->addForce(vector3df(-2,0,0));
 
 
         //world->debugDrawWorld(debugDraw);
@@ -203,21 +195,15 @@ void CLiquidbodyExample::runExample()
         // to the GUI environment.
         world->debugDrawProperties(drawProperties);
 
-
         device->getSceneManager()->drawAll();
         device->getGUIEnvironment()->drawAll();
 
         device->getVideoDriver()->endScene();
     }
-    //delete Liquid;
-
-    // We're done with the IrrBullet world, so we free the memory that it takes up.
-    if(world)
-        delete world;
 }
 
 
 CLiquidbodyExample::~CLiquidbodyExample()
 {
-    //dtor
+    
 }

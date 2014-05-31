@@ -1,9 +1,12 @@
-// This example is part of irrBullet by Josiah Hartzell (fighterstw@hotmail.com or josiah.hartzell@gmail.com)
+// Copyright (C) 2014- Danyal Zia
+// Copyright (C) 2009-2013 Josiah Hartzell (Skyreign Software)
+// This file is part of the "irrBullet" Bullet physics wrapper.
+// For conditions of distribution and use, see copyright notice in irrBullet.h
+// The above copyright notice and its accompanying information must remain here.
 
 #include <irrlicht.h>
 #include <irrBullet.h>
 #include "affectorsexample.h"
-
 
 using namespace irr;
 using namespace core;
@@ -12,7 +15,6 @@ using namespace scene;
 using namespace gui;
 using namespace io;
 using namespace std;
-
 
 /*
 This example is low-skill level, and will show you how to create simple cube shapes and
@@ -34,7 +36,7 @@ bool CAffectorsExample::OnEvent(const SEvent& event)
         {
             if(event.MouseInput.Event==EMIE_LMOUSE_PRESSED_DOWN)
             {
-                IRigidBody* body = shootCube(vector3df(2,2,2), 1);
+				auto body = shootCube(vector3df(2, 2, 2), 1);
 
                 makeAffector(body);
                 return true;
@@ -43,7 +45,7 @@ bool CAffectorsExample::OnEvent(const SEvent& event)
             else
             if(event.MouseInput.Event==EMIE_RMOUSE_PRESSED_DOWN)
             {
-                IRigidBody* body = shootSphere(vector3df(0.2,0.2,0.2), 0.2);
+				auto body = shootSphere(vector3df(0.2, 0.2, 0.2), 0.2);
 
                 makeAffector(body);
                 return true;
@@ -75,8 +77,6 @@ bool CAffectorsExample::OnEvent(const SEvent& event)
             break;
     }
     return false;
-
-
 }
 
 
@@ -91,23 +91,17 @@ void CAffectorsExample::runExample()
     device.reset(createDevice( video::EDT_OPENGL, dimension2d<u32>(640, 480), 16,
             false, false, false, this));
 
-    printf("Affector type (1=deletion,2=attraction,3=repulsion):\n");
+    printf("Affector type (1=deletion, 2=attraction, 3=repulsion):\n");
     cin >> AffectorType;
 
-
-    device->setWindowCaption(L"irrBullet Affectors Example - Josiah Hartzell");
+    device->setWindowCaption(L"irrBullet Affectors Example");
 
     device->getFileSystem()->addFileArchive("../../media/");
 
-
     device->getSceneManager()->addLightSceneNode(0, vector3df(20, 40, -50), SColorf(1.0f, 1.0f, 1.0f), 4000.0f);
 
-
-
-    ////////////////////////////
-    // Create irrBullet World //
-    ////////////////////////////
-    world = createIrrBulletWorld(device, true, debugDraw);
+    // Create irrBullet World
+    world.reset(createIrrBulletWorld(device, true, debugDraw));
 
 	world->setDebugMode(irrPhysicsDebugMode::EPDM_DrawAabb |
             irrPhysicsDebugMode::EPDM_DrawContactPoints);
@@ -118,11 +112,8 @@ void CAffectorsExample::runExample()
     camera = device->getSceneManager()->addCameraSceneNodeFPS();
 	camera->setPosition(vector3df(50,15,200));
 
-
 	createGround();
 	createBoxes();
-
-
 
     // Set our delta time and time stamp
     u32 TimeStamp = device->getTimer()->getTime();
@@ -136,32 +127,25 @@ void CAffectorsExample::runExample()
 
 		// Step the simulation with our delta time
         world->stepSimulation(DeltaTime*0.001f, 120);
-
-
         world->debugDrawWorld(debugDraw);
         // This call will draw the technical properties of the physics simulation
         // to the GUI environment.
         world->debugDrawProperties(drawProperties);
-
 
         device->getSceneManager()->drawAll();
         device->getGUIEnvironment()->drawAll();
 
         device->getVideoDriver()->endScene();
     }
-
-    // We're done with the IrrBullet world, so we free the memory that it takes up.
-    if(world)
-        delete world;
 }
 
 void CAffectorsExample::createBoxes()
 {
-    for(u32 j=0; j < 10; j++)
+    for(u32 j = 0; j < 10; j++)
     {
-        for(u32 i=0; i < 10; i++)
+        for(u32 i = 0; i < 10; i++)
         {
-            IRigidBody* body = addCube(vector3df(3 * i, 0 + 3 * j + 3, 0), vector3df(3,3,3), 3);
+            auto body = addCube(vector3df(3 * i, 0 + 3 * j + 3, 0), vector3df(3,3,3), 3);
             makeAffector(body);
         }
     }
@@ -169,7 +153,7 @@ void CAffectorsExample::createBoxes()
 
 void CAffectorsExample::createGround()
 {
-    ISceneNode *Node = device->getSceneManager()->addCubeSceneNode(1.0);
+    auto Node = device->getSceneManager()->addCubeSceneNode(1.0);
 	Node->setScale(vector3df(300,3,300)); // 400, 3, 400
 	Node->setPosition(vector3df(20,0,10));
 	Node->setMaterialFlag(video::EMF_LIGHTING, true);
@@ -179,12 +163,9 @@ void CAffectorsExample::createGround()
     if(drawWireFrame)
         Node->setMaterialFlag(EMF_WIREFRAME, true);
 
-	ICollisionShape *shape = new IBoxShape(Node, 0, false);
+	auto shape = new IBoxShape(Node, 0, false);
 
-	//shape->setMargin(0.01);
-
-	IRigidBody *body;
-	body = world->addRigidBody(shape);
+	auto body = world->addRigidBody(shape);
 }
 
 void CAffectorsExample::makeAffector(IRigidBody* const body)

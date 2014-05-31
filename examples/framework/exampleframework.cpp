@@ -1,3 +1,9 @@
+// Copyright (C) 2014- Danyal Zia
+// Copyright (C) 2009-2013 Josiah Hartzell (Skyreign Software)
+// This file is part of the "irrBullet" Bullet physics wrapper.
+// For conditions of distribution and use, see copyright notice in irrBullet.h
+// The above copyright notice and its accompanying information must remain here.
+
 #include <irrlicht.h>
 #include <irrBulletWorld.h>
 #include <irrBulletRigidBody.h>
@@ -16,7 +22,7 @@ CExampleFramework::CExampleFramework()
 
 IRigidBody* const CExampleFramework::addCube(const irr::core::vector3df &pos, const irr::core::vector3df &scale, irr::f32 mass, irr::core::stringc textureFile) const
 {
-    irr::scene::ISceneNode *Node = device->getSceneManager()->addCubeSceneNode(1.0f);
+    auto Node = device->getSceneManager()->addCubeSceneNode(1.0f);
 	Node->setScale(scale);
 	Node->setPosition(pos);
 	Node->setMaterialFlag(irr::video::EMF_LIGHTING, true);
@@ -25,10 +31,9 @@ IRigidBody* const CExampleFramework::addCube(const irr::core::vector3df &pos, co
 
     Node->setMaterialFlag(irr::video::EMF_WIREFRAME, drawWireFrame);
 
-	ICollisionShape *shape = new IBoxShape(Node, mass, false);
+	auto shape = new IBoxShape(Node, mass, false);
 
-	IRigidBody *body;
-	body = world->addRigidBody(shape);
+	auto body = world->addRigidBody(shape);
 
 	return body;
 }
@@ -37,7 +42,7 @@ IRigidBody* const CExampleFramework::shootCube(const irr::core::vector3df &scale
 {
 	irr::core::vector3df pos(camera->getPosition().X,camera->getPosition().Y,camera->getPosition().Z);
 
-	irr::scene::ISceneNode *Node = device->getSceneManager()->addCubeSceneNode(1.0f);
+	auto Node = device->getSceneManager()->addCubeSceneNode(1.0f);
 	Node->setScale(scale);
 	Node->setPosition(pos);
 	Node->setMaterialFlag(irr::video::EMF_LIGHTING, true);
@@ -46,11 +51,9 @@ IRigidBody* const CExampleFramework::shootCube(const irr::core::vector3df &scale
 
     Node->setMaterialFlag(irr::video::EMF_WIREFRAME, drawWireFrame);
 
-	ICollisionShape *shape = new IBoxShape(Node, mass, true);
+	auto shape = new IBoxShape(Node, mass, true);
 
-	//shape->setMargin(0.01);
-
-	IRigidBody *body = world->addRigidBody(shape);
+	auto body = world->addRigidBody(shape);
 
 	irr::core::vector3df rot = camera->getRotation();
     irr::core::matrix4 mat;
@@ -58,19 +61,11 @@ IRigidBody* const CExampleFramework::shootCube(const irr::core::vector3df &scale
     irr::core::vector3df forwardDir(irr::core::vector3df(mat[8],mat[9],mat[10]) * 120);
 
     body->setLinearVelocity(forwardDir);
-    //body->setActivationState(EAS_DISABLE_DEACTIVATION);
 
     body->setDamping(0.2,0.2);
     body->setFriction(0.4f);
 
-    //ICollisionObjectAffectorDelete *deleteAffector = new ICollisionObjectAffectorDelete(4000);
-    //body->addAffector(deleteAffector);
-
     body->getAttributes()->addBool("collide", true);
-
-    //ICollisionObjectAffectorAttract* affector = new ICollisionObjectAffectorAttract(irr::core::vector3df(0,1000,0), 2500);
-    //ICollisionObjectAffectorAttract* affector = new ICollisionObjectAffectorAttract(device->getSceneManager()->getActiveCamera(), 2500);
-    //body->addAffector(affector);
 
     return body;
 }
@@ -79,7 +74,7 @@ IRigidBody* const CExampleFramework::shootSphere(const irr::core::vector3df &sca
 {
 	irr::core::vector3df pos(camera->getPosition().X,camera->getPosition().Y,camera->getPosition().Z);
 
-	irr::scene::ISceneNode *Node = device->getSceneManager()->addSphereSceneNode();
+	auto Node = device->getSceneManager()->addSphereSceneNode();
 	Node->setScale(scale);
 	Node->setPosition(pos);
 	Node->setMaterialFlag(irr::video::EMF_LIGHTING, true);
@@ -89,11 +84,9 @@ IRigidBody* const CExampleFramework::shootSphere(const irr::core::vector3df &sca
 	if(drawWireFrame)
         Node->setMaterialFlag(irr::video::EMF_WIREFRAME, drawWireFrame);
 
-	ICollisionShape *shape = new ISphereShape(Node, mass, true);
+	auto shape = new ISphereShape(Node, mass, true);
 
-	//shape->setMargin(0.01);
-
-	IRigidBody *body = world->addRigidBody(shape);
+	auto body = world->addRigidBody(shape);
 	body->setDamping(0.2,0.2);
 
     // Since we use a "bumpy" triangle mesh for the terrain, we need to set the CCD radius and
@@ -120,17 +113,15 @@ IRigidBody* const CExampleFramework::shootSphere(const irr::core::vector3df &sca
 IRigidBody* const CExampleFramework::createTank(const irr::core::stringw& file, const irr::core::stringw& collFile,
     const irr::core::vector3df &pos, const irr::f32 mass) const
 {
-    irr::scene::IAnimatedMeshSceneNode *Node = device->getSceneManager()->addAnimatedMeshSceneNode(
+	auto Node = device->getSceneManager()->addAnimatedMeshSceneNode(
         device->getSceneManager()->getMesh(file.c_str()));
 	Node->setPosition(pos);
 	Node->setMaterialFlag(irr::video::EMF_LIGHTING, true);
 
 
-	IGImpactMeshShape *shape = new IGImpactMeshShape(Node, device->getSceneManager()->getMesh(collFile.c_str()), mass);
-	//ICollisionShape *shape = new IBoxShape(Node, mass, false);
+	auto shape = new IGImpactMeshShape(Node, device->getSceneManager()->getMesh(collFile.c_str()), mass);
 
-
-	IRigidBody* tank = world->addRigidBody(shape);
+	auto tank = world->addRigidBody(shape);
 	tank->includeNodeOnRemoval(false);
 
     tank->setName("Tank");
@@ -142,7 +133,7 @@ IRigidBody* const CExampleFramework::createTank(const irr::core::stringw& file, 
 	tank->setActivationState(EActivationState::EAS_DISABLE_DEACTIVATION);
 
     // We create our vehicle, passing our newly created rigid body as a parameter.
-	IRaycastVehicle* vehicle = world->addRaycastVehicle(tank);
+	auto vehicle = world->addRaycastVehicle(tank);
 
 
     // Set up our wheel construction info. These values can be changed for each wheel,
@@ -197,10 +188,10 @@ irr::scene::IParticleSystemSceneNode* const CExampleFramework::createParticleSys
     const irr::core::dimension2df& minSize, const irr::core::dimension2df maxSize, const irr::core::stringc& textureFile,
     irr::f32 lifeTime, bool gravity, irr::video::E_MATERIAL_TYPE materialType, bool fadeOut) const
 {
-    irr::scene::IParticleSystemSceneNode* ps =
+	auto ps =
     device->getSceneManager()->addParticleSystemSceneNode(false);
 
-    irr::scene::IParticleEmitter* em = ps->createBoxEmitter(
+    auto em = ps->createBoxEmitter(
         irr::core::aabbox3d<irr::f32>(-7,0,-7,7,1,7), // emitter size
         dir,   // initial direction core::vector3df(0.0f,0.01f,0.0f)
         min,max,                             // emit rate
@@ -215,14 +206,14 @@ irr::scene::IParticleSystemSceneNode* const CExampleFramework::createParticleSys
 
     if(fadeOut)
     {
-        irr::scene::IParticleAffector* paf = ps->createFadeOutParticleAffector();
+        auto paf = ps->createFadeOutParticleAffector();
         ps->addAffector(paf); // same goes for the affector
         paf->drop();
     }
 
     if(gravity==true)
     {
-        irr::scene::IParticleAffector* paf = ps->createGravityAffector(irr::core::vector3df(0.0f,-0.007f, 0.0f), 1800);
+        auto paf = ps->createGravityAffector(irr::core::vector3df(0.0f,-0.007f, 0.0f), 1800);
         ps->addAffector(paf); // same goes for the affector
         paf->drop();
     }
@@ -232,9 +223,6 @@ irr::scene::IParticleSystemSceneNode* const CExampleFramework::createParticleSys
     ps->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
     ps->setMaterialTexture(0, device->getVideoDriver()->getTexture(textureFile.c_str()));
     ps->setMaterialType(materialType);
-
-    //ps->setParent(info->getBody0()->getCollisionShape()->getSceneNode());
-    //ps->setPosition(vector3df(0,2,0));
 
     if(lifeTime > 0.0f)
     {
@@ -249,7 +237,7 @@ irr::scene::IParticleSystemSceneNode* const CExampleFramework::createParticleSys
 
 IRigidBody* const CExampleFramework::createGround() const
 {
-    irr::scene::ISceneNode *Node = device->getSceneManager()->addCubeSceneNode(1.0);
+    auto Node = device->getSceneManager()->addCubeSceneNode(1.0);
 	Node->setScale(irr::core::vector3df(600,3,600)); // 400, 3, 400
 	Node->setPosition(irr::core::vector3df(200,0,100));
 	Node->setMaterialFlag(irr::video::EMF_LIGHTING, true);
@@ -259,12 +247,9 @@ IRigidBody* const CExampleFramework::createGround() const
     if(drawWireFrame)
         Node->setMaterialFlag(irr::video::EMF_WIREFRAME, true);
 
-	ICollisionShape *shape = new IBoxShape(Node, 0, false);
+	auto shape = new IBoxShape(Node, 0, false);
 
-	//shape->setMargin(0.01);
-
-	IRigidBody *body;
-	body = world->addRigidBody(shape);
+	auto body = world->addRigidBody(shape);
 
 	return body;
 }

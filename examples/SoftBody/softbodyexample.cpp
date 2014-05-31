@@ -1,4 +1,8 @@
-// This example is part of irrBullet by Josiah Hartzell (fighterstw@hotmail.com or josiah.hartzell@gmail.com)
+// Copyright (C) 2014- Danyal Zia
+// Copyright (C) 2009-2013 Josiah Hartzell (Skyreign Software)
+// This file is part of the "irrBullet" Bullet physics wrapper.
+// For conditions of distribution and use, see copyright notice in irrBullet.h
+// The above copyright notice and its accompanying information must remain here.
 
 #include "softbodyexample.h"
 #include <irrlicht.h>
@@ -34,9 +38,9 @@ bool CSoftbodyExample::OnEvent(const SEvent& event)
         {
             if(event.MouseInput.Event==EMIE_LMOUSE_PRESSED_DOWN)
             {
-                IRigidBody* body = shootCube(vector3df(10,10,10), 2);
+				auto body = shootCube(vector3df(10, 10, 10), 2);
 
-                ICollisionObjectAffectorDelete *deleteAffector = new ICollisionObjectAffectorDelete(4000);
+				auto deleteAffector = new ICollisionObjectAffectorDelete(4000);
                 body->addAffector(deleteAffector);
                 return true;
             }
@@ -44,9 +48,9 @@ bool CSoftbodyExample::OnEvent(const SEvent& event)
             else
             if(event.MouseInput.Event==EMIE_RMOUSE_PRESSED_DOWN)
             {
-                IRigidBody* body = shootSphere(vector3df(0.2,0.2,0.2), 0.2);
+				auto body = shootSphere(vector3df(0.2, 0.2, 0.2), 0.2);
 
-                ICollisionObjectAffectorDelete *deleteAffector = new ICollisionObjectAffectorDelete(4000);
+				auto deleteAffector = new ICollisionObjectAffectorDelete(4000);
                 body->addAffector(deleteAffector);
                 return true;
             }
@@ -98,7 +102,7 @@ void CSoftbodyExample::runExample()
     device->getFileSystem()->addFileArchive("../../media/");
 
 
-    ILightSceneNode* light = device->getSceneManager()->addLightSceneNode(0, vector3df(20, 40, -50), SColorf(1.0f, 1.0f, 1.0f), 4000.0f);
+	auto light = device->getSceneManager()->addLightSceneNode(0, vector3df(20, 40, -50), SColorf(1.0f, 1.0f, 1.0f), 4000.0f);
     light->setLightType(ELT_DIRECTIONAL);
     light->setRotation(vector3df(0,200,30));
 
@@ -109,10 +113,8 @@ void CSoftbodyExample::runExample()
 	camera->setTarget(vector3df(0,0,0));
 
 
-    ////////////////////////////
-    // Create irrBullet World //
-    ////////////////////////////
-    world = createIrrBulletWorld(device, true, debugDraw);
+    // Create irrBullet World 
+    world.reset(createIrrBulletWorld(device, true, debugDraw));
 
 	world->setDebugMode(irrPhysicsDebugMode::EPDM_DrawAabb |
 		irrPhysicsDebugMode::EPDM_DrawContactPoints);
@@ -124,17 +126,11 @@ void CSoftbodyExample::runExample()
     createGround();
 
 
-    for(u32 i=0; i < rows; i++)
+    for(u32 i = 0; i < rows; i++)
     {
-        for(u32 j=0; j < columns; j++)
+        for(u32 j = 0; j < columns; j++)
             createSoftbodyType(choice, vector3df(56*(j+i), 200+i, 56*(j+i)));
     }
-    //loadRoomScene();
-
-    /*for(u32 i=1; i < 10; i++)
-        createSoftbodyType(3, vector3df(106*i, 200+i, 106*i));*/
-
-    //createSoftbodyType(4, vector3df(0,100,0));
 
     // Set our delta time and time stamp
     u32 TimeStamp = device->getTimer()->getTime();
@@ -142,6 +138,7 @@ void CSoftbodyExample::runExample()
     u32 lastWindUpdate = 0;
     f32 xWind = 0.0f;
     f32 zWind = 0.0f;
+
     while(device->run())
     {
         device->getVideoDriver()->beginScene(true, true, SColor(255,100,101,140));
@@ -166,7 +163,7 @@ void CSoftbodyExample::runExample()
             {
                 for(u32 i=0; i < world->getNumCollisionObjects(); ++i)
                 {
-                    ICollisionObject* object = world->getCollisionObjectByIndex(i);
+					auto object = world->getCollisionObjectByIndex(i);
                     if(object->getObjectType() == ECollisionObjectType::ECOT_SOFT_BODY)
                         static_cast<ISoftBody*>(object)->addForce(vector3df(xWind,0,zWind));
                 }
@@ -185,11 +182,6 @@ void CSoftbodyExample::runExample()
 
         device->getVideoDriver()->endScene();
     }
-    //delete water;
-
-    // We're done with the IrrBullet world, so we free the memory that it takes up.
-    if(world)
-        delete world;
 }
 
 // 1 = sphere, 2 = newspaper(aero), 3 = cloth, 4 = feather(aero), 5 = flag(aero)
@@ -201,7 +193,7 @@ ISoftBody* CSoftbodyExample::createSoftbodyType(u32 type, const vector3df& posit
         case 1:
         {
             device->getSceneManager()->getMeshCache()->removeMesh(device->getSceneManager()->getMeshCache()->getMeshByName("sphere.b3d"));
-            IMesh* mesh = device->getSceneManager()->getMesh("sphere.b3d");
+			auto mesh = device->getSceneManager()->getMesh("sphere.b3d");
 
             softbodyNode = device->getSceneManager()->addMeshSceneNode(mesh);
             softbodyNode->setMaterialTexture(0, device->getVideoDriver()->getTexture("detailmap3.jpg"));
@@ -215,7 +207,7 @@ ISoftBody* CSoftbodyExample::createSoftbodyType(u32 type, const vector3df& posit
         {
             device->getSceneManager()->getMeshCache()->removeMesh(device->getSceneManager()->getMeshCache()->getMeshByName("newspaperMesh"));
 
-            IMesh* mesh = device->getSceneManager()->addHillPlaneMesh("newspaperMesh",
+			auto mesh = device->getSceneManager()->addHillPlaneMesh("newspaperMesh",
                 core::dimension2d<f32>(22,22),
                 core::dimension2d<u32>(3,3), 0, 0,
                 core::dimension2d<f32>(0,0),
@@ -233,7 +225,7 @@ ISoftBody* CSoftbodyExample::createSoftbodyType(u32 type, const vector3df& posit
         {
             device->getSceneManager()->getMeshCache()->removeMesh(device->getSceneManager()->getMeshCache()->getMeshByName("clothMesh"));
 
-            IMesh* mesh = device->getSceneManager()->addHillPlaneMesh("clothMesh",
+			auto mesh = device->getSceneManager()->addHillPlaneMesh("clothMesh",
                 core::dimension2d<f32>(10,10),
                 core::dimension2d<u32>(10,10), 0, 0,
                 core::dimension2d<f32>(0,0),
@@ -256,7 +248,7 @@ ISoftBody* CSoftbodyExample::createSoftbodyType(u32 type, const vector3df& posit
 
             //IMesh* mesh = device->getSceneManager()->getMesh("newspaper.obj");
 
-            IMesh* mesh = device->getSceneManager()->addHillPlaneMesh("featherMesh",
+			auto mesh = device->getSceneManager()->addHillPlaneMesh("featherMesh",
                 core::dimension2d<f32>(22,22),
                 core::dimension2d<u32>(1,4), 0, 0,
                 core::dimension2d<f32>(0,0),
@@ -280,7 +272,7 @@ ISoftBody* CSoftbodyExample::createSoftbodyType(u32 type, const vector3df& posit
         {
             device->getSceneManager()->getMeshCache()->removeMesh(device->getSceneManager()->getMeshCache()->getMeshByName("clothMesh"));
 
-            IMesh* mesh = device->getSceneManager()->addHillPlaneMesh("clothMesh",
+			auto mesh = device->getSceneManager()->addHillPlaneMesh("clothMesh",
                 core::dimension2d<f32>(1.5,1),
                 core::dimension2d<u32>(10,10), 0, 0,
                 core::dimension2d<f32>(0,0),
@@ -298,10 +290,9 @@ ISoftBody* CSoftbodyExample::createSoftbodyType(u32 type, const vector3df& posit
         break;
     }
     softbodyNode->setPosition(position);
-    //softbodyNode->setRotation(vector3df(0,0,0));
     softbodyNode->setDebugDataVisible(EDS_BBOX);
 
-    ISoftBody* softbody = world->addSoftBody(softbodyNode);
+	auto softbody = world->addSoftBody(softbodyNode);
 
     softbody->setName("SOFTBODY1");
     softbody->setActivationState(EActivationState::EAS_DISABLE_DEACTIVATION);
@@ -344,7 +335,7 @@ ISoftBody* CSoftbodyExample::createSoftbodyType(u32 type, const vector3df& posit
 
         case 3:
         {
-            IRigidBody* body = addCube(bulletToIrrlichtVector(softbody->getPointer()->m_nodes[0].m_x), vector3df(1,1,1), 0.0f);
+			auto body = addCube(bulletToIrrlichtVector(softbody->getPointer()->m_nodes[0].m_x), vector3df(1, 1, 1), 0.0f);
             softbody->appendAnchor(0, body, true);
 
             body = addCube(bulletToIrrlichtVector(softbody->getPointer()->m_nodes[11*10].m_x), vector3df(1,1,1), 0.0f);
@@ -372,17 +363,8 @@ ISoftBody* CSoftbodyExample::createSoftbodyType(u32 type, const vector3df& posit
 
         case 5:
         {
-            IRigidBody* body = addCube(bulletToIrrlichtVector(softbody->getPointer()->m_nodes[0].m_x), vector3df(0.1,0.1,0.1), 0.0f);
+			auto body = addCube(bulletToIrrlichtVector(softbody->getPointer()->m_nodes[0].m_x), vector3df(0.1, 0.1, 0.1), 0.0f);
             softbody->appendAnchor(0, body, true);
-
-            /*body = addCube(bulletToIrrlichtVector(softbody->getPointer()->m_nodes[6].m_x), vector3df(0.1,0.1,0.1), 0.0f);
-            softbody->appendAnchor(6, body, true);
-
-            body = addCube(bulletToIrrlichtVector(softbody->getPointer()->m_nodes[10].m_x), vector3df(0.1,0.1,0.1), 0.0f);
-            softbody->appendAnchor(10, body, true);
-
-            body = addCube(bulletToIrrlichtVector(softbody->getPointer()->m_nodes[14].m_x), vector3df(0.1,0.1,0.1), 0.0f);
-            softbody->appendAnchor(14, body, true);*/
 
             body = addCube(bulletToIrrlichtVector(softbody->getPointer()->m_nodes[20].m_x), vector3df(0.1,0.1,0.1), 0.0f);
             softbody->appendAnchor(20, body, true);
@@ -404,5 +386,5 @@ ISoftBody* CSoftbodyExample::createSoftbodyType(u32 type, const vector3df& posit
 
 CSoftbodyExample::~CSoftbodyExample()
 {
-    //dtor
+    
 }
