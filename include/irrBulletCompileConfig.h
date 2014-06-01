@@ -11,8 +11,6 @@
     four new functions: ::isDebugDrawEnabled(), ::setDebugDrawEnabled(), ::isDebugPropertiesEnabled(), setDebugPropertiesEnabled()
 - Add raycast function to irrBulletWorld
 - Add raycast example (after implementing raycasting)
-- Add cylinder shape
-- Add capsule shape
 - Add support for ITerrainSceneNode
 */
 

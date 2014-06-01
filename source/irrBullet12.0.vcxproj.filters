@@ -78,6 +78,12 @@
     <ClInclude Include="..\include\irrBulletWorld.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\irrBulletCylinderShape.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\irrBulletCapsuleShape.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="irrBullet.cpp">
@@ -144,6 +150,12 @@
       <Filter>irrBullet</Filter>
     </ClCompile>
     <ClCompile Include="irrBulletWorld.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="irrBulletCylinderShape.cpp">
+      <Filter>irrBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="irrBulletCapsuleShape.cpp">
       <Filter>irrBullet</Filter>
     </ClCompile>
   </ItemGroup>

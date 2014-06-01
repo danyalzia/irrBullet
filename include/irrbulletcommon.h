@@ -9,6 +9,7 @@
 #define BIT(x) (1<<(x)) // For collision masking
 
 #include <matrix4.h>
+#include <quaternion.h>
 #include <ISceneNode.h>
 #include "irrBulletCompileConfig.h"
 
@@ -37,7 +38,7 @@ FORCEINLINE irr::core::vector3df bulletToIrrlichtVector(const btVector3& vec);
 
 FORCEINLINE irr::core::vector3df toIrrlichtVector(float x, float y, float z);
 
-btQuaternion irrlichtToBulletQuaternion(const irr::core::quaternion& quat);
+FORCEINLINE btQuaternion irrlichtToBulletQuaternion(const irr::core::quaternion& quat);
 
 irr::core::quaternion bulletToIrrlichtQuaternion(const btQuaternion& quat);
 

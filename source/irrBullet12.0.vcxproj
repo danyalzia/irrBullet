@@ -14,6 +14,7 @@
     <ClInclude Include="..\include\irrBullet.h" />
     <ClInclude Include="..\include\irrBulletBoxShape.h" />
     <ClInclude Include="..\include\irrBulletBvhTriangleMeshShape.h" />
+    <ClInclude Include="..\include\irrBulletCapsuleShape.h" />
     <ClInclude Include="..\include\irrBulletCollisionCallBackInformation.h" />
     <ClInclude Include="..\include\irrBulletCollisionObject.h" />
     <ClInclude Include="..\include\irrBulletCollisionObjectAffector.h" />
@@ -23,6 +24,7 @@
     <ClInclude Include="..\include\irrBulletCommon.h" />
     <ClInclude Include="..\include\irrBulletCompileConfig.h" />
     <ClInclude Include="..\include\irrBulletConvexHullShape.h" />
+    <ClInclude Include="..\include\irrBulletCylinderShape.h" />
     <ClInclude Include="..\include\irrBulletGImpactMeshShape.h" />
     <ClInclude Include="..\include\irrBulletKinematicCharacterController.h" />
     <ClInclude Include="..\include\irrBulletLiquidBody.h" />
@@ -39,6 +41,7 @@
     <ClCompile Include="irrBullet.cpp" />
     <ClCompile Include="irrBulletBoxShape.cpp" />
     <ClCompile Include="irrBulletBvhTriangleMeshShape.cpp" />
+    <ClCompile Include="irrBulletCapsuleShape.cpp" />
     <ClCompile Include="irrBulletCollisionCallBackInformation.cpp" />
     <ClCompile Include="irrBulletCollisionObject.cpp" />
     <ClCompile Include="irrBulletCollisionObjectAffector.cpp" />
@@ -47,6 +50,7 @@
     <ClCompile Include="irrBulletCollisionShape.cpp" />
     <ClCompile Include="irrBulletCommon.cpp" />
     <ClCompile Include="irrBulletConvexHullShape.cpp" />
+    <ClCompile Include="irrBulletCylinderShape.cpp" />
     <ClCompile Include="irrBulletGImpactMeshShape.cpp" />
     <ClCompile Include="irrBulletKinematicCharacterController.cpp" />
     <ClCompile Include="irrBulletLiquidBody.cpp" />
