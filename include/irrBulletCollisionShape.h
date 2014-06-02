@@ -52,38 +52,8 @@ public:
     ICollisionShape();
 
 	ICollisionShape(const ICollisionShape& other) = default;
-	
+
 	ICollisionShape& operator=(const ICollisionShape& other) = default;
-
-	// Move constructor
-	ICollisionShape(const ICollisionShape&& other)
-	{
-#ifdef IRRBULLET_DEBUG_MODE
-#pragma message("ICollisionShape move constructor called...")
-#endif
-		*this = std::move(other);
-	}
-
-	// Move assignment operator
-	ICollisionShape& operator=(ICollisionShape&& other)
-	{
-		if (this != &other)
-		{
-			delete node;
-			delete shape;
-
-			type = other.type;
-			node = other.node;
-			shape = other.shape;
-			name = other.name;
-			mass = other.mass;
-			localInertia = other.localInertia;
-
-			node = nullptr;
-			shape = nullptr;
-		}
-		return *this;
-	}
 
     virtual ~ICollisionShape();
 

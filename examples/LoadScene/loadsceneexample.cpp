@@ -97,7 +97,7 @@ void CLoadSceneExample::runExample()
     device->getSceneManager()->addLightSceneNode(0, vector3df(20, 40, -50), SColorf(1.0f, 1.0f, 1.0f), 4000.0f);
 
 
-    // Create irrBullet World 
+    // Create irrBullet World
     world.reset(createIrrBulletWorld(device, true, debugDraw));
 
 	world->setDebugMode(irrPhysicsDebugMode::EPDM_DrawAabb |
@@ -110,7 +110,7 @@ void CLoadSceneExample::runExample()
 	camera->setPosition(vector3df(50,15,200));
 
 
-	device->getSceneManager()->loadScene("Scenes/SimpleScene.irr");
+	device->getSceneManager()->loadScene("example.irr");
 
 	core::array<scene::ISceneNode *> nodes;
 	device->getSceneManager()->getSceneNodesFromType(scene::ESNT_ANY, nodes); // Find all nodes

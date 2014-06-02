@@ -30,15 +30,15 @@ void btWheelInfoFromSWheelInfo(const SWheelInfo& info, btWheelInfo& btInfo);
 
 irr::core::vector3df compensateForNodeType(const irr::core::vector3df& scale, irr::scene::ESCENE_NODE_TYPE type);
 
-FORCEINLINE btVector3 irrlichtToBulletVector(const irr::core::vector3df& vec);
+btVector3 irrlichtToBulletVector(const irr::core::vector3df& vec);
 
-FORCEINLINE btVector3 toBulletVector(float x, float y, float z);
+btVector3 toBulletVector(float x, float y, float z);
 
-FORCEINLINE irr::core::vector3df bulletToIrrlichtVector(const btVector3& vec);
+irr::core::vector3df bulletToIrrlichtVector(const btVector3& vec);
 
-FORCEINLINE irr::core::vector3df toIrrlichtVector(float x, float y, float z);
+irr::core::vector3df toIrrlichtVector(float x, float y, float z);
 
-FORCEINLINE btQuaternion irrlichtToBulletQuaternion(const irr::core::quaternion& quat);
+btQuaternion irrlichtToBulletQuaternion(const irr::core::quaternion& quat);
 
 irr::core::quaternion bulletToIrrlichtQuaternion(const btQuaternion& quat);
 

@@ -22,7 +22,11 @@
 - When using the attraction affector, Bullet will sometimes report an AABB overflow error and remove the object
 */
 
+#ifdef _MSC_VER
 #define FORCEINLINE __forceinline
+#else
+#define FORCEINLINE inline
+#endif // _MSC_VER
 
 #define IRRBULLET_VER_MAJOR 0
 #define IRRBULLET_VER_MINOR 1

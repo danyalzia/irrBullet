@@ -8,8 +8,9 @@
 		<Build>
 			<Target title="Debug Win32">
 				<Option output="../../bin/Win32-gcc/HelloWorld" prefix_auto="1" extension_auto="1" />
-				<Option type="0" />
+				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add directory="../../include" />
@@ -32,8 +33,9 @@
 			</Target>
 			<Target title="Release Win32">
 				<Option output="../../bin/Win32-gcc/HelloWorld" prefix_auto="1" extension_auto="1" />
-				<Option type="0" />
+				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-march=pentium4" />
 					<Add option="-O3" />
