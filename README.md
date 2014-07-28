@@ -1,4 +1,6 @@
+[![Build Status](https://travis-ci.org/Artistic-Games/DIrrlicht.png?branch=master)](https://travis-ci.org/Artistic-Games/irrBullet)
 [![Stories in Ready](https://badge.waffle.io/Artistic-Games/irrBullet.png?label=ready&title=Ready)](https://waffle.io/Artistic-Games/irrBullet)
+
 irrBullet - Bullet Physics Wrapper for Irrlicht Engine
 ======================================================
 
