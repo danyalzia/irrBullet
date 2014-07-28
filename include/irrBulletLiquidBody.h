@@ -59,9 +59,6 @@ class ILiquidBody
 		// move constructor
 		ILiquidBody(const ILiquidBody&& other)
 		{
-#ifdef IRRBULLET_DEBUG_MODE
-#pragma message("ILiquidBody move constructor called...")
-#endif
 			*this = std::move(other);
 		}
 

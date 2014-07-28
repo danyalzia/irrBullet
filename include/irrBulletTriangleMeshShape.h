@@ -7,7 +7,7 @@
 #pragma once
 
 #include "irrBulletCollisionShape.h"
-#include "BulletCollision/CollisionShapes/btTriangleMesh.h"
+#include <BulletCollision/CollisionShapes/btTriangleMesh.h>
 #include "irrBulletCommon.h"
 
 namespace irr

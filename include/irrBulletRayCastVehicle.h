@@ -8,7 +8,7 @@
 
 #include "irrBulletCommon.h"
 #include "IrrCompileConfig.h"
-#include "BulletDynamics/Vehicle/btRayCastVehicle.h"
+#include <BulletDynamics/Vehicle/btRaycastVehicle.h>
 #include <memory> // std::move
 
 class irrBulletWorld;
@@ -138,9 +138,6 @@ class IRaycastVehicle
 		// Move constructor
 		IRaycastVehicle(const IRaycastVehicle&& other)
 		{
-#ifdef IRRBULLET_DEBUG_MODE
-#pragma message("IRaycastVehicle move constructor called...")
-#endif
 			*this = std::move(other);
 		}
 

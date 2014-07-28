@@ -9,7 +9,7 @@
 #include "irrBulletCommon.h"
 #include "irrBulletCompileConfig.h"
 #include "irrBulletCollisionObject.h"
-#include "BulletDynamics/Dynamics/btRigidBody.h"
+#include <BulletDynamics/Dynamics/btRigidBody.h>
 #include "irrBulletRayCastVehicle.h"
 #include <vector>
 
@@ -71,9 +71,6 @@ public:
 	// Move constructor
 	IRigidBody(const IRigidBody&& other)
 	{
-#ifdef IRRBULLET_DEBUG_MODE
-#pragma message("IRigidBody move constructor called...")
-#endif
 		*this = std::move(other);
 	}
 

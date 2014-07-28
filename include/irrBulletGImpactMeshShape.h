@@ -7,7 +7,7 @@
 #pragma once
 
 #include "irrBulletCommon.h"
-#include "BulletCollision/Gimpact/btGImpactShape.h"
+#include <BulletCollision/Gimpact/btGImpactShape.h>
 #include "irrBulletTriangleMeshShape.h"
 
 

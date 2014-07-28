@@ -21,9 +21,6 @@ public:
 	// Move constructor
 	ISphereShape(const ISphereShape&& other)
 	{
-#ifdef IRRBULLET_DEBUG_MODE
-#pragma message("ISphereShape move constructor called...")
-#endif
 		*this = std::move(other);
 	}
 

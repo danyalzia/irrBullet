@@ -20,9 +20,6 @@ public:
 	// move constructor
 	ICapsuleShape(const ICapsuleShape&& other)
 	{
-#ifdef IRRBULLET_DEBUG_MODE
-#pragma message("ICapsuleShape move constructor called...")
-#endif
 		*this = std::move(other);
 	}
 

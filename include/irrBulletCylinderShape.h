@@ -20,9 +20,6 @@ public:
 	// move constructor
 	ICylinderShape(const ICylinderShape&& other)
 	{
-#ifdef IRRBULLET_DEBUG_MODE
-#pragma message("ICylinderShape move constructor called...")
-#endif
 		*this = std::move(other);
 	}
 

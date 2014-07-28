@@ -7,8 +7,8 @@
 #pragma once
 
 #include "irrBulletCollisionObject.h"
-#include "BulletSoftBody/btSoftBodyHelpers.h"
-#include "BulletSoftBody/btSoftBody.h"
+#include <BulletSoftBody/btSoftBodyHelpers.h>
+#include <BulletSoftBody/btSoftBody.h>
 #include <irrTypes.h>
 #include <map>
 #include <vector>
@@ -154,9 +154,6 @@ class ISoftBody : public ICollisionObject
 		// Move constructor
 		ISoftBody(const ISoftBody&& other)
 		{
-#ifdef IRRBULLET_DEBUG_MODE
-#pragma message("ISoftBody move constructor called...")
-#endif
 			*this = std::move(other);
 		}
 

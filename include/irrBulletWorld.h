@@ -10,7 +10,7 @@
 #include "irrBulletRigidBody.h"
 #include "irrBulletSoftBody.h"
 #include "irrBulletPhysicsDebug.h"
-#include "BulletSoftBody/btSoftRigidDynamicsWorld.h"
+#include <BulletSoftBody/btSoftRigidDynamicsWorld.h>
 #include "irrBulletCollisionCallBackInformation.h"
 #include "irrBulletCompileConfig.h"
 #include <irrlicht.h>

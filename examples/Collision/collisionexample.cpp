@@ -6,7 +6,7 @@
 
 #include "collisionexample.h"
 #include <irrlicht.h>
-#include <irrbullet.h>
+#include <irrBullet.h>
 
 using namespace irr;
 using namespace core;

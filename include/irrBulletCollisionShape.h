@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "BulletCollision/CollisionShapes/btCollisionShape.h"
+#include <BulletCollision/CollisionShapes/btCollisionShape.h>
 #include <vector3d.h>
 #include <irrTypes.h>
 #include <irrString.h>

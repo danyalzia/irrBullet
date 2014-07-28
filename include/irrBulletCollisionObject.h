@@ -8,7 +8,7 @@
 
 #include "irrBulletCommon.h"
 #include "irrBulletCollisionShape.h"
-#include "BulletCollision/CollisionDispatch/btCollisionObject.h"
+#include <BulletCollision/CollisionDispatch/btCollisionObject.h>
 #include "irrBulletCollisionObjectAffector.h"
 #include <IAttributes.h>
 #include <vector>
@@ -80,9 +80,6 @@ class ICollisionObject
 		// Move constructor
 		ICollisionObject(const ICollisionObject&& other)
 		{
-#ifdef IRRBULLET_DEBUG_MODE
-#pragma message("ICollisionObject move constructor called...")
-#endif
 			*this = std::move(other);
 		}
 

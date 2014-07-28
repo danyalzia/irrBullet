@@ -21,9 +21,6 @@ class IBvhTriangleMeshShape : public ITriangleMeshShape
 		// Move constructor
 		IBvhTriangleMeshShape(const IBvhTriangleMeshShape&& other)
 		{
-#ifdef IRRBULLET_DEBUG_MODE
-#pragma message("IBvhTriangleMeshShape move constructor called...")
-#endif
 			*this = std::move(other);
 		}
 

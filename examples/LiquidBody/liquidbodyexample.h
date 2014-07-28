@@ -9,7 +9,7 @@
 #include "../framework/exampleframework.h"
 #include <irrString.h>
 #include <irrTypes.h>
-#include <irrbulletcommon.h>
+#include <irrBulletCommon.h>
 
 class ISoftBody;
 
