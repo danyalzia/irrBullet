@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/Artistic-Games/irrBullet.png?label=ready&title=Ready)](https://waffle.io/Artistic-Games/irrBullet)
 irrBullet - Bullet Physics Wrapper for Irrlicht Engine
 ======================================================
 
