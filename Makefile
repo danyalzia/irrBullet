@@ -6,8 +6,8 @@ IRRBULLET =  src/irrBullet.o  src/irrBulletBoxShape.o src/irrBulletBvhTriangleMe
 EXTRAOBJ =
 LINKOBJ = $(IRRBULLET)
 
-IrrlichtHome = $(HOME)/irrlicht
-BulletHome = $(HOME)/bullet3
+IrrlichtHome := $(HOME)/irrlicht
+BulletHome := $(HOME)/bullet3
 CXXINCS = -I $(IrrlichtHome)/include -I $(BulletHome)/src -Iinclude
 CPPFLAGS += $(CXXINCS)
 CXXFLAGS += -std=c++11 -Wall -pipe -fno-exceptions -fno-rtti -fstrict-aliasing
@@ -35,6 +35,10 @@ sharedlib: LDFLAGS += -L/usr/X11R6/lib$(LIBSELECT) -lGL -lXxf86vm
 sharedlib: LDFLAGS += -L$(IrrlichtHome)/lib/Linux -lIrrlicht
 staticlib sharedlib: CXXINCS += -I/usr/X11R6/include
 
+ifeq ($(MACHINE), x86_64)
+sharedlib: CPPFLAGS += -fPIC
+endif
+
 VERSION = $(VERSION_MAJOR).$(VERSION_MINOR).$(VERSION_RELEASE)
 SHARED_FULLNAME = $(SHARED_LIB).$(VERSION)
 SONAME = $(SHARED_LIB).$(VERSION_MAJOR).$(VERSION_MINOR)
@@ -53,7 +57,8 @@ install:
 	cp $(LIB_PATH)/$(SHARED_FULLNAME) $(INSTALL_DIR)
 	cd $(INSTALL_DIR) && ln -s -f $(SHARED_FULLNAME) $(SONAME)
 	cd $(INSTALL_DIR) && ln -s -f $(SONAME) $(SHARED_LIB)
-
+	ldconfig -n $(INSTALL_DIR)
+	
 staticlib staticlib_osx: $(STATIC_LIB)
 	mkdir -p $(LIB_PATH)
 	mv $^ $(LIB_PATH)

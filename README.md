@@ -9,7 +9,7 @@ Details
 
 This is a fork of irrBullet, which can be found at https://irrbullet.svn.sourceforge.net/
 
-It is an updated version of irrBullet which works with Irrlicht 1.8.1 and latest SVN branch (unstable) and Bullet 2.82. It also has several improvements over outdated irrBullet. I tried contacting the original author of irrBullet, but got no response.
+It is an updated version of irrBullet which works with Irrlicht 1.8.1 and latest SVN branch (unstable) and Bullet 2.83. It also has several improvements over outdated irrBullet. I tried contacting the original author of irrBullet, but got no response.
 
 Note: The following version hasn't released yet and maybe unstable. If you find any bug, then please open an issue in issues tracker. Thanks.
 
