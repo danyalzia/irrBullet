@@ -2,13 +2,13 @@ VERSION_MAJOR = 0
 VERSION_MINOR = 1
 VERSION_RELEASE = 9
 
-IRRBULLET =  src/irrBullet.o  src/irrBulletBoxShape.o src/irrBulletBvhTriangleMeshShape.o src/irrBulletCapsuleShape.o src/irrBulletCollisionCallBackInformation.o  src/irrBulletCollisionObject.o  src/irrBulletCollisionObjectAffector.o src/irrBulletCollisionObjectAffectorAttract.o src/irrBulletCollisionObjectAffectorDelete.o  src/irrBulletCollisionShape.o  src/irrBulletcommon.o  src/irrBulletConvexHullShape.o  src/irrBulletCylinderShape.o src/irrBulletGImpactMeshShape.o src/irrBulletKinematicCharacterController.o  src/irrBulletLiquidBody.o   src/irrBulletMotionState.o   src/irrBulletPhysicsDebug.o src/irrBulletRayCastVehicle.o src/irrBulletRigidBody.o src/irrBulletSoftBody.o src/irrBulletSphereShape.o src/irrBulletTriangleMeshShape.o src/irrBulletWorld.o
+IRRBULLET =  src/CBoxShape.o src/CBvhTriangleMeshShape.o src/irrBullet.o src/CTriangleMeshShape.o
 EXTRAOBJ =
 LINKOBJ = $(IRRBULLET)
 
 IrrlichtHome := $(HOME)/irrlicht
 BulletHome := $(HOME)/bullet3
-CXXINCS = -I $(IrrlichtHome)/include -I $(BulletHome)/src -Iinclude
+CXXINCS = -I $(IrrlichtHome)/include -I $(BulletHome)/src -Iinclude/irrBullet
 CPPFLAGS += $(CXXINCS)
 CXXFLAGS += -std=c++11 -Wall -pipe -fno-exceptions -fno-rtti -fstrict-aliasing
 ifdef DEBUG
