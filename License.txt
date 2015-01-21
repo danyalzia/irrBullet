@@ -1,5 +1,5 @@
 irrBullet physics extension library and wrapper for the Irrlicht rendering engine and Bullet physics engine.
-Copyright (C) 2014- Danyal Zia (superpws)
+Copyright (C) 2014- Danyal Zia
 Copyright (C) 2009-2011 Josiah Hartzell (Skyreign Software | www.skyreignsoftware.com)
 
 This software is provided 'as-is', without any express or implied
@@ -20,7 +20,7 @@ freely, subject to the following restrictions:
 
 
 Danyal Zia:
-catofdanyal@yahoo.com
+contact@danyalzia.com
 
 Josiah Hartzell:
 josiah@skyreignsoftware.com | fighterstw@hotmail.com | josiah.hartzell@gmail.com
