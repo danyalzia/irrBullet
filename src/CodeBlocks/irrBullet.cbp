@@ -19,10 +19,7 @@
 					<Add directory="$(IrrlichtHome)" />
 					<Add directory="$(IrrlichtHome)/include" />
 				</Compiler>
-				<Environment>
-					<Variable name="BulletHome" value="G:\Programmation\bullet3-Bullet-2.83-alpha\bullet3-Bullet-2.83-alpha" />
-					<Variable name="IrrlichtHome" value="G:\Programmation\Irrlicht\irrlicht-1.8.1" />
-				</Environment>
+
 			</Target>
 			<Target title="Release">
 				<Option output="../../lib/irrBullet" prefix_auto="1" extension_auto="1" />
